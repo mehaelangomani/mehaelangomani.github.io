@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,24 @@
     <title>Meha | Cybersecurity Analyst</title>
 
     <style>
+
+        /* =========================================================
+           ROOT
+        ========================================================= */
+
+        :root {
+            --deep: #021820;
+            --ocean: #032f3f;
+            --blue: #07566b;
+            --teal: #08a6a6;
+            --aqua: #48e0d0;
+            --cyan: #73f7eb;
+            --white: #eefefe;
+            --muted: #8baeb5;
+            --glass: rgba(255, 255, 255, 0.055);
+            --border: rgba(115, 247, 235, 0.16);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -19,419 +38,1004 @@
 
         body {
             font-family: "Segoe UI", Arial, sans-serif;
-            background: #f4fbfc;
-            color: #173b4d;
-            line-height: 1.6;
+            background: var(--deep);
+            color: var(--white);
+            overflow-x: hidden;
         }
 
-        /* ================= NAVBAR ================= */
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ::selection {
+            background: var(--aqua);
+            color: var(--deep);
+        }
+
+
+        /* =========================================================
+           SCROLLBAR
+        ========================================================= */
+
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--deep);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--teal);
+            border-radius: 20px;
+        }
+
+
+        /* =========================================================
+           CURSOR GLOW
+        ========================================================= */
+
+        .cursor-glow {
+            position: fixed;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+
+            background: radial-gradient(
+                circle,
+                rgba(72, 224, 208, 0.11),
+                transparent 65%
+            );
+
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+
+        /* =========================================================
+           PARTICLE CANVAS
+        ========================================================= */
+
+        #particles {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.45;
+        }
+
+
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
 
         nav {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
 
-            background: rgba(5, 48, 65, 0.96);
-            padding: 15px 8%;
+            width: min(1100px, 92%);
+
+            padding: 14px 20px;
 
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
 
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
+            background: rgba(3, 31, 40, 0.72);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border: 1px solid var(--border);
+            border-radius: 18px;
+
+            z-index: 1000;
+
+            box-shadow:
+                0 10px 40px rgba(0, 0, 0, 0.25);
         }
 
         .logo {
-            color: #8ee7e8;
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 2px;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: var(--cyan);
         }
 
-        nav ul {
-            list-style: none;
+        .nav-links {
             display: flex;
             gap: 28px;
+            list-style: none;
         }
 
-        nav a {
-            color: #e8fbfc;
-            text-decoration: none;
-            font-size: 14px;
-            transition: 0.3s;
+        .nav-links a {
+            font-size: 13px;
+            color: var(--muted);
+            transition: 0.3s ease;
         }
 
-        nav a:hover {
-            color: #63d6d8;
+        .nav-links a:hover {
+            color: var(--cyan);
         }
 
-        /* ================= HERO ================= */
+        .nav-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--aqua);
+
+            box-shadow:
+                0 0 8px var(--aqua);
+
+            animation: pulse 2s infinite;
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
 
         .hero {
-            min-height: 90vh;
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
 
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
 
-            padding: 60px 20px;
+            padding: 120px 8% 80px;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #032f3f,
-                    #07566b,
-                    #0b7285
-                );
+            overflow: hidden;
+        }
 
-            color: white;
+        .hero::before {
+            content: "";
+            position: absolute;
+
+            width: 600px;
+            height: 600px;
+
+            background: radial-gradient(
+                circle,
+                rgba(8, 166, 166, 0.18),
+                transparent 65%
+            );
+
+            top: -200px;
+            right: -100px;
+
+            animation: float 8s ease-in-out infinite;
         }
 
         .hero-content {
-            max-width: 800px;
+            width: min(1150px, 100%);
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 8px 14px;
+
+            border: 1px solid var(--border);
+            border-radius: 30px;
+
+            background: var(--glass);
+
+            color: var(--cyan);
+            font-size: 12px;
+            letter-spacing: 1px;
+
+            margin-bottom: 25px;
+
+            animation: fadeUp 1s ease forwards;
         }
 
         .hero h1 {
-            font-size: clamp(55px, 9vw, 95px);
-            letter-spacing: 4px;
-            margin-bottom: 5px;
+            font-size: clamp(60px, 9vw, 120px);
+            line-height: 0.9;
+            letter-spacing: -6px;
+
+            background: linear-gradient(
+                135deg,
+                #ffffff,
+                #73f7eb,
+                #168ca0
+            );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            animation: fadeUp 1s 0.15s ease both;
         }
 
         .hero h2 {
-            font-size: 24px;
+            margin-top: 20px;
+
+            font-size: clamp(22px, 3vw, 34px);
             font-weight: 400;
-            color: #8ee7e8;
-            margin-bottom: 20px;
+
+            color: var(--muted);
+
+            animation: fadeUp 1s 0.3s ease both;
         }
 
-        .hero p {
+        .hero h2 span {
+            color: var(--cyan);
+        }
+
+        .hero-description {
             max-width: 650px;
-            margin: auto;
-            color: #d9f4f5;
-            font-size: 17px;
+            margin-top: 25px;
+
+            color: #91b1b8;
+            font-size: 16px;
+            line-height: 1.8;
+
+            animation: fadeUp 1s 0.45s ease both;
         }
 
         .hero-buttons {
-            margin-top: 30px;
-        }
+            margin-top: 35px;
 
-        .btn {
-            display: inline-block;
-            padding: 12px 25px;
-            margin: 5px;
-
-            border-radius: 25px;
-            text-decoration: none;
-
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .primary-btn {
-            background: #69d7d9;
-            color: #063847;
-        }
-
-        .primary-btn:hover {
-            background: #a1eeee;
-            transform: translateY(-2px);
-        }
-
-        .secondary-btn {
-            border: 1px solid #8ee7e8;
-            color: white;
-        }
-
-        .secondary-btn:hover {
-            background: #8ee7e8;
-            color: #063847;
-        }
-
-        /* ================= GENERAL ================= */
-
-        section {
-            padding: 75px 8%;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 45px;
-        }
-
-        .section-title h2 {
-            font-size: 32px;
-            color: #07566b;
-        }
-
-        .section-title span {
-            display: block;
-            width: 55px;
-            height: 4px;
-            margin: 10px auto;
-
-            background: #43c6c8;
-            border-radius: 10px;
-        }
-
-        /* ================= ABOUT ================= */
-
-        .about {
-            max-width: 850px;
-            margin: auto;
-            text-align: center;
-            font-size: 17px;
-            color: #456675;
-        }
-
-        .highlight {
-            color: #08798c;
-            font-weight: 600;
-        }
-
-        /* ================= EDUCATION ================= */
-
-        .education-card {
-            max-width: 850px;
-            margin: auto;
-
-            background: white;
-            padding: 30px;
-
-            border-left: 5px solid #31aeb5;
-            border-radius: 10px;
-
-            box-shadow: 0 5px 20px rgba(0, 75, 90, 0.08);
-        }
-
-        .education-card h3 {
-            color: #07566b;
-            font-size: 22px;
-        }
-
-        .education-card .institution {
-            color: #0a8998;
-            font-weight: 600;
-        }
-
-        .education-card .year {
-            color: #718b95;
-            font-size: 14px;
-            margin: 5px 0 15px;
-        }
-
-        .grades {
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
-            margin-top: 20px;
+
+            animation: fadeUp 1s 0.6s ease both;
         }
 
-        .grade {
-            background: #e4f7f8;
-            padding: 12px 20px;
-            border-radius: 8px;
-            text-align: center;
-        }
+        .btn {
+            padding: 13px 22px;
+            border-radius: 12px;
 
-        .grade strong {
-            display: block;
-            color: #07566b;
-            font-size: 22px;
-        }
-
-        .grade span {
             font-size: 13px;
-            color: #58737d;
-        }
-
-        /* ================= SKILLS ================= */
-
-        .skills-section {
-            background: #eaf7f8;
-        }
-
-        .skills {
-            max-width: 900px;
-            margin: auto;
-
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 18px;
-        }
-
-        .skill {
-            background: white;
-            padding: 22px;
-            text-align: center;
-
-            border-radius: 10px;
-            color: #07566b;
-
             font-weight: 600;
 
-            box-shadow: 0 4px 15px rgba(0, 70, 85, 0.07);
-
-            transition: 0.3s;
+            transition: 0.35s ease;
         }
 
-        .skill:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 70, 85, 0.12);
+        .btn-primary {
+            color: var(--deep);
+            background: var(--cyan);
+
+            box-shadow:
+                0 0 25px rgba(72, 224, 208, 0.18);
         }
 
-        .skill-icon {
-            font-size: 28px;
-            margin-bottom: 8px;
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow:
+                0 10px 30px rgba(72, 224, 208, 0.25);
         }
 
-        /* ================= ACHIEVEMENTS ================= */
+        .btn-secondary {
+            border: 1px solid var(--border);
+            color: var(--white);
+            background: var(--glass);
+        }
 
-        .achievements {
-            max-width: 950px;
+        .btn-secondary:hover {
+            border-color: var(--cyan);
+            transform: translateY(-4px);
+        }
+
+
+        /* =========================================================
+           CYBER SECURITY VISUAL
+        ========================================================= */
+
+        .cyber-visual {
+            width: 350px;
+            height: 350px;
+
             margin: auto;
 
+            position: relative;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .orbit {
+            position: absolute;
+
+            border: 1px solid rgba(72, 224, 208, 0.2);
+            border-radius: 50%;
+        }
+
+        .orbit.one {
+            width: 330px;
+            height: 330px;
+            animation: rotate 18s linear infinite;
+        }
+
+        .orbit.two {
+            width: 250px;
+            height: 250px;
+            animation: rotateReverse 12s linear infinite;
+        }
+
+        .orbit.three {
+            width: 170px;
+            height: 170px;
+            animation: rotate 8s linear infinite;
+        }
+
+        .orbit::before {
+            content: "";
+
+            position: absolute;
+
+            width: 8px;
+            height: 8px;
+
+            background: var(--cyan);
+            border-radius: 50%;
+
+            top: 0;
+            left: 50%;
+
+            box-shadow: 0 0 15px var(--cyan);
+        }
+
+        .shield {
+            width: 125px;
+            height: 145px;
+
+            background: linear-gradient(
+                145deg,
+                rgba(72, 224, 208, 0.18),
+                rgba(7, 86, 107, 0.3)
+            );
+
+            border: 1px solid rgba(115, 247, 235, 0.4);
+
+            clip-path: polygon(
+                50% 0%,
+                92% 15%,
+                85% 65%,
+                50% 100%,
+                15% 65%,
+                8% 15%
+            );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 45px;
+
+            box-shadow:
+                0 0 60px rgba(72, 224, 208, 0.12);
+
+            animation: shieldFloat 4s ease-in-out infinite;
+        }
+
+
+        /* =========================================================
+           SECTIONS
+        ========================================================= */
+
+        section {
+            position: relative;
+            z-index: 1;
+
+            padding: 120px 8%;
+        }
+
+        .section-container {
+            width: min(1100px, 100%);
+            margin: auto;
+        }
+
+        .section-label {
+            color: var(--aqua);
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: clamp(35px, 5vw, 55px);
+            letter-spacing: -2px;
+            margin-bottom: 50px;
+        }
+
+        .section-title span {
+            color: var(--cyan);
+        }
+
+
+        /* =========================================================
+           ABOUT
+        ========================================================= */
+
+        .about-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
         }
 
-        .achievement {
-            background: white;
-            padding: 25px;
+        .glass-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
 
-            border-radius: 10px;
-            border-top: 4px solid #36b8bd;
+            border-radius: 22px;
+            padding: 35px;
 
-            box-shadow: 0 5px 18px rgba(0, 70, 85, 0.08);
+            backdrop-filter: blur(15px);
+
+            transition:
+                transform 0.5s ease,
+                border-color 0.5s ease,
+                box-shadow 0.5s ease;
         }
 
-        .achievement h3 {
-            color: #07566b;
-            margin-bottom: 8px;
+        .glass-card:hover {
+            transform: translateY(-8px);
+
+            border-color: rgba(115, 247, 235, 0.35);
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.2);
         }
 
-        .achievement p {
-            color: #607b85;
+        .glass-card p {
+            color: var(--muted);
+            line-height: 1.9;
             font-size: 15px;
         }
 
-        /* ================= CAREER GOAL ================= */
+        .highlight {
+            color: var(--cyan);
+        }
 
-        .career {
+        .mini-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .mini-stat {
+            padding: 20px;
+
+            background: rgba(72, 224, 208, 0.04);
+            border: 1px solid var(--border);
+
+            border-radius: 15px;
+        }
+
+        .mini-stat strong {
+            display: block;
+            font-size: 27px;
+            color: var(--cyan);
+        }
+
+        .mini-stat small {
+            color: var(--muted);
+        }
+
+
+        /* =========================================================
+           EDUCATION
+        ========================================================= */
+
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .timeline::before {
+            content: "";
+
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+
+            width: 1px;
+
+            background:
+                linear-gradient(
+                    transparent,
+                    var(--teal),
+                    transparent
+                );
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 55px;
+            margin-bottom: 45px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+
+            left: 8px;
+            top: 5px;
+
+            width: 15px;
+            height: 15px;
+
+            border-radius: 50%;
+
+            background: var(--cyan);
+
+            box-shadow:
+                0 0 20px rgba(72, 224, 208, 0.5);
+        }
+
+        .timeline-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+
+            padding: 30px;
+            border-radius: 18px;
+
+            transition: 0.4s ease;
+        }
+
+        .timeline-card:hover {
+            transform: translateX(8px);
+            border-color: rgba(115, 247, 235, 0.4);
+        }
+
+        .timeline-card h3 {
+            font-size: 21px;
+            margin-bottom: 5px;
+        }
+
+        .timeline-card h4 {
+            color: var(--cyan);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .timeline-card p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+
+        /* =========================================================
+           SKILLS
+        ========================================================= */
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .skill-card {
+            position: relative;
+
+            padding: 30px;
+
+            background: linear-gradient(
+                145deg,
+                rgba(255,255,255,0.055),
+                rgba(255,255,255,0.015)
+            );
+
+            border: 1px solid var(--border);
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            transition: 0.4s ease;
+        }
+
+        .skill-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 100px;
+            height: 100px;
+
+            right: -50px;
+            bottom: -50px;
+
+            background: var(--aqua);
+            opacity: 0.05;
+
+            border-radius: 50%;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(115, 247, 235, 0.35);
+        }
+
+        .skill-number {
+            color: var(--aqua);
+            font-size: 12px;
+            margin-bottom: 25px;
+        }
+
+        .skill-card h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .skill-card p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+
+        /* =========================================================
+           ACHIEVEMENTS
+        ========================================================= */
+
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .achievement-card {
+            min-height: 190px;
+
+            padding: 30px;
+
+            background: var(--glass);
+            border: 1px solid var(--border);
+
+            border-radius: 20px;
+
+            position: relative;
+            overflow: hidden;
+
+            transition: 0.4s ease;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(115, 247, 235, 0.4);
+        }
+
+        .achievement-icon {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .achievement-card h3 {
+            margin-bottom: 8px;
+        }
+
+        .achievement-card p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+
+        /* =========================================================
+           CAREER
+        ========================================================= */
+
+        .career-box {
+            position: relative;
+
+            padding: 65px 50px;
+
+            border-radius: 30px;
+
+            overflow: hidden;
+
             background:
                 linear-gradient(
                     135deg,
                     #063847,
-                    #08798c
+                    #07566b,
+                    #032f3f
                 );
 
-            color: white;
+            border: 1px solid rgba(115, 247, 235, 0.2);
+
             text-align: center;
         }
 
-        .career-content {
-            max-width: 750px;
-            margin: auto;
+        .career-box::before {
+            content: "";
+
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            background: rgba(72, 224, 208, 0.12);
+
+            border-radius: 50%;
+
+            filter: blur(80px);
+
+            left: -100px;
+            top: -150px;
         }
 
-        .career h2 {
-            font-size: 32px;
+        .career-box h2 {
+            position: relative;
+
+            font-size: clamp(32px, 5vw, 55px);
             margin-bottom: 20px;
-            color: #8ee7e8;
         }
 
-        .career p {
-            color: #d9f4f5;
-            font-size: 17px;
+        .career-box h2 span {
+            color: var(--cyan);
         }
 
-        /* ================= CONTACT ================= */
+        .career-box p {
+            position: relative;
 
-        .contact-container {
             max-width: 700px;
             margin: auto;
+
+            color: #b4d5d9;
+            line-height: 1.9;
+        }
+
+
+        /* =========================================================
+           CONTACT
+        ========================================================= */
+
+        .contact {
             text-align: center;
         }
 
-        .contact-container p {
-            color: #5d7680;
-            margin-bottom: 20px;
+        .contact-text {
+            color: var(--muted);
+            max-width: 550px;
+            margin: -20px auto 35px;
         }
 
-        .contact-links {
+        .contact-buttons {
             display: flex;
             justify-content: center;
-            flex-wrap: wrap;
             gap: 15px;
+            flex-wrap: wrap;
         }
 
-        .contact-link {
-            text-decoration: none;
-            color: #07566b;
 
-            border: 1px solid #9bdcde;
-            padding: 10px 20px;
-            border-radius: 25px;
-
-            transition: 0.3s;
-        }
-
-        .contact-link:hover {
-            background: #07566b;
-            color: white;
-        }
-
-        /* ================= FOOTER ================= */
+        /* =========================================================
+           FOOTER
+        ========================================================= */
 
         footer {
+            padding: 30px;
+
             text-align: center;
-            padding: 25px;
 
-            background: #032f3f;
-            color: #a9dadd;
+            border-top: 1px solid var(--border);
 
-            font-size: 14px;
+            color: #62838b;
+            font-size: 12px;
         }
 
-        /* ================= RESPONSIVE ================= */
 
-        @media (max-width: 700px) {
+        /* =========================================================
+           REVEAL ANIMATION
+        ========================================================= */
 
-            nav {
-                flex-direction: column;
-                gap: 10px;
+        .reveal {
+            opacity: 0;
+            transform: translateY(45px);
+
+            transition:
+                opacity 0.9s ease,
+                transform 0.9s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* =========================================================
+           KEYFRAMES
+        ========================================================= */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
 
-            nav ul {
-                gap: 15px;
-                flex-wrap: wrap;
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.4;
+                transform: scale(1.5);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes rotateReverse {
+            from {
+                transform: rotate(360deg);
+            }
+
+            to {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(30px);
+            }
+        }
+
+        @keyframes shieldFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 850px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
                 justify-content: center;
             }
 
-            .hero {
-                min-height: 80vh;
+            .cyber-visual {
+                width: 280px;
+                height: 280px;
+            }
+
+            .orbit.one {
+                width: 260px;
+                height: 260px;
+            }
+
+            .orbit.two {
+                width: 200px;
+                height: 200px;
+            }
+
+            .orbit.three {
+                width: 140px;
+                height: 140px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            nav {
+                top: 10px;
             }
 
             section {
-                padding: 55px 6%;
+                padding: 80px 6%;
             }
 
-            .grades {
-                justify-content: center;
+            .hero {
+                padding: 120px 6% 70px;
+            }
+
+            .hero h1 {
+                letter-spacing: -3px;
+            }
+
+            .skills-grid,
+            .achievement-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .career-box {
+                padding: 45px 25px;
+            }
+
+            .mini-stat-grid {
+                grid-template-columns: 1fr;
             }
         }
+
     </style>
 </head>
 
+
 <body>
 
-    <!-- NAVIGATION -->
+    <!-- =========================================================
+         BACKGROUND
+    ========================================================== -->
+
+    <canvas id="particles"></canvas>
+
+    <div class="cursor-glow"></div>
+
+
+    <!-- =========================================================
+         NAVIGATION
+    ========================================================== -->
 
     <nav>
-        <div class="logo">MEHA</div>
 
-        <ul>
+        <div class="logo">MEHA.</div>
+
+        <ul class="nav-links">
             <li><a href="#about">About</a></li>
             <li><a href="#education">Education</a></li>
             <li><a href="#skills">Skills</a></li>
@@ -439,33 +1043,70 @@
             <li><a href="#career">Career</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
+
+        <div class="nav-status">
+            <span class="status-dot"></span>
+            Open to opportunities
+        </div>
+
     </nav>
 
 
-    <!-- HERO -->
+    <!-- =========================================================
+         HERO
+    ========================================================== -->
 
     <header class="hero">
 
         <div class="hero-content">
 
-            <h1>MEHA</h1>
+            <div>
 
-            <h2>Future Cybersecurity Analyst</h2>
+                <div class="eyebrow">
+                    <span class="status-dot"></span>
+                    COMPUTING & DATA SCIENCE
+                </div>
 
-            <p>
-                Computing & Data Science student passionate about
-                cybersecurity, technology, problem-solving and
-                building secure digital solutions.
-            </p>
+                <h1>MEHA</h1>
 
-            <div class="hero-buttons">
-                <a href="#about" class="btn primary-btn">
-                    Explore My Resume
-                </a>
+                <h2>
+                    Future <span>Cybersecurity Analyst</span>
+                </h2>
 
-                <a href="#contact" class="btn secondary-btn">
-                    Contact Me
-                </a>
+                <p class="hero-description">
+                    Second-year Computing & Data Science student at
+                    Sai University with a passion for cybersecurity,
+                    analytical thinking, programming and solving
+                    complex problems.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="#about" class="btn btn-primary">
+                        Explore My Profile
+                    </a>
+
+                    <a href="#contact" class="btn btn-secondary">
+                        Let's Connect →
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- CYBER VISUAL -->
+
+            <div class="cyber-visual">
+
+                <div class="orbit one"></div>
+                <div class="orbit two"></div>
+                <div class="orbit three"></div>
+
+                <div class="shield">
+                    ◈
+                </div>
+
             </div>
 
         </div>
@@ -473,153 +1114,176 @@
     </header>
 
 
-    <!-- ABOUT -->
+    <!-- =========================================================
+         ABOUT
+    ========================================================== -->
 
     <section id="about">
 
-        <div class="section-title">
-            <h2>About Me</h2>
-            <span></span>
-        </div>
+        <div class="section-container reveal">
 
-        <div class="about">
+            <div class="section-label">
+                01 / ABOUT
+            </div>
 
-            <p>
-                I am a second-year student at
-                <span class="highlight">Sai University</span>,
-                pursuing a degree in
-                <span class="highlight">
-                    Computing and Data Science
-                </span>.
-            </p>
+            <h2 class="section-title">
+                Beyond the <span>Code.</span>
+            </h2>
 
-            <br>
 
-            <p>
-                With a strong academic foundation and an interest in
-                cybersecurity, I aim to build a career as a
-                <span class="highlight">Cybersecurity Analyst</span>.
-                I enjoy understanding complex problems, thinking
-                critically and developing technical solutions.
-            </p>
+            <div class="about-grid">
+
+                <div class="glass-card">
+
+                    <p>
+                        I am <span class="highlight">Meha</span>,
+                        a second-year student at
+                        <span class="highlight">
+                            Sai University
+                        </span>,
+                        pursuing Computing and Data Science.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        I am particularly interested in
+                        cybersecurity and aspire to become a
+                        <span class="highlight">
+                            Cybersecurity Analyst
+                        </span>.
+                        I enjoy understanding how systems work,
+                        identifying problems and approaching them
+                        through logical and critical thinking.
+                    </p>
+
+                </div>
+
+
+                <div class="glass-card">
+
+                    <p>
+                        My academic journey combines programming,
+                        data structures and database technologies
+                        with leadership and creative activities.
+                    </p>
+
+                    <div class="mini-stat-grid">
+
+                        <div class="mini-stat">
+                            <strong>9.64</strong>
+                            <small>Current CGPA</small>
+                        </div>
+
+                        <div class="mini-stat">
+                            <strong>9.85</strong>
+                            <small>Latest GPA</small>
+                        </div>
+
+                        <div class="mini-stat">
+                            <strong>90%</strong>
+                            <small>School Score</small>
+                        </div>
+
+                        <div class="mini-stat">
+                            <strong>2nd</strong>
+                            <small>Year</small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
     </section>
 
 
-    <!-- EDUCATION -->
+    <!-- =========================================================
+         EDUCATION
+    ========================================================== -->
 
     <section id="education">
 
-        <div class="section-title">
-            <h2>Education</h2>
-            <span></span>
-        </div>
+        <div class="section-container reveal">
 
-        <div class="education-card">
+            <div class="section-label">
+                02 / EDUCATION
+            </div>
 
-            <h3>Computing and Data Science</h3>
+            <h2 class="section-title">
+                Academic <span>Journey.</span>
+            </h2>
 
-            <p class="institution">
-                Sai University
-            </p>
 
-            <p class="year">
-                Second Year • Undergraduate
-            </p>
+            <div class="timeline">
 
-            <p>
-                Currently pursuing my undergraduate degree with a
-                strong academic performance and growing interest
-                in cybersecurity and data-driven technologies.
-            </p>
+                <div class="timeline-item">
 
-            <div class="grades">
+                    <div class="timeline-dot"></div>
 
-                <div class="grade">
-                    <strong>9.64</strong>
-                    <span>CGPA</span>
+                    <div class="timeline-card">
+
+                        <h3>Computing & Data Science</h3>
+
+                        <h4>Sai University</h4>
+
+                        <p>
+                            Second Year • Undergraduate
+                        </p>
+
+                        <br>
+
+                        <p>
+                            Currently pursuing an undergraduate
+                            degree with a strong academic record
+                            and a growing focus on cybersecurity
+                            and technology.
+                        </p>
+
+                        <br>
+
+                        <p>
+                            <strong>CGPA:</strong> 9.64
+                            &nbsp; | &nbsp;
+                            <strong>Sem 1:</strong> 9.33
+                            &nbsp; | &nbsp;
+                            <strong>Sem 2:</strong> 9.85
+                        </p>
+
+                    </div>
+
                 </div>
 
-                <div class="grade">
-                    <strong>9.33</strong>
-                    <span>First Semester GPA</span>
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div class="timeline-card">
+
+                        <h3>School Education</h3>
+
+                        <h4>Velammal Vidhyashram</h4>
+
+                        <p>
+                            Completed Schooling
+                        </p>
+
+                        <br>
+
+                        <p>
+                            Successfully completed schooling
+                            with an overall score of
+                            <strong>90%</strong>.
+                        </p>
+
+                    </div>
+
                 </div>
 
-                <div class="grade">
-                    <strong>9.85</strong>
-                    <span>Second Semester GPA</span>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <br><br>
-
-        <div class="education-card">
-
-            <h3>School Education</h3>
-
-            <p class="institution">
-                Velammal Vidhyashram
-            </p>
-
-            <p class="year">
-                Completed Schooling
-            </p>
-
-            <p>
-                Completed my schooling with an overall score of
-                <strong>90%</strong>.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- SKILLS -->
-
-    <section id="skills" class="skills-section">
-
-        <div class="section-title">
-            <h2>Skills</h2>
-            <span></span>
-        </div>
-
-        <div class="skills">
-
-            <div class="skill">
-                <div class="skill-icon">💻</div>
-                C Programming
-            </div>
-
-            <div class="skill">
-                <div class="skill-icon">🐍</div>
-                Python
-            </div>
-
-            <div class="skill">
-                <div class="skill-icon">🗄️</div>
-                MySQL
-            </div>
-
-            <div class="skill">
-                <div class="skill-icon">🔗</div>
-                Data Structures
-            </div>
-
-            <div class="skill">
-                <div class="skill-icon">🧠</div>
-                Critical Thinking
-            </div>
-
-            <div class="skill">
-                <div class="skill-icon">👥</div>
-                Leadership
             </div>
 
         </div>
@@ -627,72 +1291,202 @@
     </section>
 
 
-    <!-- ACHIEVEMENTS -->
+    <!-- =========================================================
+         SKILLS
+    ========================================================== -->
+
+    <section id="skills">
+
+        <div class="section-container reveal">
+
+            <div class="section-label">
+                03 / SKILLS
+            </div>
+
+            <h2 class="section-title">
+                My <span>Toolkit.</span>
+            </h2>
+
+
+            <div class="skills-grid">
+
+                <div class="skill-card">
+                    <div class="skill-number">01</div>
+                    <h3>C Programming</h3>
+                    <p>
+                        Programming fundamentals and
+                        structured problem solving.
+                    </p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-number">02</div>
+                    <h3>Python</h3>
+                    <p>
+                        Programming, logic building and
+                        computational problem solving.
+                    </p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-number">03</div>
+                    <h3>MySQL</h3>
+                    <p>
+                        Database fundamentals and
+                        structured data management.
+                    </p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-number">04</div>
+                    <h3>Data Structures</h3>
+                    <p>
+                        Understanding efficient organization
+                        and manipulation of data.
+                    </p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-number">05</div>
+                    <h3>Critical Thinking</h3>
+                    <p>
+                        Analytical reasoning and structured
+                        approaches to complex problems.
+                    </p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-number">06</div>
+                    <h3>Leadership</h3>
+                    <p>
+                        Communication, collaboration and
+                        taking initiative in team environments.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         ACHIEVEMENTS
+    ========================================================== -->
 
     <section id="achievements">
 
-        <div class="section-title">
-            <h2>Achievements</h2>
-            <span></span>
+        <div class="section-container reveal">
+
+            <div class="section-label">
+                04 / ACHIEVEMENTS
+            </div>
+
+            <h2 class="section-title">
+                Beyond <span>Academics.</span>
+            </h2>
+
+
+            <div class="achievement-grid">
+
+                <div class="achievement-card">
+
+                    <div class="achievement-icon">
+                        🏆
+                    </div>
+
+                    <h3>Guinness World Record</h3>
+
+                    <p>
+                        Participated in a Guinness World Record
+                        achievement in Classical Dance.
+                    </p>
+
+                </div>
+
+
+                <div class="achievement-card">
+
+                    <div class="achievement-icon">
+                        🏃
+                    </div>
+
+                    <h3>State-Level Athletics</h3>
+
+                    <p>
+                        Participated at state level in
+                        100m, 400m and 400m relay events.
+                    </p>
+
+                </div>
+
+
+                <div class="achievement-card">
+
+                    <div class="achievement-icon">
+                        🎤
+                    </div>
+
+                    <h3>Singing Awards</h3>
+
+                    <p>
+                        Won several awards and recognitions
+                        in singing competitions.
+                    </p>
+
+                </div>
+
+
+                <div class="achievement-card">
+
+                    <div class="achievement-icon">
+                        🎨
+                    </div>
+
+                    <h3>Drawing Awards</h3>
+
+                    <p>
+                        Won several awards and recognitions
+                        in drawing competitions.
+                    </p>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="achievements">
-
-            <div class="achievement">
-
-                <h3>🏆 Guinness World Record</h3>
-
-                <p>
-                    Participated in a Guinness World Record
-                    achievement in Classical Dance.
-                </p>
-
-            </div>
+    </section>
 
 
-            <div class="achievement">
+    <!-- =========================================================
+         CAREER
+    ========================================================== -->
 
-                <h3>🏃 Athletics</h3>
+    <section id="career">
 
-                <p>
-                    Participated at the state level in
-                    100m, 400m and 400m relay events.
-                </p>
+        <div class="section-container reveal">
 
-            </div>
+            <div class="career-box">
 
+                <div class="section-label">
+                    05 / FUTURE
+                </div>
 
-            <div class="achievement">
-
-                <h3>🎤 Singing</h3>
+                <h2>
+                    Building a career in
+                    <span>Cybersecurity.</span>
+                </h2>
 
                 <p>
-                    Won several awards and recognitions
-                    in singing competitions.
-                </p>
-
-            </div>
-
-
-            <div class="achievement">
-
-                <h3>🎨 Drawing</h3>
-
-                <p>
-                    Won several awards and recognitions
-                    in drawing competitions.
-                </p>
-
-            </div>
-
-
-            <div class="achievement">
-
-                <h3>👑 Leadership</h3>
-
-                <p>
-                    Developed leadership and teamwork skills
-                    through academic and extracurricular activities.
+                    My goal is to become a Cybersecurity Analyst
+                    and work at the intersection of technology,
+                    analytical thinking and digital security.
+                    I want to develop the skills required to
+                    identify vulnerabilities, analyze threats
+                    and contribute to protecting digital systems
+                    and data.
                 </p>
 
             </div>
@@ -702,66 +1496,53 @@
     </section>
 
 
-    <!-- CAREER GOAL -->
-
-    <section id="career" class="career">
-
-        <div class="career-content">
-
-            <h2>My Career Goal</h2>
-
-            <p>
-                My goal is to become a skilled
-                <strong>Cybersecurity Analyst</strong> and contribute
-                to protecting digital systems, networks and data
-                from evolving cyber threats.
-            </p>
-
-            <br>
-
-            <p>
-                I am continuously developing my programming,
-                analytical and problem-solving skills while
-                exploring the field of cybersecurity.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- CONTACT -->
+    <!-- =========================================================
+         CONTACT
+    ========================================================== -->
 
     <section id="contact">
 
-        <div class="section-title">
-            <h2>Let's Connect</h2>
-            <span></span>
-        </div>
+        <div class="section-container contact reveal">
 
-        <div class="contact-container">
+            <div class="section-label">
+                06 / CONTACT
+            </div>
 
-            <p>
-                Interested in connecting with me?
-                Feel free to reach out.
+            <h2 class="section-title">
+                Let's <span>Connect.</span>
+            </h2>
+
+            <p class="contact-text">
+                Whether it's technology, cybersecurity,
+                collaboration or an interesting project —
+                I'd love to connect.
             </p>
 
-            <div class="contact-links">
 
-                <a href="mailto:your-email@example.com"
-                   class="contact-link">
-                    📧 Email
+            <div class="contact-buttons">
+
+                <!-- Replace these links -->
+
+                <a
+                    href="mailto:your-email@example.com"
+                    class="btn btn-primary"
+                >
+                    Email Me
                 </a>
 
-                <a href="https://www.linkedin.com/"
-                   target="_blank"
-                   class="contact-link">
+                <a
+                    href="https://linkedin.com/"
+                    target="_blank"
+                    class="btn btn-secondary"
+                >
                     LinkedIn
                 </a>
 
-                <a href="https://github.com/"
-                   target="_blank"
-                   class="contact-link">
+                <a
+                    href="https://github.com/"
+                    target="_blank"
+                    class="btn btn-secondary"
+                >
                     GitHub
                 </a>
 
@@ -772,11 +1553,305 @@
     </section>
 
 
-    <!-- FOOTER -->
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
 
     <footer>
-        © 2026 Meha • Computing & Data Science
+
+        © 2026 Meha
+        <br>
+        Computing & Data Science • Future Cybersecurity Analyst
+
     </footer>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script>
+
+        /* =====================================================
+           CURSOR GLOW
+        ===================================================== */
+
+        const glow = document.querySelector(".cursor-glow");
+
+        document.addEventListener("mousemove", (event) => {
+
+            glow.style.left = event.clientX + "px";
+            glow.style.top = event.clientY + "px";
+
+        });
+
+
+        /* =====================================================
+           SCROLL REVEAL
+        ===================================================== */
+
+        const revealElements =
+            document.querySelectorAll(".reveal");
+
+        const revealObserver =
+            new IntersectionObserver(
+                (entries) => {
+
+                    entries.forEach((entry) => {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add("active");
+
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: 0.15
+                }
+            );
+
+
+        revealElements.forEach((element) => {
+
+            revealObserver.observe(element);
+
+        });
+
+
+        /* =====================================================
+           PARTICLE BACKGROUND
+        ===================================================== */
+
+        const canvas =
+            document.getElementById("particles");
+
+        const ctx =
+            canvas.getContext("2d");
+
+        let particles = [];
+
+        function resizeCanvas() {
+
+            canvas.width =
+                window.innerWidth;
+
+            canvas.height =
+                window.innerHeight;
+
+        }
+
+        resizeCanvas();
+
+        window.addEventListener(
+            "resize",
+            resizeCanvas
+        );
+
+
+        class Particle {
+
+            constructor() {
+
+                this.x =
+                    Math.random() *
+                    canvas.width;
+
+                this.y =
+                    Math.random() *
+                    canvas.height;
+
+                this.size =
+                    Math.random() * 1.8 + 0.5;
+
+                this.speedX =
+                    (Math.random() - 0.5) * 0.25;
+
+                this.speedY =
+                    (Math.random() - 0.5) * 0.25;
+
+            }
+
+
+            update() {
+
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+
+                if (
+                    this.x < 0 ||
+                    this.x > canvas.width
+                ) {
+
+                    this.speedX *= -1;
+
+                }
+
+
+                if (
+                    this.y < 0 ||
+                    this.y > canvas.height
+                ) {
+
+                    this.speedY *= -1;
+
+                }
+
+            }
+
+
+            draw() {
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    this.x,
+                    this.y,
+                    this.size,
+                    0,
+                    Math.PI * 2
+                );
+
+                ctx.fillStyle =
+                    "rgba(115,247,235,0.45)";
+
+                ctx.fill();
+
+            }
+
+        }
+
+
+        function createParticles() {
+
+            particles = [];
+
+            const count =
+                Math.min(
+                    100,
+                    Math.floor(
+                        window.innerWidth / 12
+                    )
+                );
+
+
+            for (
+                let i = 0;
+                i < count;
+                i++
+            ) {
+
+                particles.push(
+                    new Particle()
+                );
+
+            }
+
+        }
+
+
+        createParticles();
+
+
+        function animateParticles() {
+
+            ctx.clearRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+
+            particles.forEach(
+                (particle) => {
+
+                    particle.update();
+                    particle.draw();
+
+                }
+            );
+
+
+            requestAnimationFrame(
+                animateParticles
+            );
+
+        }
+
+
+        animateParticles();
+
+
+        /* =====================================================
+           CARD TILT EFFECT
+        ===================================================== */
+
+        const cards =
+            document.querySelectorAll(
+                ".skill-card, .achievement-card"
+            );
+
+
+        cards.forEach((card) => {
+
+            card.addEventListener(
+                "mousemove",
+                (event) => {
+
+                    const rect =
+                        card.getBoundingClientRect();
+
+                    const x =
+                        event.clientX -
+                        rect.left;
+
+                    const y =
+                        event.clientY -
+                        rect.top;
+
+                    const centerX =
+                        rect.width / 2;
+
+                    const centerY =
+                        rect.height / 2;
+
+                    const rotateX =
+                        ((y - centerY) /
+                        centerY) * -4;
+
+                    const rotateY =
+                        ((x - centerX) /
+                        centerX) * 4;
+
+
+                    card.style.transform =
+                        `perspective(700px)
+                         rotateX(${rotateX}deg)
+                         rotateY(${rotateY}deg)
+                         translateY(-8px)`;
+
+                }
+            );
+
+
+            card.addEventListener(
+                "mouseleave",
+                () => {
+
+                    card.style.transform =
+                        "";
+
+                }
+            );
+
+        });
+
+    </script>
 
 </body>
 </html>
+```
