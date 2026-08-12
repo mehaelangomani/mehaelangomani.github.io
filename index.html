@@ -2,1855 +2,2528 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Meha | Cybersecurity Analyst</title>
-
-    <style>
-
-        /* =========================================================
-           ROOT
-        ========================================================= */
-
-        :root {
-            --deep: #021820;
-            --ocean: #032f3f;
-            --blue: #07566b;
-            --teal: #08a6a6;
-            --aqua: #48e0d0;
-            --cyan: #73f7eb;
-            --white: #eefefe;
-            --muted: #8baeb5;
-            --glass: rgba(255, 255, 255, 0.055);
-            --border: rgba(115, 247, 235, 0.16);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: "Segoe UI", Arial, sans-serif;
-            background: var(--deep);
-            color: var(--white);
-            overflow-x: hidden;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        ::selection {
-            background: var(--aqua);
-            color: var(--deep);
-        }
-
-
-        /* =========================================================
-           SCROLLBAR
-        ========================================================= */
-
-        ::-webkit-scrollbar {
-            width: 7px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--deep);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--teal);
-            border-radius: 20px;
-        }
-
-
-        /* =========================================================
-           CURSOR GLOW
-        ========================================================= */
-
-        .cursor-glow {
-            position: fixed;
-            width: 280px;
-            height: 280px;
-            border-radius: 50%;
-
-            background: radial-gradient(
-                circle,
-                rgba(72, 224, 208, 0.11),
-                transparent 65%
-            );
-
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 0;
-        }
-
-
-        /* =========================================================
-           PARTICLE CANVAS
-        ========================================================= */
-
-        #particles {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0.45;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MEHA // Cybersecurity Analyst</title>
+
+<style>
+
+/* =========================================================
+   CORE
+========================================================= */
+
+:root {
+    --black: #02090d;
+    --deep: #03151c;
+    --ocean: #052b38;
+    --blue: #07566b;
+    --teal: #00aeb5;
+    --aqua: #4fffe5;
+    --cyan: #83fff2;
+    --white: #edffff;
+    --muted: #7299a2;
+    --line: rgba(79,255,229,.14);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--black);
+    color: var(--white);
+    font-family: "Segoe UI", Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+::selection {
+    background: var(--aqua);
+    color: #001114;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #02090d;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--teal);
+}
+
+
+/* =========================================================
+   GLOBAL ATMOSPHERE
+========================================================= */
+
+#space {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+}
+
+.ambient {
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -5;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,174,181,.08),
+            transparent 70%
+        );
+
+    filter: blur(20px);
+}
+
+.ambient.one {
+    top: -250px;
+    left: -200px;
+}
 
+.ambient.two {
+    right: -250px;
+    bottom: -200px;
+}
 
-        /* =========================================================
-           NAVIGATION
-        ========================================================= */
 
-        nav {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+/* =========================================================
+   TOP SYSTEM BAR
+========================================================= */
 
-            width: min(1100px, 92%);
+.system-bar {
+    position: fixed;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
 
-            padding: 14px 20px;
+    width: min(1250px, 92%);
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+    height: 54px;
 
-            background: rgba(3, 31, 40, 0.72);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-            border: 1px solid var(--border);
-            border-radius: 18px;
-
-            z-index: 1000;
+    padding: 0 20px;
 
-            box-shadow:
-                0 10px 40px rgba(0, 0, 0, 0.25);
-        }
+    background: rgba(2,15,21,.65);
+    border: 1px solid var(--line);
+    backdrop-filter: blur(20px);
 
-        .logo {
-            font-size: 22px;
-            font-weight: 800;
-            letter-spacing: 3px;
-            color: var(--cyan);
-        }
+    z-index: 1000;
 
-        .nav-links {
-            display: flex;
-            gap: 28px;
-            list-style: none;
-        }
+    border-radius: 12px;
+}
 
-        .nav-links a {
-            font-size: 13px;
-            color: var(--muted);
-            transition: 0.3s ease;
-        }
+.system-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
 
-        .nav-links a:hover {
-            color: var(--cyan);
-        }
+.logo {
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: var(--cyan);
+}
 
-        .nav-status {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+.system-code {
+    color: #557b83;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
 
-            font-size: 11px;
-            color: var(--muted);
-        }
+.system-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
 
-        .status-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: var(--aqua);
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: #648991;
+}
 
-            box-shadow:
-                0 0 8px var(--aqua);
+.online {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
 
-            animation: pulse 2s infinite;
-        }
+.online-dot {
+    width: 6px;
+    height: 6px;
 
+    background: var(--aqua);
+    border-radius: 50%;
 
-        /* =========================================================
-           HERO
-        ========================================================= */
+    box-shadow: 0 0 12px var(--aqua);
 
-        .hero {
-            min-height: 100vh;
-            position: relative;
-            z-index: 1;
+    animation: blink 2s infinite;
+}
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
 
-            padding: 120px 8% 80px;
+/* =========================================================
+   NAVIGATION
+========================================================= */
 
-            overflow: hidden;
-        }
+.side-nav {
+    position: fixed;
 
-        .hero::before {
-            content: "";
-            position: absolute;
+    left: 25px;
+    top: 50%;
 
-            width: 600px;
-            height: 600px;
+    transform: translateY(-50%);
 
-            background: radial-gradient(
-                circle,
-                rgba(8, 166, 166, 0.18),
-                transparent 65%
-            );
+    z-index: 900;
 
-            top: -200px;
-            right: -100px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
 
-            animation: float 8s ease-in-out infinite;
-        }
+.nav-point {
+    position: relative;
 
-        .hero-content {
-            width: min(1150px, 100%);
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 80px;
-            align-items: center;
-        }
+    width: 8px;
+    height: 8px;
 
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+    border-radius: 50%;
 
-            padding: 8px 14px;
+    background: #31515a;
 
-            border: 1px solid var(--border);
-            border-radius: 30px;
+    cursor: pointer;
 
-            background: var(--glass);
+    transition: .4s;
+}
 
-            color: var(--cyan);
-            font-size: 12px;
-            letter-spacing: 1px;
+.nav-point::after {
+    content: attr(data-name);
 
-            margin-bottom: 25px;
+    position: absolute;
 
-            animation: fadeUp 1s ease forwards;
-        }
+    left: 20px;
+    top: 50%;
 
-        .hero h1 {
-            font-size: clamp(60px, 9vw, 120px);
-            line-height: 0.9;
-            letter-spacing: -6px;
+    transform: translateY(-50%);
 
-            background: linear-gradient(
-                135deg,
-                #ffffff,
-                #73f7eb,
-                #168ca0
-            );
+    white-space: nowrap;
 
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+    font-size: 9px;
+    letter-spacing: 2px;
 
-            animation: fadeUp 1s 0.15s ease both;
-        }
+    color: #56757c;
 
-        .hero h2 {
-            margin-top: 20px;
+    opacity: 0;
 
-            font-size: clamp(22px, 3vw, 34px);
-            font-weight: 400;
+    transition: .3s;
+}
 
-            color: var(--muted);
+.nav-point:hover::after {
+    opacity: 1;
+}
 
-            animation: fadeUp 1s 0.3s ease both;
-        }
+.nav-point.active {
+    background: var(--aqua);
 
-        .hero h2 span {
-            color: var(--cyan);
-        }
+    box-shadow:
+        0 0 15px var(--aqua);
 
-        .hero-description {
-            max-width: 650px;
-            margin-top: 25px;
+    transform: scale(1.6);
+}
 
-            color: #91b1b8;
-            font-size: 16px;
-            line-height: 1.8;
 
-            animation: fadeUp 1s 0.45s ease both;
-        }
+/* =========================================================
+   SECTIONS
+========================================================= */
 
-        .hero-buttons {
-            margin-top: 35px;
+.screen {
+    min-height: 100vh;
+    position: relative;
 
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
+    display: flex;
+    align-items: center;
 
-            animation: fadeUp 1s 0.6s ease both;
-        }
+    padding: 110px 8%;
 
-        .btn {
-            padding: 13px 22px;
-            border-radius: 12px;
+    overflow: hidden;
+}
 
-            font-size: 13px;
-            font-weight: 600;
+.inner {
+    width: min(1200px,100%);
+    margin: auto;
+}
 
-            transition: 0.35s ease;
-        }
 
-        .btn-primary {
-            color: var(--deep);
-            background: var(--cyan);
+/* =========================================================
+   HERO
+========================================================= */
 
-            box-shadow:
-                0 0 25px rgba(72, 224, 208, 0.18);
-        }
+#home {
+    min-height: 100vh;
 
-        .btn-primary:hover {
-            transform: translateY(-4px);
-            box-shadow:
-                0 10px 30px rgba(72, 224, 208, 0.25);
-        }
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(0,174,181,.08),
+            transparent 38%
+        );
+}
 
-        .btn-secondary {
-            border: 1px solid var(--border);
-            color: var(--white);
-            background: var(--glass);
-        }
+.hero-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 
-        .btn-secondary:hover {
-            border-color: var(--cyan);
-            transform: translateY(-4px);
-        }
+    align-items: center;
 
+    gap: 40px;
+}
 
-        /* =========================================================
-           CYBER SECURITY VISUAL
-        ========================================================= */
 
-        .cyber-visual {
-            width: 350px;
-            height: 350px;
+/* LEFT */
 
-            margin: auto;
+.hero-tag {
+    color: var(--aqua);
 
-            position: relative;
+    font-size: 10px;
+    letter-spacing: 4px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    margin-bottom: 25px;
+}
 
-        .orbit {
-            position: absolute;
+.hero-name {
+    font-size: clamp(80px,13vw,180px);
 
-            border: 1px solid rgba(72, 224, 208, 0.2);
-            border-radius: 50%;
-        }
+    line-height: .78;
 
-        .orbit.one {
-            width: 330px;
-            height: 330px;
-            animation: rotate 18s linear infinite;
-        }
+    letter-spacing: -10px;
 
-        .orbit.two {
-            width: 250px;
-            height: 250px;
-            animation: rotateReverse 12s linear infinite;
-        }
+    background:
+        linear-gradient(
+            120deg,
+            white,
+            #8ffff2,
+            #167a89
+        );
 
-        .orbit.three {
-            width: 170px;
-            height: 170px;
-            animation: rotate 8s linear infinite;
-        }
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 
-        .orbit::before {
-            content: "";
+    animation: nameReveal 1.4s ease;
+}
 
-            position: absolute;
+.hero-role {
+    margin-top: 30px;
 
-            width: 8px;
-            height: 8px;
+    font-size: clamp(20px,3vw,32px);
 
-            background: var(--cyan);
-            border-radius: 50%;
+    color: var(--muted);
 
-            top: 0;
-            left: 50%;
+    font-weight: 300;
+}
 
-            box-shadow: 0 0 15px var(--cyan);
-        }
+.hero-role strong {
+    color: var(--aqua);
+    font-weight: 500;
+}
 
-        .shield {
-            width: 125px;
-            height: 145px;
+.hero-description {
+    margin-top: 20px;
 
-            background: linear-gradient(
-                145deg,
-                rgba(72, 224, 208, 0.18),
-                rgba(7, 86, 107, 0.3)
-            );
+    max-width: 580px;
 
-            border: 1px solid rgba(115, 247, 235, 0.4);
+    color: #6d9199;
 
-            clip-path: polygon(
-                50% 0%,
-                92% 15%,
-                85% 65%,
-                50% 100%,
-                15% 65%,
-                8% 15%
-            );
+    line-height: 1.9;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    font-size: 14px;
+}
 
-            font-size: 45px;
+.hero-actions {
+    display: flex;
+    gap: 12px;
 
-            box-shadow:
-                0 0 60px rgba(72, 224, 208, 0.12);
+    margin-top: 35px;
+}
 
-            animation: shieldFloat 4s ease-in-out infinite;
-        }
+.button {
+    position: relative;
 
+    padding: 13px 22px;
 
-        /* =========================================================
-           SECTIONS
-        ========================================================= */
+    border-radius: 8px;
 
-        section {
-            position: relative;
-            z-index: 1;
+    font-size: 11px;
 
-            padding: 120px 8%;
-        }
+    letter-spacing: 1px;
 
-        .section-container {
-            width: min(1100px, 100%);
-            margin: auto;
-        }
+    transition: .4s;
 
-        .section-label {
-            color: var(--aqua);
-            font-size: 11px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
+    overflow: hidden;
+}
 
-        .section-title {
-            font-size: clamp(35px, 5vw, 55px);
-            letter-spacing: -2px;
-            margin-bottom: 50px;
-        }
+.button-primary {
+    background: var(--aqua);
+    color: #001418;
+}
 
-        .section-title span {
-            color: var(--cyan);
-        }
+.button-primary:hover {
+    transform: translateY(-4px);
 
+    box-shadow:
+        0 12px 40px rgba(79,255,229,.2);
+}
 
-        /* =========================================================
-           ABOUT
-        ========================================================= */
+.button-outline {
+    border: 1px solid var(--line);
+    color: var(--white);
+}
 
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
+.button-outline:hover {
+    border-color: var(--aqua);
+    color: var(--aqua);
+}
 
-        .glass-card {
-            background: var(--glass);
-            border: 1px solid var(--border);
 
-            border-radius: 22px;
-            padding: 35px;
+/* =========================================================
+   CENTRAL CORE
+========================================================= */
 
-            backdrop-filter: blur(15px);
+.core-area {
+    position: relative;
 
-            transition:
-                transform 0.5s ease,
-                border-color 0.5s ease,
-                box-shadow 0.5s ease;
-        }
+    width: min(480px,90vw);
+    height: 480px;
 
-        .glass-card:hover {
-            transform: translateY(-8px);
+    margin: auto;
 
-            border-color: rgba(115, 247, 235, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-            box-shadow:
-                0 20px 60px rgba(0, 0, 0, 0.2);
-        }
+.core-ring {
+    position: absolute;
 
-        .glass-card p {
-            color: var(--muted);
-            line-height: 1.9;
-            font-size: 15px;
-        }
+    border: 1px solid var(--line);
 
-        .highlight {
-            color: var(--cyan);
-        }
+    border-radius: 50%;
+}
 
-        .mini-stat-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 25px;
-        }
+.ring-1 {
+    width: 450px;
+    height: 450px;
 
-        .mini-stat {
-            padding: 20px;
+    animation: spin 30s linear infinite;
+}
 
-            background: rgba(72, 224, 208, 0.04);
-            border: 1px solid var(--border);
+.ring-2 {
+    width: 350px;
+    height: 350px;
 
-            border-radius: 15px;
-        }
+    border-style: dashed;
 
-        .mini-stat strong {
-            display: block;
-            font-size: 27px;
-            color: var(--cyan);
-        }
+    animation: spinReverse 22s linear infinite;
+}
 
-        .mini-stat small {
-            color: var(--muted);
-        }
+.ring-3 {
+    width: 240px;
+    height: 240px;
 
+    border-color: rgba(79,255,229,.3);
 
-        /* =========================================================
-           EDUCATION
-        ========================================================= */
+    animation: spin 14s linear infinite;
+}
 
-        .timeline {
-            position: relative;
-            max-width: 900px;
-            margin: auto;
-        }
+.ring-4 {
+    width: 145px;
+    height: 145px;
 
-        .timeline::before {
-            content: "";
+    background:
+        radial-gradient(
+            circle,
+            rgba(79,255,229,.13),
+            transparent 70%
+        );
 
-            position: absolute;
-            left: 15px;
-            top: 0;
-            bottom: 0;
+    border-color: var(--aqua);
 
-            width: 1px;
+    box-shadow:
+        0 0 80px rgba(79,255,229,.15);
 
-            background:
-                linear-gradient(
-                    transparent,
-                    var(--teal),
-                    transparent
-                );
-        }
+    animation: pulseCore 3s ease-in-out infinite;
+}
 
-        .timeline-item {
-            position: relative;
-            padding-left: 55px;
-            margin-bottom: 45px;
-        }
+.core {
+    position: relative;
 
-        .timeline-dot {
-            position: absolute;
+    width: 100px;
+    height: 100px;
 
-            left: 8px;
-            top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-            width: 15px;
-            height: 15px;
+    border-radius: 50%;
 
-            border-radius: 50%;
+    background:
+        radial-gradient(
+            circle,
+            var(--aqua),
+            #087a83 35%,
+            #02161d 70%
+        );
 
-            background: var(--cyan);
+    box-shadow:
+        0 0 50px rgba(79,255,229,.35);
 
-            box-shadow:
-                0 0 20px rgba(72, 224, 208, 0.5);
-        }
+    color: #001114;
 
-        .timeline-card {
-            background: var(--glass);
-            border: 1px solid var(--border);
+    font-size: 30px;
+    font-weight: 900;
 
-            padding: 30px;
-            border-radius: 18px;
+    z-index: 5;
+}
 
-            transition: 0.4s ease;
-        }
+.orbit-dot {
+    position: absolute;
 
-        .timeline-card:hover {
-            transform: translateX(8px);
-            border-color: rgba(115, 247, 235, 0.4);
-        }
+    width: 7px;
+    height: 7px;
 
-        .timeline-card h3 {
-            font-size: 21px;
-            margin-bottom: 5px;
-        }
+    background: var(--aqua);
 
-        .timeline-card h4 {
-            color: var(--cyan);
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
+    border-radius: 50%;
 
-        .timeline-card p {
-            color: var(--muted);
-            font-size: 14px;
-        }
+    box-shadow:
+        0 0 12px var(--aqua);
+}
 
+.dot-1 {
+    top: 15px;
+    left: 50%;
+}
 
-        /* =========================================================
-           SKILLS
-        ========================================================= */
+.dot-2 {
+    right: 20px;
+    top: 50%;
+}
 
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
+.dot-3 {
+    bottom: 25px;
+    left: 25%;
+}
 
-        .skill-card {
-            position: relative;
+.dot-4 {
+    left: 20px;
+    top: 35%;
+}
 
-            padding: 30px;
 
-            background: linear-gradient(
-                145deg,
-                rgba(255,255,255,0.055),
-                rgba(255,255,255,0.015)
-            );
+/* =========================================================
+   FLOATING DATA
+========================================================= */
 
-            border: 1px solid var(--border);
-            border-radius: 18px;
+.data-chip {
+    position: absolute;
 
-            overflow: hidden;
+    padding: 8px 12px;
 
-            transition: 0.4s ease;
-        }
+    border: 1px solid var(--line);
 
-        .skill-card::after {
-            content: "";
+    background: rgba(3,35,44,.7);
 
-            position: absolute;
+    backdrop-filter: blur(10px);
 
-            width: 100px;
-            height: 100px;
+    color: var(--muted);
 
-            right: -50px;
-            bottom: -50px;
+    font-size: 9px;
 
-            background: var(--aqua);
-            opacity: 0.05;
+    letter-spacing: 1px;
 
-            border-radius: 50%;
-        }
+    border-radius: 5px;
 
-        .skill-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: rgba(115, 247, 235, 0.35);
-        }
+    animation: float 5s ease-in-out infinite;
+}
 
-        .skill-number {
-            color: var(--aqua);
-            font-size: 12px;
-            margin-bottom: 25px;
-        }
+.chip-1 {
+    top: 25px;
+    left: 20px;
+}
 
-        .skill-card h3 {
-            font-size: 20px;
-            margin-bottom: 8px;
-        }
+.chip-2 {
+    right: 10px;
+    top: 90px;
 
-        .skill-card p {
-            color: var(--muted);
-            font-size: 13px;
-        }
+    animation-delay: 1s;
+}
 
+.chip-3 {
+    bottom: 40px;
+    left: 5px;
 
-        /* =========================================================
-           ACHIEVEMENTS
-        ========================================================= */
+    animation-delay: 2s;
+}
 
-        .achievement-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
+.chip-4 {
+    bottom: 70px;
+    right: 20px;
 
-        .achievement-card {
-            min-height: 190px;
+    animation-delay: 1.5s;
+}
 
-            padding: 30px;
 
-            background: var(--glass);
-            border: 1px solid var(--border);
+/* =========================================================
+   SECTION HEADER
+========================================================= */
 
-            border-radius: 20px;
+.section-number {
+    font-size: 10px;
 
-            position: relative;
-            overflow: hidden;
+    color: var(--aqua);
 
-            transition: 0.4s ease;
-        }
+    letter-spacing: 4px;
 
-        .achievement-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(115, 247, 235, 0.4);
-        }
+    margin-bottom: 15px;
+}
 
-        .achievement-icon {
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
+.section-heading {
+    font-size: clamp(45px,7vw,90px);
 
-        .achievement-card h3 {
-            margin-bottom: 8px;
-        }
+    letter-spacing: -5px;
 
-        .achievement-card p {
-            color: var(--muted);
-            font-size: 14px;
-        }
+    line-height: .9;
+}
 
+.section-heading span {
+    color: var(--aqua);
+}
 
-        /* =========================================================
-           CAREER
-        ========================================================= */
 
-        .career-box {
-            position: relative;
+/* =========================================================
+   ABOUT / PROFILE MATRIX
+========================================================= */
 
-            padding: 65px 50px;
+.profile-matrix {
+    margin-top: 60px;
 
-            border-radius: 30px;
+    display: grid;
 
-            overflow: hidden;
+    grid-template-columns:
+        1fr 1fr 1fr;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #063847,
-                    #07566b,
-                    #032f3f
-                );
+    grid-template-rows:
+        auto auto;
 
-            border: 1px solid rgba(115, 247, 235, 0.2);
+    gap: 12px;
+}
 
-            text-align: center;
-        }
+.matrix-box {
+    position: relative;
 
-        .career-box::before {
-            content: "";
+    padding: 28px;
 
-            position: absolute;
+    min-height: 190px;
 
-            width: 300px;
-            height: 300px;
+    border: 1px solid var(--line);
 
-            background: rgba(72, 224, 208, 0.12);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.035),
+            rgba(255,255,255,.008)
+        );
 
-            border-radius: 50%;
+    overflow: hidden;
 
-            filter: blur(80px);
+    transition: .5s;
+}
 
-            left: -100px;
-            top: -150px;
-        }
+.matrix-box:hover {
+    border-color: rgba(79,255,229,.35);
 
-        .career-box h2 {
-            position: relative;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(79,255,229,.07),
+            rgba(255,255,255,.01)
+        );
 
-            font-size: clamp(32px, 5vw, 55px);
-            margin-bottom: 20px;
-        }
+    transform: translateY(-5px);
+}
 
-        .career-box h2 span {
-            color: var(--cyan);
-        }
+.matrix-box.large {
+    grid-column: span 2;
+}
 
-        .career-box p {
-            position: relative;
+.matrix-label {
+    font-size: 9px;
 
-            max-width: 700px;
-            margin: auto;
+    color: #50737b;
 
-            color: #b4d5d9;
-            line-height: 1.9;
-        }
+    letter-spacing: 3px;
 
+    margin-bottom: 25px;
+}
 
-        /* =========================================================
-           CONTACT
-        ========================================================= */
+.matrix-value {
+    font-size: 28px;
 
-        .contact {
-            text-align: center;
-        }
+    color: var(--white);
+}
 
-        .contact-text {
-            color: var(--muted);
-            max-width: 550px;
-            margin: -20px auto 35px;
-        }
+.matrix-text {
+    color: var(--muted);
 
-        .contact-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
+    line-height: 1.8;
 
+    font-size: 13px;
+}
 
-        /* =========================================================
-           FOOTER
-        ========================================================= */
 
-        footer {
-            padding: 30px;
+/* =========================================================
+   ACADEMIC DATA
+========================================================= */
 
-            text-align: center;
+.academic-layout {
+    display: grid;
 
-            border-top: 1px solid var(--border);
+    grid-template-columns: .7fr 1.3fr;
 
-            color: #62838b;
-            font-size: 12px;
-        }
+    gap: 60px;
 
+    align-items: center;
+}
 
-        /* =========================================================
-           REVEAL ANIMATION
-        ========================================================= */
+.big-score {
+    font-size: clamp(100px,14vw,180px);
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(45px);
+    line-height: .75;
 
-            transition:
-                opacity 0.9s ease,
-                transform 0.9s ease;
-        }
+    color: var(--aqua);
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    letter-spacing: -10px;
 
+    text-shadow:
+        0 0 60px rgba(79,255,229,.1);
+}
 
-        /* =========================================================
-           KEYFRAMES
-        ========================================================= */
+.score-label {
+    margin-top: 25px;
 
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
+    color: var(--muted);
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    letter-spacing: 3px;
 
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-                transform: scale(1);
-            }
+    font-size: 11px;
+}
 
-            50% {
-                opacity: 0.4;
-                transform: scale(1.5);
-            }
-        }
 
-        @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
+/* GRAPH */
 
-            to {
-                transform: rotate(360deg);
-            }
-        }
+.graph {
+    height: 400px;
 
-        @keyframes rotateReverse {
-            from {
-                transform: rotate(360deg);
-            }
+    position: relative;
 
-            to {
-                transform: rotate(0deg);
-            }
-        }
+    border-left: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
+    padding: 30px;
+}
 
-            50% {
-                transform: translateY(30px);
-            }
-        }
+.graph-grid {
+    position: absolute;
+    inset: 0;
 
-        @keyframes shieldFloat {
-            0%, 100% {
-                transform: translateY(0);
-            }
+    background:
+        linear-gradient(
+            rgba(79,255,229,.05) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(79,255,229,.05) 1px,
+            transparent 1px
+        );
 
-            50% {
-                transform: translateY(-12px);
-            }
-        }
+    background-size: 50px 50px;
+}
 
+.graph-line {
+    position: absolute;
 
-        /* =========================================================
-           RESPONSIVE
-        ========================================================= */
+    left: 8%;
+    bottom: 20%;
 
-        @media (max-width: 850px) {
+    width: 84%;
+    height: 60%;
 
-            .nav-links {
-                display: none;
-            }
+    overflow: visible;
+}
 
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
+.graph-path {
+    fill: none;
 
-            .hero-description {
-                margin-left: auto;
-                margin-right: auto;
-            }
+    stroke: var(--aqua);
 
-            .hero-buttons {
-                justify-content: center;
-            }
+    stroke-width: 3;
 
-            .cyber-visual {
-                width: 280px;
-                height: 280px;
-            }
+    stroke-linecap: round;
 
-            .orbit.one {
-                width: 260px;
-                height: 260px;
-            }
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
 
-            .orbit.two {
-                width: 200px;
-                height: 200px;
-            }
+    animation:
+        drawGraph 2s 1s forwards;
+}
 
-            .orbit.three {
-                width: 140px;
-                height: 140px;
-            }
+.graph-point {
+    fill: var(--aqua);
 
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
+    filter:
+        drop-shadow(
+            0 0 7px var(--aqua)
+        );
+}
 
-            .skills-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+.graph-text {
+    position: absolute;
 
-        @media (max-width: 600px) {
+    font-size: 11px;
 
-            nav {
-                top: 10px;
-            }
+    color: var(--muted);
+}
 
-            section {
-                padding: 80px 6%;
-            }
+.g1 {
+    left: 8%;
+    bottom: 8%;
+}
 
-            .hero {
-                padding: 120px 6% 70px;
-            }
+.g2 {
+    left: 45%;
+    bottom: 45%;
+}
 
-            .hero h1 {
-                letter-spacing: -3px;
-            }
+.g3 {
+    right: 8%;
+    bottom: 58%;
+}
 
-            .skills-grid,
-            .achievement-grid {
-                grid-template-columns: 1fr;
-            }
 
-            .career-box {
-                padding: 45px 25px;
-            }
+/* =========================================================
+   SKILL CONSTELLATION
+========================================================= */
 
-            .mini-stat-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+.skill-universe {
+    height: 620px;
 
-    </style>
+    position: relative;
+
+    margin-top: 30px;
+
+    border: 1px solid var(--line);
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0,174,181,.08),
+            transparent 45%
+        );
+}
+
+.skill-center {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%,-50%);
+
+    width: 130px;
+    height: 130px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(79,255,229,.25),
+            rgba(3,25,31,.9)
+        );
+
+    border: 1px solid var(--aqua);
+
+    box-shadow:
+        0 0 50px rgba(79,255,229,.12);
+
+    color: var(--aqua);
+
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.skill-node {
+    position: absolute;
+
+    width: 105px;
+    height: 105px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+        rgba(3,28,36,.9);
+
+    border: 1px solid var(--line);
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    cursor: pointer;
+
+    transition: .5s;
+
+    z-index: 5;
+}
+
+.skill-node:hover {
+    transform: scale(1.18);
+
+    color: var(--aqua);
+
+    border-color: var(--aqua);
+
+    box-shadow:
+        0 0 35px rgba(79,255,229,.16);
+}
+
+.node-1 {
+    left: 18%;
+    top: 18%;
+}
+
+.node-2 {
+    right: 18%;
+    top: 18%;
+}
+
+.node-3 {
+    left: 10%;
+    bottom: 18%;
+}
+
+.node-4 {
+    right: 10%;
+    bottom: 18%;
+}
+
+.node-5 {
+    left: 42%;
+    top: 7%;
+}
+
+.node-6 {
+    left: 42%;
+    bottom: 7%;
+}
+
+
+/* CONNECTIONS */
+
+.connection {
+    position: absolute;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(79,255,229,.25),
+            transparent
+        );
+
+    transform-origin: left center;
+
+    z-index: 1;
+}
+
+.c1 {
+    width: 300px;
+    left: 25%;
+    top: 35%;
+
+    transform: rotate(25deg);
+}
+
+.c2 {
+    width: 300px;
+    right: 25%;
+    top: 35%;
+
+    transform: rotate(-25deg);
+}
+
+.c3 {
+    width: 320px;
+    left: 23%;
+    bottom: 35%;
+
+    transform: rotate(-25deg);
+}
+
+.c4 {
+    width: 320px;
+    right: 23%;
+    bottom: 35%;
+
+    transform: rotate(25deg);
+}
+
+
+/* =========================================================
+   ACHIEVEMENT CONSTELLATION
+========================================================= */
+
+.achievement-space {
+    position: relative;
+
+    height: 600px;
+
+    margin-top: 30px;
+
+    overflow: hidden;
+
+    border: 1px solid var(--line);
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(7,86,107,.12),
+            transparent 55%
+        );
+}
+
+.star {
+    position: absolute;
+
+    width: 12px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    background: var(--aqua);
+
+    box-shadow:
+        0 0 20px var(--aqua);
+
+    cursor: pointer;
+
+    transition: .4s;
+}
+
+.star:hover {
+    transform: scale(2);
+}
+
+.star::after {
+    content: attr(data-title);
+
+    position: absolute;
+
+    left: 20px;
+    top: -8px;
+
+    width: 170px;
+
+    font-size: 10px;
+
+    color: var(--muted);
+
+    letter-spacing: 1px;
+
+    opacity: 0;
+
+    transition: .3s;
+}
+
+.star:hover::after {
+    opacity: 1;
+}
+
+.star-1 {
+    left: 22%;
+    top: 28%;
+}
+
+.star-2 {
+    left: 48%;
+    top: 15%;
+}
+
+.star-3 {
+    right: 22%;
+    top: 32%;
+}
+
+.star-4 {
+    left: 35%;
+    bottom: 25%;
+}
+
+.star-5 {
+    right: 35%;
+    bottom: 18%;
+}
+
+.star-6 {
+    left: 50%;
+    top: 48%;
+
+    width: 18px;
+    height: 18px;
+}
+
+
+/* =========================================================
+   CAREER TERMINAL
+========================================================= */
+
+.terminal {
+    border: 1px solid var(--line);
+
+    background: #010b0f;
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.3);
+
+    margin-top: 50px;
+}
+
+.terminal-head {
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 0 15px;
+
+    border-bottom: 1px solid var(--line);
+}
+
+.terminal-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #31515a;
+}
+
+.terminal-title {
+    margin-left: 10px;
+
+    color: #51757d;
+
+    font-size: 10px;
+}
+
+.terminal-body {
+    padding: 45px;
+
+    color: #71aaa9;
+
+    font-family: monospace;
+
+    font-size: 13px;
+
+    line-height: 2;
+}
+
+.prompt {
+    color: var(--aqua);
+}
+
+.cursor {
+    display: inline-block;
+
+    width: 7px;
+    height: 14px;
+
+    background: var(--aqua);
+
+    animation: blink 1s infinite;
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact-zone {
+    min-height: 75vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.contact-title {
+    font-size: clamp(60px,10vw,140px);
+
+    letter-spacing: -8px;
+
+    line-height: .8;
+}
+
+.contact-title span {
+    color: var(--aqua);
+}
+
+.contact-sub {
+    margin-top: 30px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+.contact-links {
+    margin-top: 35px;
+
+    display: flex;
+    justify-content: center;
+
+    gap: 12px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    border-top: 1px solid var(--line);
+
+    padding: 25px 8%;
+
+    display: flex;
+    justify-content: space-between;
+
+    color: #466a72;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spinReverse {
+    from {
+        transform: rotate(360deg);
+    }
+
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes pulseCore {
+    0%,100% {
+        transform: scale(1);
+        box-shadow:
+            0 0 40px rgba(79,255,229,.1);
+    }
+
+    50% {
+        transform: scale(1.08);
+        box-shadow:
+            0 0 80px rgba(79,255,229,.22);
+    }
+}
+
+@keyframes float {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+@keyframes blink {
+    0%,100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .25;
+    }
+}
+
+@keyframes nameReveal {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+        letter-spacing: 10px;
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        letter-spacing: -10px;
+    }
+}
+
+@keyframes drawGraph {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:900px) {
+
+    .hero-layout,
+    .academic-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-layout {
+        text-align: center;
+    }
+
+    .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .core-area {
+        transform: scale(.8);
+    }
+
+    .profile-matrix {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .matrix-box.large {
+        grid-column: span 2;
+    }
+
+    .side-nav {
+        display: none;
+    }
+}
+
+
+@media(max-width:600px) {
+
+    .system-bar {
+        width: 94%;
+    }
+
+    .system-code,
+    .system-right span:not(.online-dot) {
+        display: none;
+    }
+
+    .screen {
+        padding: 100px 6%;
+    }
+
+    .hero-name {
+        font-size: 75px;
+        letter-spacing: -5px;
+    }
+
+    .core-area {
+        width: 330px;
+        height: 330px;
+        transform: scale(.75);
+    }
+
+    .profile-matrix {
+        grid-template-columns: 1fr;
+    }
+
+    .matrix-box.large {
+        grid-column: span 1;
+    }
+
+    .skill-universe,
+    .achievement-space {
+        height: 500px;
+    }
+
+    .skill-node {
+        width: 75px;
+        height: 75px;
+        font-size: 9px;
+    }
+
+    .terminal-body {
+        padding: 25px;
+        font-size: 11px;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+
+</style>
 </head>
 
 
 <body>
 
-    <!-- =========================================================
-         BACKGROUND
-    ========================================================== -->
 
-    <canvas id="particles"></canvas>
+<!-- =========================================================
+     BACKGROUND
+========================================================= -->
 
-    <div class="cursor-glow"></div>
+<canvas id="space"></canvas>
+
+<div class="ambient one"></div>
+<div class="ambient two"></div>
 
 
-    <!-- =========================================================
-         NAVIGATION
-    ========================================================== -->
+<!-- =========================================================
+     SYSTEM BAR
+========================================================= -->
 
-    <nav>
+<div class="system-bar">
 
-        <div class="logo">MEHA.</div>
+    <div class="system-left">
 
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#achievements">Achievements</a></li>
-            <li><a href="#career">Career</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-
-        <div class="nav-status">
-            <span class="status-dot"></span>
-            Open to opportunities
+        <div class="logo">
+            MEHA.
         </div>
 
-    </nav>
-
-
-    <!-- =========================================================
-         HERO
-    ========================================================== -->
-
-    <header class="hero">
-
-        <div class="hero-content">
-
-            <div>
-
-                <div class="eyebrow">
-                    <span class="status-dot"></span>
-                    COMPUTING & DATA SCIENCE
-                </div>
-
-                <h1>MEHA</h1>
-
-                <h2>
-                    Future <span>Cybersecurity Analyst</span>
-                </h2>
-
-                <p class="hero-description">
-                    Second-year Computing & Data Science student at
-                    Sai University with a passion for cybersecurity,
-                    analytical thinking, programming and solving
-                    complex problems.
-                </p>
-
-                <div class="hero-buttons">
-
-                    <a href="#about" class="btn btn-primary">
-                        Explore My Profile
-                    </a>
-
-                    <a href="#contact" class="btn btn-secondary">
-                        Let's Connect →
-                    </a>
-
-                </div>
-
-            </div>
-
-
-            <!-- CYBER VISUAL -->
-
-            <div class="cyber-visual">
-
-                <div class="orbit one"></div>
-                <div class="orbit two"></div>
-                <div class="orbit three"></div>
-
-                <div class="shield">
-                    ◈
-                </div>
-
-            </div>
-
+        <div class="system-code">
+            ID: CDS-2026-MEHA
         </div>
 
-    </header>
+    </div>
 
 
-    <!-- =========================================================
-         ABOUT
-    ========================================================== -->
+    <div class="system-right">
 
-    <section id="about">
-
-        <div class="section-container reveal">
-
-            <div class="section-label">
-                01 / ABOUT
-            </div>
-
-            <h2 class="section-title">
-                Beyond the <span>Code.</span>
-            </h2>
-
-
-            <div class="about-grid">
-
-                <div class="glass-card">
-
-                    <p>
-                        I am <span class="highlight">Meha</span>,
-                        a second-year student at
-                        <span class="highlight">
-                            Sai University
-                        </span>,
-                        pursuing Computing and Data Science.
-                    </p>
-
-                    <br>
-
-                    <p>
-                        I am particularly interested in
-                        cybersecurity and aspire to become a
-                        <span class="highlight">
-                            Cybersecurity Analyst
-                        </span>.
-                        I enjoy understanding how systems work,
-                        identifying problems and approaching them
-                        through logical and critical thinking.
-                    </p>
-
-                </div>
-
-
-                <div class="glass-card">
-
-                    <p>
-                        My academic journey combines programming,
-                        data structures and database technologies
-                        with leadership and creative activities.
-                    </p>
-
-                    <div class="mini-stat-grid">
-
-                        <div class="mini-stat">
-                            <strong>9.64</strong>
-                            <small>Current CGPA</small>
-                        </div>
-
-                        <div class="mini-stat">
-                            <strong>9.85</strong>
-                            <small>Latest GPA</small>
-                        </div>
-
-                        <div class="mini-stat">
-                            <strong>90%</strong>
-                            <small>School Score</small>
-                        </div>
-
-                        <div class="mini-stat">
-                            <strong>2nd</strong>
-                            <small>Year</small>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
+        <div>
+            PORTFOLIO / 01
         </div>
 
-    </section>
-
-
-    <!-- =========================================================
-         EDUCATION
-    ========================================================== -->
-
-    <section id="education">
-
-        <div class="section-container reveal">
-
-            <div class="section-label">
-                02 / EDUCATION
-            </div>
-
-            <h2 class="section-title">
-                Academic <span>Journey.</span>
-            </h2>
-
-
-            <div class="timeline">
-
-                <div class="timeline-item">
-
-                    <div class="timeline-dot"></div>
-
-                    <div class="timeline-card">
-
-                        <h3>Computing & Data Science</h3>
-
-                        <h4>Sai University</h4>
-
-                        <p>
-                            Second Year • Undergraduate
-                        </p>
-
-                        <br>
-
-                        <p>
-                            Currently pursuing an undergraduate
-                            degree with a strong academic record
-                            and a growing focus on cybersecurity
-                            and technology.
-                        </p>
-
-                        <br>
-
-                        <p>
-                            <strong>CGPA:</strong> 9.64
-                            &nbsp; | &nbsp;
-                            <strong>Sem 1:</strong> 9.33
-                            &nbsp; | &nbsp;
-                            <strong>Sem 2:</strong> 9.85
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div class="timeline-item">
-
-                    <div class="timeline-dot"></div>
-
-                    <div class="timeline-card">
-
-                        <h3>School Education</h3>
-
-                        <h4>Velammal Vidhyashram</h4>
-
-                        <p>
-                            Completed Schooling
-                        </p>
-
-                        <br>
-
-                        <p>
-                            Successfully completed schooling
-                            with an overall score of
-                            <strong>90%</strong>.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
+        <div class="online">
+            <span class="online-dot"></span>
+            SYSTEM ONLINE
         </div>
 
-    </section>
+    </div>
+
+</div>
 
 
-    <!-- =========================================================
-         SKILLS
-    ========================================================== -->
+<!-- =========================================================
+     SIDE NAV
+========================================================= -->
 
-    <section id="skills">
+<div class="side-nav">
 
-        <div class="section-container reveal">
+    <div class="nav-point active"
+         data-name="IDENTITY"
+         data-target="home"></div>
 
-            <div class="section-label">
-                03 / SKILLS
+    <div class="nav-point"
+         data-name="PROFILE"
+         data-target="profile"></div>
+
+    <div class="nav-point"
+         data-name="ACADEMICS"
+         data-target="academic"></div>
+
+    <div class="nav-point"
+         data-name="SKILLS"
+         data-target="skills"></div>
+
+    <div class="nav-point"
+         data-name="ACHIEVEMENTS"
+         data-target="achievements"></div>
+
+    <div class="nav-point"
+         data-name="CAREER"
+         data-target="career"></div>
+
+    <div class="nav-point"
+         data-name="CONTACT"
+         data-target="contact"></div>
+
+</div>
+
+
+<!-- =========================================================
+     IDENTITY
+========================================================= -->
+
+<section class="screen" id="home">
+
+<div class="inner">
+
+<div class="hero-layout">
+
+
+<div>
+
+    <div class="hero-tag">
+        COMPUTING × DATA SCIENCE × SECURITY
+    </div>
+
+    <h1 class="hero-name">
+        MEHA
+    </h1>
+
+    <div class="hero-role">
+        Future <strong>Cybersecurity Analyst</strong>
+    </div>
+
+    <p class="hero-description">
+        Second-year Computing and Data Science student at
+        Sai University. Exploring cybersecurity, programming,
+        data structures and analytical problem solving while
+        building the foundation for a career in digital security.
+    </p>
+
+    <div class="hero-actions">
+
+        <a href="#profile"
+           class="button button-primary">
+            ENTER PROFILE
+        </a>
+
+        <a href="#contact"
+           class="button button-outline">
+            CONNECT →
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- CORE -->
+
+<div class="core-area">
+
+    <div class="core-ring ring-1"></div>
+    <div class="core-ring ring-2"></div>
+    <div class="core-ring ring-3"></div>
+    <div class="core-ring ring-4"></div>
+
+    <div class="core">
+        M
+    </div>
+
+    <div class="orbit-dot dot-1"></div>
+    <div class="orbit-dot dot-2"></div>
+    <div class="orbit-dot dot-3"></div>
+    <div class="orbit-dot dot-4"></div>
+
+    <div class="data-chip chip-1">
+        CGPA / 9.64
+    </div>
+
+    <div class="data-chip chip-2">
+        SECURITY
+    </div>
+
+    <div class="data-chip chip-3">
+        PYTHON
+    </div>
+
+    <div class="data-chip chip-4">
+        ANALYSIS
+    </div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     PROFILE
+========================================================= -->
+
+<section class="screen" id="profile">
+
+<div class="inner">
+
+    <div class="section-number">
+        01 / PROFILE
+    </div>
+
+    <h2 class="section-heading">
+        THE <span>PERSON</span><br>
+        BEHIND THE CODE.
+    </h2>
+
+
+    <div class="profile-matrix">
+
+
+        <div class="matrix-box large">
+
+            <div class="matrix-label">
+                IDENTITY
             </div>
 
-            <h2 class="section-title">
-                My <span>Toolkit.</span>
-            </h2>
-
-
-            <div class="skills-grid">
-
-                <div class="skill-card">
-                    <div class="skill-number">01</div>
-                    <h3>C Programming</h3>
-                    <p>
-                        Programming fundamentals and
-                        structured problem solving.
-                    </p>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-number">02</div>
-                    <h3>Python</h3>
-                    <p>
-                        Programming, logic building and
-                        computational problem solving.
-                    </p>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-number">03</div>
-                    <h3>MySQL</h3>
-                    <p>
-                        Database fundamentals and
-                        structured data management.
-                    </p>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-number">04</div>
-                    <h3>Data Structures</h3>
-                    <p>
-                        Understanding efficient organization
-                        and manipulation of data.
-                    </p>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-number">05</div>
-                    <h3>Critical Thinking</h3>
-                    <p>
-                        Analytical reasoning and structured
-                        approaches to complex problems.
-                    </p>
-                </div>
-
-                <div class="skill-card">
-                    <div class="skill-number">06</div>
-                    <h3>Leadership</h3>
-                    <p>
-                        Communication, collaboration and
-                        taking initiative in team environments.
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================================================
-         ACHIEVEMENTS
-    ========================================================== -->
-
-    <section id="achievements">
-
-        <div class="section-container reveal">
-
-            <div class="section-label">
-                04 / ACHIEVEMENTS
-            </div>
-
-            <h2 class="section-title">
-                Beyond <span>Academics.</span>
-            </h2>
-
-
-            <div class="achievement-grid">
-
-                <div class="achievement-card">
-
-                    <div class="achievement-icon">
-                        🏆
-                    </div>
-
-                    <h3>Guinness World Record</h3>
-
-                    <p>
-                        Participated in a Guinness World Record
-                        achievement in Classical Dance.
-                    </p>
-
-                </div>
-
-
-                <div class="achievement-card">
-
-                    <div class="achievement-icon">
-                        🏃
-                    </div>
-
-                    <h3>State-Level Athletics</h3>
-
-                    <p>
-                        Participated at state level in
-                        100m, 400m and 400m relay events.
-                    </p>
-
-                </div>
-
-
-                <div class="achievement-card">
-
-                    <div class="achievement-icon">
-                        🎤
-                    </div>
-
-                    <h3>Singing Awards</h3>
-
-                    <p>
-                        Won several awards and recognitions
-                        in singing competitions.
-                    </p>
-
-                </div>
-
-
-                <div class="achievement-card">
-
-                    <div class="achievement-icon">
-                        🎨
-                    </div>
-
-                    <h3>Drawing Awards</h3>
-
-                    <p>
-                        Won several awards and recognitions
-                        in drawing competitions.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================================================
-         CAREER
-    ========================================================== -->
-
-    <section id="career">
-
-        <div class="section-container reveal">
-
-            <div class="career-box">
-
-                <div class="section-label">
-                    05 / FUTURE
-                </div>
-
-                <h2>
-                    Building a career in
-                    <span>Cybersecurity.</span>
-                </h2>
-
-                <p>
-                    My goal is to become a Cybersecurity Analyst
-                    and work at the intersection of technology,
-                    analytical thinking and digital security.
-                    I want to develop the skills required to
-                    identify vulnerabilities, analyze threats
-                    and contribute to protecting digital systems
-                    and data.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================================================
-         CONTACT
-    ========================================================== -->
-
-    <section id="contact">
-
-        <div class="section-container contact reveal">
-
-            <div class="section-label">
-                06 / CONTACT
-            </div>
-
-            <h2 class="section-title">
-                Let's <span>Connect.</span>
-            </h2>
-
-            <p class="contact-text">
-                Whether it's technology, cybersecurity,
-                collaboration or an interesting project —
-                I'd love to connect.
+            <p class="matrix-text">
+                I am Meha, a second-year Computing and Data
+                Science student at Sai University with a strong
+                interest in cybersecurity. I enjoy understanding
+                complex systems, breaking problems into logical
+                components and developing structured solutions.
             </p>
 
+        </div>
 
-            <div class="contact-buttons">
 
-                <!-- Replace these links -->
+        <div class="matrix-box">
 
-                <a
-                    href="mailto:your-email@example.com"
-                    class="btn btn-primary"
-                >
-                    Email Me
-                </a>
+            <div class="matrix-label">
+                CURRENT STATE
+            </div>
 
-                <a
-                    href="https://linkedin.com/"
-                    target="_blank"
-                    class="btn btn-secondary"
-                >
-                    LinkedIn
-                </a>
+            <div class="matrix-value">
+                2ND YEAR
+            </div>
 
-                <a
-                    href="https://github.com/"
-                    target="_blank"
-                    class="btn btn-secondary"
-                >
-                    GitHub
-                </a>
+            <p class="matrix-text">
+                Undergraduate
+            </p>
 
+        </div>
+
+
+        <div class="matrix-box">
+
+            <div class="matrix-label">
+                SPECIALIZATION
+            </div>
+
+            <div class="matrix-value">
+                SECURITY
+            </div>
+
+            <p class="matrix-text">
+                Future Cybersecurity Analyst
+            </p>
+
+        </div>
+
+
+        <div class="matrix-box">
+
+            <div class="matrix-label">
+                THINKING
+            </div>
+
+            <div class="matrix-value">
+                CRITICAL
+            </div>
+
+            <p class="matrix-text">
+                Analytical problem solving
+            </p>
+
+        </div>
+
+
+        <div class="matrix-box">
+
+            <div class="matrix-label">
+                LEADERSHIP
+            </div>
+
+            <div class="matrix-value">
+                ACTIVE
+            </div>
+
+            <p class="matrix-text">
+                Teamwork & initiative
+            </p>
+
+        </div>
+
+
+        <div class="matrix-box large">
+
+            <div class="matrix-label">
+                DIRECTION
+            </div>
+
+            <p class="matrix-text">
+                Building strong foundations in programming,
+                data structures and databases while gradually
+                moving toward cybersecurity, threat analysis
+                and digital defense.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     ACADEMICS
+========================================================= -->
+
+<section class="screen" id="academic">
+
+<div class="inner">
+
+    <div class="section-number">
+        02 / ACADEMICS
+    </div>
+
+    <h2 class="section-heading">
+        DATA <span>DRIVEN.</span>
+    </h2>
+
+
+    <div class="academic-layout">
+
+        <div>
+
+            <div class="big-score">
+                9.64
+            </div>
+
+            <div class="score-label">
+                CURRENT CGPA
+            </div>
+
+            <br>
+
+            <div class="matrix-text">
+                Sai University<br>
+                Computing & Data Science
             </div>
 
         </div>
 
-    </section>
+
+        <div class="graph">
+
+            <div class="graph-grid"></div>
+
+            <svg
+                class="graph-line"
+                viewBox="0 0 600 300"
+                preserveAspectRatio="none"
+            >
+
+                <path
+                    class="graph-path"
+                    d="
+                    M0,240
+                    C100,210
+                    150,170
+                    250,190
+                    C350,210
+                    390,100
+                    600,70
+                    "
+                />
+
+                <circle
+                    class="graph-point"
+                    cx="0"
+                    cy="240"
+                    r="7"
+                />
+
+                <circle
+                    class="graph-point"
+                    cx="250"
+                    cy="190"
+                    r="7"
+                />
+
+                <circle
+                    class="graph-point"
+                    cx="600"
+                    cy="70"
+                    r="7"
+                />
+
+            </svg>
 
 
-    <!-- =========================================================
-         FOOTER
-    ========================================================== -->
+            <div class="graph-text g1">
+                SEM 1<br>
+                <strong>9.33</strong>
+            </div>
 
-    <footer>
+            <div class="graph-text g2">
+                GROWTH
+            </div>
 
-        © 2026 Meha
-        <br>
-        Computing & Data Science • Future Cybersecurity Analyst
+            <div class="graph-text g3">
+                SEM 2<br>
+                <strong>9.85</strong>
+            </div>
 
-    </footer>
+        </div>
 
+    </div>
 
-    <!-- =========================================================
-         JAVASCRIPT
-    ========================================================== -->
+</div>
 
-    <script>
-
-        /* =====================================================
-           CURSOR GLOW
-        ===================================================== */
-
-        const glow = document.querySelector(".cursor-glow");
-
-        document.addEventListener("mousemove", (event) => {
-
-            glow.style.left = event.clientX + "px";
-            glow.style.top = event.clientY + "px";
-
-        });
+</section>
 
 
-        /* =====================================================
-           SCROLL REVEAL
-        ===================================================== */
+<!-- =========================================================
+     SKILL CONSTELLATION
+========================================================= -->
 
-        const revealElements =
-            document.querySelectorAll(".reveal");
+<section class="screen" id="skills">
 
-        const revealObserver =
-            new IntersectionObserver(
-                (entries) => {
+<div class="inner">
 
-                    entries.forEach((entry) => {
+    <div class="section-number">
+        03 / SKILL NETWORK
+    </div>
 
-                        if (entry.isIntersecting) {
-
-                            entry.target.classList.add("active");
-
-                        }
-
-                    });
-
-                },
-                {
-                    threshold: 0.15
-                }
-            );
+    <h2 class="section-heading">
+        MY <span>TOOLKIT.</span>
+    </h2>
 
 
-        revealElements.forEach((element) => {
+    <div class="skill-universe">
 
-            revealObserver.observe(element);
+        <div class="skill-center">
+            CORE<br>
+            SKILLS
+        </div>
 
-        });
+
+        <div class="connection c1"></div>
+        <div class="connection c2"></div>
+        <div class="connection c3"></div>
+        <div class="connection c4"></div>
 
 
-        /* =====================================================
-           PARTICLE BACKGROUND
-        ===================================================== */
+        <div class="skill-node node-1">
+            PYTHON
+        </div>
 
-        const canvas =
-            document.getElementById("particles");
+        <div class="skill-node node-2">
+            C PROGRAMMING
+        </div>
 
-        const ctx =
-            canvas.getContext("2d");
+        <div class="skill-node node-3">
+            MYSQL
+        </div>
 
-        let particles = [];
+        <div class="skill-node node-4">
+            DATA<br>
+            STRUCTURES
+        </div>
 
-        function resizeCanvas() {
+        <div class="skill-node node-5">
+            CRITICAL<br>
+            THINKING
+        </div>
 
-            canvas.width =
-                window.innerWidth;
+        <div class="skill-node node-6">
+            LEADERSHIP
+        </div>
 
-            canvas.height =
-                window.innerHeight;
+    </div>
 
-        }
+</div>
 
-        resizeCanvas();
+</section>
 
-        window.addEventListener(
-            "resize",
-            resizeCanvas
+
+<!-- =========================================================
+     ACHIEVEMENTS
+========================================================= -->
+
+<section class="screen" id="achievements">
+
+<div class="inner">
+
+    <div class="section-number">
+        04 / ACHIEVEMENT FIELD
+    </div>
+
+    <h2 class="section-heading">
+        MOMENTS THAT <span>SHAPED ME.</span>
+    </h2>
+
+
+    <div class="achievement-space">
+
+        <div class="star star-1"
+             data-title="GUINNESS WORLD RECORD — CLASSICAL DANCE">
+        </div>
+
+        <div class="star star-2"
+             data-title="STATE LEVEL — 100 METRES">
+        </div>
+
+        <div class="star star-3"
+             data-title="STATE LEVEL — 400 METRES">
+        </div>
+
+        <div class="star star-4"
+             data-title="STATE LEVEL — 400M RELAY">
+        </div>
+
+        <div class="star star-5"
+             data-title="MULTIPLE SINGING & DRAWING AWARDS">
+        </div>
+
+        <div class="star star-6"
+             data-title="MEHA — ACHIEVEMENT CORE">
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     CAREER TERMINAL
+========================================================= -->
+
+<section class="screen" id="career">
+
+<div class="inner">
+
+    <div class="section-number">
+        05 / CAREER OBJECTIVE
+    </div>
+
+    <h2 class="section-heading">
+        FUTURE <span>MISSION.</span>
+    </h2>
+
+
+    <div class="terminal">
+
+        <div class="terminal-head">
+
+            <div class="terminal-dot"></div>
+            <div class="terminal-dot"></div>
+            <div class="terminal-dot"></div>
+
+            <div class="terminal-title">
+                meha@future-security:~$
+            </div>
+
+        </div>
+
+
+        <div class="terminal-body">
+
+            <div>
+                <span class="prompt">
+                    meha@system:~$
+                </span>
+                whoami
+            </div>
+
+            <div>
+                Computing & Data Science Student
+            </div>
+
+            <br>
+
+            <div>
+                <span class="prompt">
+                    meha@system:~$
+                </span>
+                target
+            </div>
+
+            <div>
+                Cybersecurity Analyst
+            </div>
+
+            <br>
+
+            <div>
+                <span class="prompt">
+                    meha@system:~$
+                </span>
+                mission
+            </div>
+
+            <div>
+                Analyze threats.
+                Understand vulnerabilities.
+                Protect digital systems.
+            </div>
+
+            <br>
+
+            <div>
+                <span class="prompt">
+                    meha@system:~$
+                </span>
+                status
+            </div>
+
+            <div>
+                LEARNING • BUILDING • EXPLORING
+            </div>
+
+            <br>
+
+            <div>
+                <span class="prompt">
+                    meha@system:~$
+                </span>
+                _
+                <span class="cursor"></span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     CONTACT
+========================================================= -->
+
+<section class="screen contact-zone" id="contact">
+
+<div>
+
+    <div class="section-number">
+        06 / CONNECTION
+    </div>
+
+    <h2 class="contact-title">
+        LET'S<br>
+        <span>CONNECT.</span>
+    </h2>
+
+    <p class="contact-sub">
+        Technology • Security • Data • Ideas
+    </p>
+
+
+    <div class="contact-links">
+
+        <!-- REPLACE THESE -->
+
+        <a
+            href="mailto:your-email@example.com"
+            class="button button-primary"
+        >
+            EMAIL
+        </a>
+
+        <a
+            href="https://www.linkedin.com/"
+            target="_blank"
+            class="button button-outline"
+        >
+            LINKEDIN
+        </a>
+
+        <a
+            href="https://github.com/"
+            target="_blank"
+            class="button button-outline"
+        >
+            GITHUB
+        </a>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <div>
+        MEHA // COMPUTING & DATA SCIENCE
+    </div>
+
+    <div>
+        FUTURE CYBERSECURITY ANALYST
+    </div>
+
+</footer>
+
+
+<script>
+
+/* =========================================================
+   PARTICLE SPACE
+========================================================= */
+
+const canvas = document.getElementById("space");
+const ctx = canvas.getContext("2d");
+
+let particles = [];
+
+function resize() {
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+}
+
+resize();
+
+window.addEventListener("resize", resize);
+
+
+class Particle {
+
+    constructor() {
+
+        this.x =
+            Math.random() * canvas.width;
+
+        this.y =
+            Math.random() * canvas.height;
+
+        this.r =
+            Math.random() * 1.5 + .2;
+
+        this.vx =
+            (Math.random() - .5) * .25;
+
+        this.vy =
+            (Math.random() - .5) * .25;
+
+    }
+
+    update() {
+
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0)
+            this.x = canvas.width;
+
+        if (this.x > canvas.width)
+            this.x = 0;
+
+        if (this.y < 0)
+            this.y = canvas.height;
+
+        if (this.y > canvas.height)
+            this.y = 0;
+
+    }
+
+    draw() {
+
+        ctx.beginPath();
+
+        ctx.arc(
+            this.x,
+            this.y,
+            this.r,
+            0,
+            Math.PI * 2
         );
 
+        ctx.fillStyle =
+            "rgba(79,255,229,.35)";
 
-        class Particle {
+        ctx.fill();
 
-            constructor() {
+    }
 
-                this.x =
-                    Math.random() *
-                    canvas.width;
-
-                this.y =
-                    Math.random() *
-                    canvas.height;
-
-                this.size =
-                    Math.random() * 1.8 + 0.5;
-
-                this.speedX =
-                    (Math.random() - 0.5) * 0.25;
-
-                this.speedY =
-                    (Math.random() - 0.5) * 0.25;
-
-            }
+}
 
 
-            update() {
+for (
+    let i = 0;
+    i < Math.min(150, window.innerWidth / 7);
+    i++
+) {
 
-                this.x += this.speedX;
-                this.y += this.speedY;
+    particles.push(
+        new Particle()
+    );
 
-
-                if (
-                    this.x < 0 ||
-                    this.x > canvas.width
-                ) {
-
-                    this.speedX *= -1;
-
-                }
+}
 
 
-                if (
-                    this.y < 0 ||
-                    this.y > canvas.height
-                ) {
+function particleAnimation() {
 
-                    this.speedY *= -1;
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
 
-                }
+    particles.forEach(
+        particle => {
 
-            }
-
-
-            draw() {
-
-                ctx.beginPath();
-
-                ctx.arc(
-                    this.x,
-                    this.y,
-                    this.size,
-                    0,
-                    Math.PI * 2
-                );
-
-                ctx.fillStyle =
-                    "rgba(115,247,235,0.45)";
-
-                ctx.fill();
-
-            }
+            particle.update();
+            particle.draw();
 
         }
+    );
+
+    requestAnimationFrame(
+        particleAnimation
+    );
+
+}
+
+particleAnimation();
 
 
-        function createParticles() {
+/* =========================================================
+   MOUSE PARALLAX
+========================================================= */
 
-            particles = [];
+document.addEventListener(
+    "mousemove",
+    event => {
 
-            const count =
-                Math.min(
-                    100,
-                    Math.floor(
-                        window.innerWidth / 12
-                    )
+        const x =
+            (event.clientX / window.innerWidth - .5);
+
+        const y =
+            (event.clientY / window.innerHeight - .5);
+
+
+        document
+            .querySelectorAll(".core-area")
+            .forEach(element => {
+
+                element.style.transform =
+                    `translate(
+                        ${x * 15}px,
+                        ${y * 15}px
+                    )`;
+
+            });
+
+    }
+);
+
+
+/* =========================================================
+   SIDE NAVIGATION
+========================================================= */
+
+const navPoints =
+    document.querySelectorAll(".nav-point");
+
+
+navPoints.forEach(point => {
+
+    point.addEventListener(
+        "click",
+        () => {
+
+            const target =
+                document.getElementById(
+                    point.dataset.target
                 );
 
-
-            for (
-                let i = 0;
-                i < count;
-                i++
-            ) {
-
-                particles.push(
-                    new Particle()
-                );
-
-            }
+            target.scrollIntoView({
+                behavior: "smooth"
+            });
 
         }
+    );
+
+});
 
 
-        createParticles();
+/* =========================================================
+   ACTIVE SECTION
+========================================================= */
+
+const sections =
+    document.querySelectorAll(".screen");
 
 
-        function animateParticles() {
+const observer =
+    new IntersectionObserver(
+        entries => {
 
-            ctx.clearRect(
-                0,
-                0,
-                canvas.width,
-                canvas.height
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    navPoints.forEach(
+                        point =>
+                            point.classList.remove("active")
+                    );
+
+
+                    const active =
+                        document.querySelector(
+                            `[data-target="${entry.target.id}"]`
+                        );
+
+
+                    if (active)
+                        active.classList.add("active");
+
+                }
+
+            });
+
+        },
+        {
+            threshold: .45
+        }
+    );
+
+
+sections.forEach(
+    section =>
+        observer.observe(section)
+);
+
+
+/* =========================================================
+   SKILL NODE INTERACTION
+========================================================= */
+
+const nodes =
+    document.querySelectorAll(".skill-node");
+
+
+nodes.forEach(node => {
+
+    node.addEventListener(
+        "mouseenter",
+        () => {
+
+            nodes.forEach(
+                n => {
+
+                    if (n !== node) {
+
+                        n.style.opacity = ".25";
+                        n.style.filter =
+                            "blur(1px)";
+
+                    }
+
+                }
             );
 
+        }
+    );
 
-            particles.forEach(
-                (particle) => {
 
-                    particle.update();
-                    particle.draw();
+    node.addEventListener(
+        "mouseleave",
+        () => {
+
+            nodes.forEach(
+                n => {
+
+                    n.style.opacity = "1";
+                    n.style.filter =
+                        "none";
+
+                }
+            );
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   MAGNETIC BUTTONS
+========================================================= */
+
+const buttons =
+    document.querySelectorAll(".button");
+
+
+buttons.forEach(button => {
+
+    button.addEventListener(
+        "mousemove",
+        event => {
+
+            const rect =
+                button.getBoundingClientRect();
+
+            const x =
+                event.clientX -
+                rect.left -
+                rect.width / 2;
+
+            const y =
+                event.clientY -
+                rect.top -
+                rect.height / 2;
+
+            button.style.transform =
+                `translate(
+                    ${x * .15}px,
+                    ${y * .15}px
+                )`;
+
+        }
+    );
+
+
+    button.addEventListener(
+        "mouseleave",
+        () => {
+
+            button.style.transform = "";
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   ACHIEVEMENT STAR INTERACTION
+========================================================= */
+
+const stars =
+    document.querySelectorAll(".star");
+
+
+stars.forEach(star => {
+
+    star.addEventListener(
+        "click",
+        () => {
+
+            stars.forEach(
+                s => {
+
+                    if (s !== star)
+                        s.style.opacity = ".2";
 
                 }
             );
 
 
-            requestAnimationFrame(
-                animateParticles
-            );
-
-        }
-
-
-        animateParticles();
-
-
-        /* =====================================================
-           CARD TILT EFFECT
-        ===================================================== */
-
-        const cards =
-            document.querySelectorAll(
-                ".skill-card, .achievement-card"
-            );
-
-
-        cards.forEach((card) => {
-
-            card.addEventListener(
-                "mousemove",
-                (event) => {
-
-                    const rect =
-                        card.getBoundingClientRect();
-
-                    const x =
-                        event.clientX -
-                        rect.left;
-
-                    const y =
-                        event.clientY -
-                        rect.top;
-
-                    const centerX =
-                        rect.width / 2;
-
-                    const centerY =
-                        rect.height / 2;
-
-                    const rotateX =
-                        ((y - centerY) /
-                        centerY) * -4;
-
-                    const rotateY =
-                        ((x - centerX) /
-                        centerX) * 4;
-
-
-                    card.style.transform =
-                        `perspective(700px)
-                         rotateX(${rotateX}deg)
-                         rotateY(${rotateY}deg)
-                         translateY(-8px)`;
-
-                }
-            );
-
-
-            card.addEventListener(
-                "mouseleave",
+            setTimeout(
                 () => {
 
-                    card.style.transform =
-                        "";
+                    stars.forEach(
+                        s =>
+                            s.style.opacity = "1"
+                    );
 
-                }
+                },
+                1500
             );
 
-        });
+        }
+    );
 
-    </script>
+});
+
+</script>
 
 </body>
 </html>
