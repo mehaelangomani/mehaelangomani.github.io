@@ -1,5 +1,782 @@
-<html>
-    <body>
-        <h1>hellooooo im meha</h1>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meha | Cybersecurity Analyst</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f4fbfc;
+            color: #173b4d;
+            line-height: 1.6;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: rgba(5, 48, 65, 0.96);
+            padding: 15px 8%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
+        }
+
+        .logo {
+            color: #8ee7e8;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 28px;
+        }
+
+        nav a {
+            color: #e8fbfc;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #63d6d8;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 90vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            padding: 60px 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #032f3f,
+                    #07566b,
+                    #0b7285
+                );
+
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(55px, 9vw, 95px);
+            letter-spacing: 4px;
+            margin-bottom: 5px;
+        }
+
+        .hero h2 {
+            font-size: 24px;
+            font-weight: 400;
+            color: #8ee7e8;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            color: #d9f4f5;
+            font-size: 17px;
+        }
+
+        .hero-buttons {
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            margin: 5px;
+
+            border-radius: 25px;
+            text-decoration: none;
+
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .primary-btn {
+            background: #69d7d9;
+            color: #063847;
+        }
+
+        .primary-btn:hover {
+            background: #a1eeee;
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            border: 1px solid #8ee7e8;
+            color: white;
+        }
+
+        .secondary-btn:hover {
+            background: #8ee7e8;
+            color: #063847;
+        }
+
+        /* ================= GENERAL ================= */
+
+        section {
+            padding: 75px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            color: #07566b;
+        }
+
+        .section-title span {
+            display: block;
+            width: 55px;
+            height: 4px;
+            margin: 10px auto;
+
+            background: #43c6c8;
+            border-radius: 10px;
+        }
+
+        /* ================= ABOUT ================= */
+
+        .about {
+            max-width: 850px;
+            margin: auto;
+            text-align: center;
+            font-size: 17px;
+            color: #456675;
+        }
+
+        .highlight {
+            color: #08798c;
+            font-weight: 600;
+        }
+
+        /* ================= EDUCATION ================= */
+
+        .education-card {
+            max-width: 850px;
+            margin: auto;
+
+            background: white;
+            padding: 30px;
+
+            border-left: 5px solid #31aeb5;
+            border-radius: 10px;
+
+            box-shadow: 0 5px 20px rgba(0, 75, 90, 0.08);
+        }
+
+        .education-card h3 {
+            color: #07566b;
+            font-size: 22px;
+        }
+
+        .education-card .institution {
+            color: #0a8998;
+            font-weight: 600;
+        }
+
+        .education-card .year {
+            color: #718b95;
+            font-size: 14px;
+            margin: 5px 0 15px;
+        }
+
+        .grades {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .grade {
+            background: #e4f7f8;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .grade strong {
+            display: block;
+            color: #07566b;
+            font-size: 22px;
+        }
+
+        .grade span {
+            font-size: 13px;
+            color: #58737d;
+        }
+
+        /* ================= SKILLS ================= */
+
+        .skills-section {
+            background: #eaf7f8;
+        }
+
+        .skills {
+            max-width: 900px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 18px;
+        }
+
+        .skill {
+            background: white;
+            padding: 22px;
+            text-align: center;
+
+            border-radius: 10px;
+            color: #07566b;
+
+            font-weight: 600;
+
+            box-shadow: 0 4px 15px rgba(0, 70, 85, 0.07);
+
+            transition: 0.3s;
+        }
+
+        .skill:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 70, 85, 0.12);
+        }
+
+        .skill-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        /* ================= ACHIEVEMENTS ================= */
+
+        .achievements {
+            max-width: 950px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .achievement {
+            background: white;
+            padding: 25px;
+
+            border-radius: 10px;
+            border-top: 4px solid #36b8bd;
+
+            box-shadow: 0 5px 18px rgba(0, 70, 85, 0.08);
+        }
+
+        .achievement h3 {
+            color: #07566b;
+            margin-bottom: 8px;
+        }
+
+        .achievement p {
+            color: #607b85;
+            font-size: 15px;
+        }
+
+        /* ================= CAREER GOAL ================= */
+
+        .career {
+            background:
+                linear-gradient(
+                    135deg,
+                    #063847,
+                    #08798c
+                );
+
+            color: white;
+            text-align: center;
+        }
+
+        .career-content {
+            max-width: 750px;
+            margin: auto;
+        }
+
+        .career h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #8ee7e8;
+        }
+
+        .career p {
+            color: #d9f4f5;
+            font-size: 17px;
+        }
+
+        /* ================= CONTACT ================= */
+
+        .contact-container {
+            max-width: 700px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .contact-container p {
+            color: #5d7680;
+            margin-bottom: 20px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .contact-link {
+            text-decoration: none;
+            color: #07566b;
+
+            border: 1px solid #9bdcde;
+            padding: 10px 20px;
+            border-radius: 25px;
+
+            transition: 0.3s;
+        }
+
+        .contact-link:hover {
+            background: #07566b;
+            color: white;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+            padding: 25px;
+
+            background: #032f3f;
+            color: #a9dadd;
+
+            font-size: 14px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 700px) {
+
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                min-height: 80vh;
+            }
+
+            section {
+                padding: 55px 6%;
+            }
+
+            .grades {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav>
+        <div class="logo">MEHA</div>
+
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#achievements">Achievements</a></li>
+            <li><a href="#career">Career</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- HERO -->
+
+    <header class="hero">
+
+        <div class="hero-content">
+
+            <h1>MEHA</h1>
+
+            <h2>Future Cybersecurity Analyst</h2>
+
+            <p>
+                Computing & Data Science student passionate about
+                cybersecurity, technology, problem-solving and
+                building secure digital solutions.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#about" class="btn primary-btn">
+                    Explore My Resume
+                </a>
+
+                <a href="#contact" class="btn secondary-btn">
+                    Contact Me
+                </a>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ABOUT -->
+
+    <section id="about">
+
+        <div class="section-title">
+            <h2>About Me</h2>
+            <span></span>
+        </div>
+
+        <div class="about">
+
+            <p>
+                I am a second-year student at
+                <span class="highlight">Sai University</span>,
+                pursuing a degree in
+                <span class="highlight">
+                    Computing and Data Science
+                </span>.
+            </p>
+
+            <br>
+
+            <p>
+                With a strong academic foundation and an interest in
+                cybersecurity, I aim to build a career as a
+                <span class="highlight">Cybersecurity Analyst</span>.
+                I enjoy understanding complex problems, thinking
+                critically and developing technical solutions.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- EDUCATION -->
+
+    <section id="education">
+
+        <div class="section-title">
+            <h2>Education</h2>
+            <span></span>
+        </div>
+
+        <div class="education-card">
+
+            <h3>Computing and Data Science</h3>
+
+            <p class="institution">
+                Sai University
+            </p>
+
+            <p class="year">
+                Second Year • Undergraduate
+            </p>
+
+            <p>
+                Currently pursuing my undergraduate degree with a
+                strong academic performance and growing interest
+                in cybersecurity and data-driven technologies.
+            </p>
+
+            <div class="grades">
+
+                <div class="grade">
+                    <strong>9.64</strong>
+                    <span>CGPA</span>
+                </div>
+
+                <div class="grade">
+                    <strong>9.33</strong>
+                    <span>First Semester GPA</span>
+                </div>
+
+                <div class="grade">
+                    <strong>9.85</strong>
+                    <span>Second Semester GPA</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <br><br>
+
+        <div class="education-card">
+
+            <h3>School Education</h3>
+
+            <p class="institution">
+                Velammal Vidhyashram
+            </p>
+
+            <p class="year">
+                Completed Schooling
+            </p>
+
+            <p>
+                Completed my schooling with an overall score of
+                <strong>90%</strong>.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SKILLS -->
+
+    <section id="skills" class="skills-section">
+
+        <div class="section-title">
+            <h2>Skills</h2>
+            <span></span>
+        </div>
+
+        <div class="skills">
+
+            <div class="skill">
+                <div class="skill-icon">💻</div>
+                C Programming
+            </div>
+
+            <div class="skill">
+                <div class="skill-icon">🐍</div>
+                Python
+            </div>
+
+            <div class="skill">
+                <div class="skill-icon">🗄️</div>
+                MySQL
+            </div>
+
+            <div class="skill">
+                <div class="skill-icon">🔗</div>
+                Data Structures
+            </div>
+
+            <div class="skill">
+                <div class="skill-icon">🧠</div>
+                Critical Thinking
+            </div>
+
+            <div class="skill">
+                <div class="skill-icon">👥</div>
+                Leadership
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ACHIEVEMENTS -->
+
+    <section id="achievements">
+
+        <div class="section-title">
+            <h2>Achievements</h2>
+            <span></span>
+        </div>
+
+        <div class="achievements">
+
+            <div class="achievement">
+
+                <h3>🏆 Guinness World Record</h3>
+
+                <p>
+                    Participated in a Guinness World Record
+                    achievement in Classical Dance.
+                </p>
+
+            </div>
+
+
+            <div class="achievement">
+
+                <h3>🏃 Athletics</h3>
+
+                <p>
+                    Participated at the state level in
+                    100m, 400m and 400m relay events.
+                </p>
+
+            </div>
+
+
+            <div class="achievement">
+
+                <h3>🎤 Singing</h3>
+
+                <p>
+                    Won several awards and recognitions
+                    in singing competitions.
+                </p>
+
+            </div>
+
+
+            <div class="achievement">
+
+                <h3>🎨 Drawing</h3>
+
+                <p>
+                    Won several awards and recognitions
+                    in drawing competitions.
+                </p>
+
+            </div>
+
+
+            <div class="achievement">
+
+                <h3>👑 Leadership</h3>
+
+                <p>
+                    Developed leadership and teamwork skills
+                    through academic and extracurricular activities.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CAREER GOAL -->
+
+    <section id="career" class="career">
+
+        <div class="career-content">
+
+            <h2>My Career Goal</h2>
+
+            <p>
+                My goal is to become a skilled
+                <strong>Cybersecurity Analyst</strong> and contribute
+                to protecting digital systems, networks and data
+                from evolving cyber threats.
+            </p>
+
+            <br>
+
+            <p>
+                I am continuously developing my programming,
+                analytical and problem-solving skills while
+                exploring the field of cybersecurity.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section id="contact">
+
+        <div class="section-title">
+            <h2>Let's Connect</h2>
+            <span></span>
+        </div>
+
+        <div class="contact-container">
+
+            <p>
+                Interested in connecting with me?
+                Feel free to reach out.
+            </p>
+
+            <div class="contact-links">
+
+                <a href="mailto:your-email@example.com"
+                   class="contact-link">
+                    📧 Email
+                </a>
+
+                <a href="https://www.linkedin.com/"
+                   target="_blank"
+                   class="contact-link">
+                    LinkedIn
+                </a>
+
+                <a href="https://github.com/"
+                   target="_blank"
+                   class="contact-link">
+                    GitHub
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+        © 2026 Meha • Computing & Data Science
+    </footer>
+
+</body>
 </html>
