@@ -45,10 +45,7 @@ a{
     text-decoration:none;
 }
 
-/* =========================
-   CUSTOM CURSOR
-========================= */
-
+/* CUSTOM CURSOR */
 .cursor{
     width:11px;
     height:11px;
@@ -67,10 +64,7 @@ a{
     background:rgba(216,255,54,.85);
 }
 
-/* =========================
-   PRELOADER
-========================= */
-
+/* PRELOADER */
 .loader{
     position:fixed;
     inset:0;
@@ -104,10 +98,7 @@ a{
     justify-content:space-between;
 }
 
-/* =========================
-   NAVIGATION
-========================= */
-
+/* NAVIGATION */
 nav{
     position:absolute;
     width:100%;
@@ -151,10 +142,7 @@ nav{
     cursor:pointer;
 }
 
-/* =========================
-   FULL SCREEN MENU
-========================= */
-
+/* FULL SCREEN MENU */
 .menu{
     position:fixed;
     inset:0;
@@ -209,10 +197,7 @@ nav{
     color:#999;
 }
 
-/* =========================
-   HERO
-========================= */
-
+/* HERO */
 .hero{
     min-height:100vh;
     background:#111;
@@ -326,10 +311,7 @@ nav{
     color:#999;
 }
 
-/* =========================
-   INTRO STRIP
-========================= */
-
+/* INTRO */
 .intro{
     min-height:75vh;
     padding:10vw 7vw;
@@ -373,10 +355,7 @@ nav{
     font-size:15px;
 }
 
-/* =========================
-   MARQUEE
-========================= */
-
+/* TICKER */
 .ticker{
     background:var(--lime);
     overflow:hidden;
@@ -401,10 +380,7 @@ nav{
     to{transform:translateX(-50%)}
 }
 
-/* =========================
-   PROJECTS
-========================= */
-
+/* PROJECTS */
 .projects{
     background:#151515;
     color:#e9e7e2;
@@ -494,7 +470,6 @@ nav{
     color:var(--lime);
 }
 
-/* visual placeholders */
 .project-visual-1{
     background:
         radial-gradient(circle at 70% 30%,#d8ff36,transparent 22%),
@@ -512,10 +487,7 @@ nav{
         linear-gradient(135deg,#061b31,#153b5c);
 }
 
-/* =========================
-   PROJECT DETAILS
-========================= */
-
+/* PROJECT STATEMENT */
 .work-statement{
     background:#151515;
     color:#e9e7e2;
@@ -535,10 +507,7 @@ nav{
     font-weight:500;
 }
 
-/* =========================
-   SKILLS
-========================= */
-
+/* SKILLS */
 .skills{
     padding:140px 35px;
 }
@@ -597,10 +566,7 @@ nav{
     font-size:13px;
 }
 
-/* =========================
-   ABOUT / ACHIEVEMENTS
-========================= */
-
+/* ABOUT */
 .story{
     background:#c7d6ff;
     min-height:100vh;
@@ -653,10 +619,7 @@ nav{
     color:#555;
 }
 
-/* =========================
-   RESUME
-========================= */
-
+/* RESUME */
 .resume{
     background:#111;
     color:#e9e7e2;
@@ -741,10 +704,7 @@ nav{
     line-height:1.6;
 }
 
-/* =========================
-   CONTACT
-========================= */
-
+/* CONTACT */
 .contact{
     min-height:100vh;
     padding:35px;
@@ -791,10 +751,7 @@ nav{
     color:#777;
 }
 
-/* =========================
-   REVEAL
-========================= */
-
+/* REVEAL */
 .reveal{
     opacity:0;
     transform:translateY(45px);
@@ -806,10 +763,7 @@ nav{
     transform:none;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-
+/* RESPONSIVE */
 @media(max-width:800px){
 
     body{
@@ -929,7 +883,6 @@ nav{
 
 <div class="cursor"></div>
 
-<!-- NAV -->
 <nav>
     <a href="#home" class="brand">
         MEHA.E <small>PORTFOLIO</small>
@@ -942,7 +895,6 @@ nav{
     </div>
 </nav>
 
-<!-- FULL MENU -->
 <div class="menu" id="menu">
     <div class="menu-head">
         <span>MEHA.E</span>
@@ -964,7 +916,6 @@ nav{
     </div>
 </div>
 
-<!-- HERO -->
 <section class="hero" id="home">
     <div class="hero-grid"></div>
     <div class="hero-shape"></div>
@@ -991,7 +942,6 @@ nav{
     </div>
 </section>
 
-<!-- INTRO -->
 <section class="intro">
     <div class="eyebrow reveal">01 — INTRODUCTION</div>
 
@@ -1011,7 +961,6 @@ nav{
     </div>
 </section>
 
-<!-- TICKER -->
 <div class="ticker">
     <div class="ticker-track">
         <span>CRITICAL THINKING ✳ LEADERSHIP ✳ CYBERSECURITY ✳ PROBLEM SOLVING ✳ DATA ✳ DEVELOPMENT ✳ </span>
@@ -1019,7 +968,6 @@ nav{
     </div>
 </div>
 
-<!-- PROJECTS -->
 <section class="projects" id="work">
 
     <div class="projects-header reveal">
@@ -1032,7 +980,6 @@ nav{
         </p>
     </div>
 
-    <!-- PROJECT 1 -->
     <a href="https://github.com/mehaelangomani" target="_blank" class="project-item reveal">
         <div class="project-top">
             <span class="project-no">01</span>
@@ -1040,11 +987,9 @@ nav{
             <span class="project-category">WEB PLATFORM</span>
             <span class="project-arrow">↗</span>
         </div>
-
         <div class="project-image project-visual-1"></div>
     </a>
 
-    <!-- PROJECT 2 -->
     <a href="https://github.com/mehaelangomani" target="_blank" class="project-item reveal">
         <div class="project-top">
             <span class="project-no">02</span>
@@ -1052,11 +997,9 @@ nav{
             <span class="project-category">DATA STRUCTURES</span>
             <span class="project-arrow">↗</span>
         </div>
-
         <div class="project-image project-visual-2"></div>
     </a>
 
-    <!-- PROJECT 3 -->
     <a href="https://github.com/mehaelangomani" target="_blank" class="project-item reveal">
         <div class="project-top">
             <span class="project-no">03</span>
@@ -1064,7 +1007,6 @@ nav{
             <span class="project-category">MANAGEMENT SYSTEM</span>
             <span class="project-arrow">↗</span>
         </div>
-
         <div class="project-image project-visual-3"></div>
     </a>
 
@@ -1078,7 +1020,6 @@ nav{
     </p>
 </section>
 
-<!-- SKILLS -->
 <section class="skills" id="skills">
 
     <div class="skills-heading reveal">
@@ -1144,7 +1085,6 @@ nav{
     </div>
 </section>
 
-<!-- ABOUT -->
 <section class="story" id="about">
 
     <div class="eyebrow reveal">04 — BEYOND ACADEMICS</div>
@@ -1199,13 +1139,11 @@ nav{
     </div>
 </section>
 
-<!-- RESUME -->
 <section class="resume" id="resume">
 
     <div class="resume-top reveal">
         <h2>On<br>paper.</h2>
 
-        <!-- Put resume.pdf in same folder -->
         <a href="resume.pdf" target="_blank" class="resume-button">
             VIEW<br>RESUME ↗
         </a>
@@ -1249,10 +1187,11 @@ nav{
             <div class="resume-entry reveal">
                 <small>FEATURED WORK</small>
                 <div>
-                    <h3>SaiUConnect / Corporate Org Chart Tool / Staff Management System</h3>
+                    <h3>03 Featured Projects</h3>
                     <p>
-                        Academic and personal projects focused on web development,
-                        data structures and software-based management solutions.
+                        SaiUConnect, Corporate Org Chart Tool and Staff Management
+                        System — projects focused on web development, data structures
+                        and software-based management solutions.
                     </p>
                 </div>
             </div>
@@ -1272,7 +1211,6 @@ nav{
     </div>
 </section>
 
-<!-- CONTACT -->
 <section class="contact" id="contact">
 
     <div class="eyebrow">06 — CONTACT</div>
@@ -1309,7 +1247,6 @@ nav{
 <script>
 
 /* PRELOADER */
-
 const loader = document.getElementById("loader");
 const loadNumber = document.getElementById("loadNumber");
 const loadPercent = document.getElementById("loadPercent");
@@ -1337,7 +1274,6 @@ const loading = setInterval(() => {
 
 
 /* CUSTOM CURSOR */
-
 const cursor = document.querySelector(".cursor");
 
 document.addEventListener("mousemove", e => {
@@ -1359,28 +1295,20 @@ document.querySelectorAll("a, button, .project-item").forEach(item => {
 
 
 /* MENU */
-
 function toggleMenu(){
-
     const menu = document.getElementById("menu");
-
     menu.classList.toggle("active");
-
     document.body.classList.toggle("menu-open");
-
 }
 
 
 /* SCROLL REVEAL */
-
 const observer = new IntersectionObserver(entries => {
 
     entries.forEach(entry => {
-
         if(entry.isIntersecting){
             entry.target.classList.add("visible");
         }
-
     });
 
 },{
@@ -1393,7 +1321,6 @@ document.querySelectorAll(".reveal").forEach(element => {
 
 
 /* HERO SHAPE PARALLAX */
-
 const shape = document.querySelector(".hero-shape");
 
 document.addEventListener("mousemove", e => {
@@ -1409,8 +1336,7 @@ document.addEventListener("mousemove", e => {
 });
 
 
-/* SMOOTH PROJECT IMAGE FOLLOW */
-
+/* PROJECT IMAGE FOLLOW */
 document.querySelectorAll(".project-item").forEach(project => {
 
     project.addEventListener("mousemove", e => {
