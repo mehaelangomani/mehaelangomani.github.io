@@ -4,20 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Meha E | Portfolio</title>
+<title>Meha E — Portfolio</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap');
 
 :root{
-    --bg:#070707;
-    --card:rgba(255,255,255,0.06);
-    --border:rgba(255,255,255,0.12);
-    --text:#f5f5f5;
-    --muted:#8d8d8d;
-    --purple:#8b5cf6;
-    --blue:#38bdf8;
-    --green:#a3ff12;
+    --bg:#101112;
+    --line:rgba(255,255,255,.075);
+    --line-strong:rgba(255,255,255,.16);
+    --text:#e8e7e3;
+    --muted:#8b8d8f;
+    --lime:#b6ff00;
 }
 
 *{
@@ -31,697 +29,933 @@ html{
 }
 
 body{
-    font-family:'Outfit',sans-serif;
     background:var(--bg);
     color:var(--text);
+    font-family:'Inter',sans-serif;
     overflow-x:hidden;
 }
 
 a{
-    text-decoration:none;
     color:inherit;
+    text-decoration:none;
 }
 
-.background-grid{
+/* =========================
+   GRID BACKGROUND
+========================= */
+
+.grid{
     position:fixed;
     inset:0;
-    z-index:-2;
+    pointer-events:none;
+    z-index:-1;
     background-image:
-    linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
-    background-size:70px 70px;
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:100% 104px, 104px 100%;
 }
 
-/* NAVIGATION */
+/* =========================
+   NAVIGATION
+========================= */
 
 nav{
-    position:fixed;
+    position:absolute;
     top:0;
+    left:0;
     width:100%;
-    padding:24px 6%;
+    height:75px;
+    padding:0 36px;
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    z-index:1000;
-    background:linear-gradient(to bottom,rgba(7,7,7,.95),rgba(7,7,7,.4),transparent);
-    backdrop-filter:blur(10px);
+    justify-content:space-between;
+    border-bottom:1px solid var(--line-strong);
+    z-index:20;
 }
 
 .logo{
-    font-size:22px;
-    font-weight:700;
-    letter-spacing:-1px;
-}
-
-.logo span{
-    color:var(--purple);
-}
-
-.nav-links{
     display:flex;
-    gap:30px;
     align-items:center;
+    gap:7px;
+    font-weight:700;
+    font-size:17px;
+    letter-spacing:-.7px;
 }
 
-.nav-links a{
-    font-size:13px;
+.logo small{
+    font-family:'DM Mono',monospace;
+    font-size:7px;
+    font-weight:400;
     color:#aaa;
+    letter-spacing:0;
+}
+
+.nav-right{
+    display:flex;
+    height:100%;
+    align-items:center;
+    gap:0;
+}
+
+.nav-right a{
+    height:100%;
+    display:flex;
+    align-items:center;
+    padding:0 23px;
+    border-left:1px solid var(--line);
+    font-family:'DM Mono',monospace;
+    font-size:10px;
+    color:#bbb;
     transition:.3s;
 }
 
-.nav-links a:hover{
-    color:white;
+.nav-right a:hover{
+    color:var(--lime);
+    background:rgba(255,255,255,.03);
 }
 
-.nav-button{
-    border:1px solid var(--border);
-    padding:10px 18px;
-    border-radius:30px;
-}
-
-/* HERO */
+/* =========================
+   HERO
+========================= */
 
 .hero{
     min-height:100vh;
-    display:flex;
-    align-items:center;
-    padding:120px 8% 70px;
     position:relative;
     overflow:hidden;
+    padding-top:75px;
 }
 
-.hero-glow{
-    position:absolute;
-    width:800px;
-    height:800px;
-    right:-150px;
-    top:50%;
-    transform:translateY(-50%);
-    background:radial-gradient(circle,rgba(139,92,246,.35),rgba(56,189,248,.12),transparent 65%);
-    filter:blur(30px);
-    animation:floatGlow 8s ease-in-out infinite;
-}
+/* top micro info */
 
-@keyframes floatGlow{
-    0%,100%{
-        transform:translateY(-50%);
-    }
-    50%{
-        transform:translateY(-55%) translate(-40px,30px);
-    }
-}
-
-.hero-content{
-    width:55%;
-    z-index:2;
-}
-
-.hero-tag{
-    display:inline-flex;
+.hero-meta{
+    height:53px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
     align-items:center;
-    gap:10px;
-    padding:9px 14px;
-    border:1px solid var(--border);
-    border-radius:30px;
-    font-family:'DM Mono';
+    padding:0 36px;
+    font-family:'DM Mono',monospace;
     font-size:10px;
-    color:#aaa;
-    margin-bottom:30px;
+    letter-spacing:1px;
+    color:#929497;
 }
 
-.dot{
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:var(--green);
-    box-shadow:0 0 12px var(--green);
-    animation:pulse 2s infinite;
-}
+/* Decorative giant word */
 
-@keyframes pulse{
-    50%{
-        transform:scale(1.7);
-        opacity:.5;
-    }
-}
-
-.hero h1{
-    font-size:clamp(65px,8vw,135px);
-    line-height:.88;
-    letter-spacing:-6px;
-    font-weight:600;
-    margin-bottom:30px;
-}
-
-.hero h1 span{
-    background:linear-gradient(90deg,#ffffff,#9c7cff,#45d5ff);
-    -webkit-background-clip:text;
-    color:transparent;
-}
-
-.hero-description{
-    font-size:18px;
-    line-height:1.7;
-    color:#999;
-    max-width:550px;
-    margin-bottom:35px;
-}
-
-.hero-buttons{
-    display:flex;
-    gap:15px;
-}
-
-.primary-btn{
-    padding:15px 25px;
-    background:white;
-    color:black;
-    border-radius:30px;
-    font-size:13px;
-    font-weight:600;
-    transition:.3s;
-}
-
-.primary-btn:hover{
-    transform:translateY(-4px);
-}
-
-.secondary-btn{
-    padding:15px 25px;
-    border:1px solid var(--border);
-    border-radius:30px;
-    font-size:13px;
-}
-
-/* HERO ORB */
-
-.visual-container{
+.top-word{
     position:absolute;
-    right:8%;
-    width:500px;
-    height:500px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    top:64px;
+    left:20px;
+    font-size:clamp(80px,13vw,220px);
+    line-height:.7;
+    letter-spacing:-12px;
+    font-weight:700;
+    color:#e9e8e4;
+    opacity:.95;
+    white-space:nowrap;
+    transform:translateY(-42%);
+    pointer-events:none;
 }
 
-.orb{
-    width:380px;
-    height:380px;
+/* side text */
+
+.hero-school{
+    position:absolute;
+    top:165px;
+    left:36px;
+    font-family:'DM Mono',monospace;
+    color:#929497;
+    font-size:11px;
+    letter-spacing:1.4px;
+}
+
+/* Main hero typography */
+
+.hero-title{
+    position:absolute;
+    z-index:5;
+    left:6%;
+    top:43%;
+    transform:translateY(-40%);
+    font-size:clamp(95px,14vw,250px);
+    line-height:.73;
+    letter-spacing:-12px;
+    font-weight:700;
+    pointer-events:none;
+}
+
+.hero-title .line-one{
+    display:block;
+}
+
+.hero-title .line-two{
+    display:block;
+    margin-left:120px;
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-weight:500;
+    letter-spacing:-14px;
+}
+
+/* Hero green object */
+
+.hero-object{
+    position:absolute;
+    width:min(67vw,950px);
+    aspect-ratio:1/1;
+    right:1%;
+    top:14%;
     border-radius:50%;
-    position:relative;
     background:
-    radial-gradient(circle at 30% 30%,#ffffff,#b9a7ff 10%,#704cff 28%,#1d1250 55%,#090909 72%);
+        radial-gradient(circle at 43% 35%,
+            #ecffb8 0%,
+            #c9ff25 13%,
+            #a5e900 30%,
+            #658e0b 54%,
+            #25340f 72%,
+            #11120d 100%);
     box-shadow:
-    inset -40px -40px 80px rgba(0,0,0,.7),
-    inset 30px 20px 50px rgba(255,255,255,.25),
-    0 0 100px rgba(112,76,255,.4);
-    animation:orbFloat 6s ease-in-out infinite;
+        inset -80px -50px 100px rgba(0,0,0,.5),
+        inset 20px 15px 60px rgba(255,255,255,.13),
+        0 0 100px rgba(182,255,0,.08);
 }
 
-.orb::before{
+.hero-object::before{
     content:"";
     position:absolute;
-    inset:-25px;
+    width:63%;
+    height:63%;
+    left:18.5%;
+    top:18.5%;
+    border:2px solid rgba(226,255,157,.18);
     border-radius:50%;
-    border:1px solid rgba(255,255,255,.12);
 }
 
-.orb::after{
+.hero-object::after{
     content:"";
     position:absolute;
-    width:130%;
-    height:45%;
-    left:-15%;
-    top:28%;
-    border:1px solid rgba(139,92,246,.4);
+    width:120%;
+    height:120%;
+    left:-10%;
+    top:-10%;
     border-radius:50%;
-    transform:rotate(-25deg);
+    border:1px solid rgba(255,255,255,.08);
 }
 
-@keyframes orbFloat{
-    50%{
-        transform:translateY(-25px);
-    }
-}
+/* lower intro */
 
-.floating-card{
+.hero-intro{
     position:absolute;
-    padding:14px 18px;
-    border:1px solid var(--border);
-    background:rgba(10,10,10,.65);
-    backdrop-filter:blur(20px);
-    border-radius:14px;
-    font-size:12px;
+    bottom:35px;
+    left:37%;
+    width:380px;
+    z-index:6;
+    font-size:17px;
+    line-height:1.65;
+    color:#aaa;
 }
 
-.card1{
-    top:40px;
-    left:-20px;
+.hero-intro strong{
+    color:var(--text);
+    font-weight:500;
 }
 
-.card2{
-    bottom:45px;
-    right:-40px;
-}
-
-.card-small{
-    font-family:'DM Mono';
-    font-size:9px;
+.hero-index{
+    position:absolute;
+    bottom:30px;
+    right:36px;
+    font-family:'DM Mono',monospace;
+    font-size:10px;
     color:#777;
-    margin-bottom:6px;
 }
 
-/* STATS */
+/* =========================
+   MARQUEE
+========================= */
 
-.stats{
-    padding:40px 8%;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    border-top:1px solid var(--border);
-    border-bottom:1px solid var(--border);
+.marquee{
+    border-top:1px solid var(--line-strong);
+    border-bottom:1px solid var(--line-strong);
+    overflow:hidden;
+    white-space:nowrap;
+    padding:18px 0;
 }
 
-.stat{
-    padding:20px 30px;
-    border-right:1px solid var(--border);
+.marquee-track{
+    display:inline-block;
+    animation:scroll 20s linear infinite;
 }
 
-.stat-number{
-    font-size:45px;
-    font-weight:600;
+.marquee span{
+    font-family:'DM Mono',monospace;
+    font-size:11px;
+    letter-spacing:2px;
+    color:#898989;
+    margin:0 30px;
 }
 
-.stat-label{
-    font-family:'DM Mono';
-    font-size:9px;
-    color:#777;
-    margin-top:8px;
+.marquee b{
+    color:var(--lime);
 }
 
-/* ABOUT */
+@keyframes scroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+}
+
+/* =========================
+   ABOUT
+========================= */
 
 .about{
-    padding:150px 8%;
+    min-height:100vh;
+    position:relative;
+    padding:140px 36px;
     display:grid;
-    grid-template-columns:1fr 1.4fr;
-    gap:100px;
+    grid-template-columns:24% 1fr;
+    border-bottom:1px solid var(--line-strong);
 }
 
-.section-tag{
-    font-family:'DM Mono';
+.section-label{
+    font-family:'DM Mono',monospace;
     font-size:10px;
-    color:#777;
-    letter-spacing:2px;
+    color:#858585;
+    letter-spacing:1.5px;
 }
 
-.about-title{
-    font-size:clamp(45px,6vw,90px);
-    line-height:.95;
-    letter-spacing:-4px;
-    margin-bottom:35px;
+.about-content{
+    max-width:1000px;
 }
 
-.about-text{
-    color:#999;
-    font-size:18px;
+.about-content h2{
+    font-size:clamp(55px,8vw,130px);
+    line-height:.9;
+    letter-spacing:-7px;
+    font-weight:500;
+    margin-bottom:60px;
+}
+
+.about-content h2 em{
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-weight:500;
+}
+
+.about-description{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    max-width:850px;
+}
+
+.about-description p{
+    font-size:16px;
     line-height:1.8;
+    color:#989898;
 }
 
-.about-text strong{
-    color:white;
+.about-description strong{
+    color:#eee;
+    font-weight:500;
 }
 
-/* PROJECTS */
+/* =========================
+   PROJECT SECTION
+========================= */
 
 .projects{
-    padding:120px 8%;
-    background:#0c0c0c;
-    border-top:1px solid var(--border);
+    padding:140px 36px 0;
 }
 
 .projects-header{
     display:flex;
     justify-content:space-between;
-    align-items:end;
-    margin-bottom:70px;
+    align-items:flex-end;
+    margin-bottom:90px;
 }
 
 .projects-title{
-    font-size:clamp(50px,7vw,100px);
-    letter-spacing:-5px;
-    line-height:.9;
+    font-size:clamp(70px,11vw,180px);
+    line-height:.75;
+    letter-spacing:-10px;
+    font-weight:600;
 }
 
-.projects-sub{
-    max-width:300px;
-    color:#777;
-    line-height:1.6;
+.projects-title em{
+    font-family:'Playfair Display',serif;
+    font-weight:500;
 }
 
-.project-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
+/* individual project */
 
-.project-card{
-    min-height:480px;
+.project{
+    min-height:680px;
     position:relative;
+    border-top:1px solid var(--line-strong);
     overflow:hidden;
-    border-radius:20px;
-    border:1px solid var(--border);
-    padding:25px;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
-    transition:.5s;
-}
-
-.project-card:hover{
-    transform:translateY(-10px);
-}
-
-.project-bg{
-    position:absolute;
-    inset:0;
-    transition:.7s;
-}
-
-.project-card:hover .project-bg{
-    transform:scale(1.1);
-}
-
-.project1 .project-bg{
-    background:
-    radial-gradient(circle at 70% 20%,#d6ff3f,transparent 20%),
-    radial-gradient(circle at 30% 50%,#4f46e5,transparent 40%),
-    linear-gradient(135deg,#07131b,#122d1d);
-}
-
-.project2 .project-bg{
-    background:
-    radial-gradient(circle at 50% 40%,#a855f7,transparent 25%),
-    linear-gradient(135deg,#10051c,#27113f);
-}
-
-.project3 .project-bg{
-    background:
-    radial-gradient(circle at 70% 30%,#38bdf8,transparent 25%),
-    linear-gradient(135deg,#05131c,#0b3145);
-}
-
-.project-graphic{
-    position:absolute;
-    top:40px;
-    left:50%;
-    transform:translateX(-50%);
-    width:220px;
-    height:220px;
-    border-radius:50%;
-    border:1px solid rgba(255,255,255,.25);
-}
-
-.project-graphic::before{
-    content:"";
-    position:absolute;
-    inset:30px;
-    border-radius:50%;
-    border:1px solid rgba(255,255,255,.25);
-}
-
-.project-content{
-    position:relative;
-    z-index:2;
+    display:grid;
+    grid-template-columns:23% 1fr;
+    padding:30px 0;
 }
 
 .project-number{
-    font-family:'DM Mono';
+    font-family:'DM Mono',monospace;
     font-size:10px;
-    color:#aaa;
-    margin-bottom:15px;
+    color:#777;
+}
+
+.project-main{
+    position:relative;
+    min-height:620px;
+}
+
+.project-visual{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    transition:.6s;
+}
+
+/* project visual 1 */
+
+.visual-one{
+    background:
+        radial-gradient(circle at 65% 40%, rgba(182,255,0,.85), transparent 12%),
+        radial-gradient(circle at 60% 55%, #2c5c14, transparent 40%),
+        #141614;
+}
+
+.visual-one::before{
+    content:"";
+    position:absolute;
+    width:65%;
+    height:65%;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:50%;
+    top:15%;
+    left:18%;
+}
+
+.visual-one::after{
+    content:"SAIU";
+    position:absolute;
+    left:6%;
+    bottom:-8%;
+    font-size:clamp(100px,17vw,270px);
+    letter-spacing:-14px;
+    font-weight:700;
+    color:rgba(255,255,255,.9);
+}
+
+/* project visual 2 */
+
+.visual-two{
+    background:
+        radial-gradient(circle at 50% 35%, #b7ff16, transparent 10%),
+        radial-gradient(circle at 55% 45%, #3e5813, transparent 38%),
+        #101310;
+}
+
+.visual-two::before{
+    content:"";
+    position:absolute;
+    width:52%;
+    height:52%;
+    border:1px solid rgba(255,255,255,.22);
+    transform:rotate(45deg);
+    left:25%;
+    top:23%;
+}
+
+.visual-two::after{
+    content:"ORG";
+    position:absolute;
+    bottom:-10%;
+    right:4%;
+    font-size:clamp(100px,16vw,250px);
+    letter-spacing:-15px;
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    color:rgba(255,255,255,.85);
+}
+
+/* project visual 3 */
+
+.visual-three{
+    background:
+        radial-gradient(circle at 60% 25%, #d6ff77, transparent 10%),
+        linear-gradient(135deg,#16240e,#0b0d0b 65%);
+}
+
+.visual-three::before,
+.visual-three::after{
+    content:"";
+    position:absolute;
+    border-radius:50%;
+    border:1px solid rgba(182,255,0,.35);
+}
+
+.visual-three::before{
+    width:420px;
+    height:420px;
+    right:15%;
+    top:12%;
+}
+
+.visual-three::after{
+    width:250px;
+    height:250px;
+    right:27%;
+    top:25%;
+}
+
+.project-info{
+    position:absolute;
+    bottom:45px;
+    left:45px;
+    z-index:3;
+    max-width:560px;
+}
+
+.project-category{
+    font-family:'DM Mono',monospace;
+    color:var(--lime);
+    font-size:10px;
+    letter-spacing:1.5px;
+    margin-bottom:18px;
 }
 
 .project-name{
-    font-size:30px;
-    line-height:1;
-    margin-bottom:12px;
+    font-size:clamp(42px,5vw,80px);
+    letter-spacing:-5px;
+    line-height:.9;
+    margin-bottom:22px;
 }
 
 .project-description{
-    color:#aaa;
-    font-size:13px;
-    line-height:1.6;
+    font-size:14px;
+    color:#b0b0b0;
+    max-width:430px;
+    line-height:1.7;
 }
 
-.project-link{
-    display:inline-block;
-    margin-top:20px;
-    font-size:12px;
-    color:white;
-    border-bottom:1px solid white;
-    padding-bottom:5px;
+.project-button{
+    display:inline-flex;
+    margin-top:28px;
+    align-items:center;
+    gap:20px;
+    font-family:'DM Mono',monospace;
+    font-size:10px;
+    letter-spacing:1px;
+    padding-bottom:9px;
+    border-bottom:1px solid #ddd;
+    transition:.3s;
 }
 
-/* SKILLS */
+.project-button:hover{
+    color:var(--lime);
+    border-color:var(--lime);
+    gap:30px;
+}
+
+.project:hover .project-visual{
+    transform:scale(1.025);
+}
+
+/* =========================
+   SKILLS
+========================= */
 
 .skills{
-    padding:150px 8%;
+    min-height:100vh;
+    padding:150px 36px;
+    border-top:1px solid var(--line-strong);
+    position:relative;
+}
+
+.skills-header{
+    display:grid;
+    grid-template-columns:24% 1fr;
+    margin-bottom:100px;
 }
 
 .skills-title{
-    font-size:clamp(50px,7vw,100px);
-    letter-spacing:-5px;
-    margin-bottom:70px;
+    font-size:clamp(65px,10vw,160px);
+    line-height:.8;
+    letter-spacing:-10px;
 }
 
-.skills-grid{
+.skills-title em{
+    font-family:'Playfair Display',serif;
+    font-weight:500;
+}
+
+.skills-list{
+    margin-left:24%;
+    border-top:1px solid var(--line-strong);
+}
+
+.skill-row{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
+    grid-template-columns:80px 1fr auto;
+    align-items:center;
+    padding:27px 0;
+    border-bottom:1px solid var(--line);
+    transition:.3s;
 }
 
-.skill{
-    padding:35px 25px;
-    border:1px solid var(--border);
-    background:var(--card);
-    border-radius:15px;
-    transition:.4s;
+.skill-row:hover{
+    padding-left:20px;
 }
 
-.skill:hover{
-    transform:translateY(-6px);
-    background:rgba(255,255,255,.1);
+.skill-index{
+    font-family:'DM Mono',monospace;
+    color:#666;
+    font-size:10px;
 }
 
-.skill-icon{
-    font-size:28px;
-    margin-bottom:20px;
+.skill-name{
+    font-size:clamp(24px,3vw,48px);
+    letter-spacing:-2px;
 }
 
-.skill h3{
-    font-size:18px;
-    margin-bottom:8px;
-}
-
-.skill p{
+.skill-type{
+    font-family:'DM Mono',monospace;
+    font-size:10px;
     color:#777;
-    font-size:12px;
 }
 
-/* ACHIEVEMENTS */
+/* =========================
+   ACHIEVEMENTS
+========================= */
 
 .achievements{
-    padding:120px 8%;
-    background:linear-gradient(135deg,#120c1e,#090909,#081421);
+    padding:150px 36px;
+    border-top:1px solid var(--line-strong);
+    background:#0d0e0e;
 }
 
 .achievements-title{
-    font-size:clamp(50px,7vw,100px);
-    letter-spacing:-5px;
-    margin-bottom:70px;
+    font-size:clamp(70px,11vw,170px);
+    line-height:.78;
+    letter-spacing:-10px;
+    margin:60px 0 100px;
 }
 
-.achievement-list{
-    border-top:1px solid var(--border);
+.achievement-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    border-top:1px solid var(--line-strong);
 }
 
 .achievement{
-    display:grid;
-    grid-template-columns:80px 1fr 200px;
-    padding:25px 0;
-    border-bottom:1px solid var(--border);
-    align-items:center;
+    min-height:300px;
+    padding:25px;
+    border-right:1px solid var(--line);
+    position:relative;
 }
 
-.achievement-number{
-    font-family:'DM Mono';
-    color:#777;
+.achievement:last-child{
+    border-right:none;
 }
 
-.achievement-name{
-    font-size:20px;
-}
-
-.achievement-type{
-    font-family:'DM Mono';
+.achievement-no{
+    font-family:'DM Mono',monospace;
     font-size:10px;
     color:#777;
-    text-align:right;
 }
 
-/* RESUME */
+.achievement h3{
+    position:absolute;
+    bottom:25px;
+    left:25px;
+    right:25px;
+    font-size:19px;
+    line-height:1.2;
+    font-weight:500;
+}
 
-.resume-section{
-    padding:150px 8%;
-    text-align:center;
+.achievement:hover{
+    background:var(--lime);
+    color:#101112;
+}
+
+.achievement:hover .achievement-no{
+    color:#101112;
+}
+
+/* =========================
+   RESUME
+========================= */
+
+.resume{
+    min-height:85vh;
+    padding:150px 36px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
     position:relative;
+    overflow:hidden;
+    border-top:1px solid var(--line-strong);
 }
 
-.resume-content{
+.resume h2{
     position:relative;
     z-index:2;
+    font-size:clamp(80px,14vw,230px);
+    letter-spacing:-13px;
+    line-height:.75;
+    font-weight:600;
 }
 
-.resume-section h2{
-    font-size:clamp(60px,9vw,130px);
-    letter-spacing:-6px;
-    margin-bottom:25px;
+.resume h2 em{
+    font-family:'Playfair Display',serif;
+    font-weight:500;
 }
 
-.resume-section p{
-    color:#888;
-    margin-bottom:35px;
-}
-
-.resume-btn{
-    display:inline-flex;
+.resume-circle{
+    position:absolute;
+    right:8%;
+    width:370px;
+    height:370px;
+    border-radius:50%;
+    background:var(--lime);
+    display:flex;
     align-items:center;
     justify-content:center;
-    width:160px;
-    height:160px;
-    border-radius:50%;
-    background:white;
-    color:black;
-    font-weight:600;
+    color:#101112;
+    font-family:'DM Mono',monospace;
+    font-size:12px;
     transition:.5s;
 }
 
-.resume-btn:hover{
-    transform:rotate(15deg) scale(1.1);
+.resume-circle:hover{
+    transform:rotate(15deg) scale(1.08);
 }
 
-/* CONTACT */
-
-.contact{
-    padding:120px 8% 50px;
-    background:#050505;
-}
-
-.contact h2{
-    font-size:clamp(60px,10vw,150px);
-    letter-spacing:-7px;
-    line-height:.85;
-    margin-bottom:70px;
-}
-
-.contact h2 span{
-    background:linear-gradient(90deg,var(--purple),var(--blue));
-    -webkit-background-clip:text;
-    color:transparent;
-}
-
-.contact-bottom{
-    display:flex;
-    justify-content:space-between;
-    padding-top:25px;
-    border-top:1px solid var(--border);
+.resume-note{
+    position:absolute;
+    left:36px;
+    bottom:45px;
     color:#777;
-    font-family:'DM Mono';
+    font-family:'DM Mono',monospace;
     font-size:10px;
 }
 
-.socials{
+/* =========================
+   CONTACT
+========================= */
+
+.contact{
+    min-height:80vh;
+    padding:100px 36px 35px;
     display:flex;
-    gap:25px;
+    flex-direction:column;
+    justify-content:space-between;
+    border-top:1px solid var(--line-strong);
 }
 
-/* MOBILE */
-
-@media(max-width:1000px){
-
-    .visual-container{
-        opacity:.5;
-        right:-120px;
-    }
-
-    .hero-content{
-        width:75%;
-    }
-
-    .project-grid{
-        grid-template-columns:1fr;
-    }
-
-    .skills-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
+.contact-title{
+    font-size:clamp(80px,14vw,230px);
+    line-height:.75;
+    letter-spacing:-13px;
 }
 
-@media(max-width:700px){
+.contact-title em{
+    font-family:'Playfair Display',serif;
+    font-weight:500;
+}
+
+.contact-links{
+    margin-top:70px;
+    display:flex;
+    gap:50px;
+    font-family:'DM Mono',monospace;
+    font-size:11px;
+}
+
+.contact-links a{
+    border-bottom:1px solid #777;
+    padding-bottom:8px;
+}
+
+.contact-links a:hover{
+    color:var(--lime);
+    border-color:var(--lime);
+}
+
+.footer{
+    border-top:1px solid var(--line-strong);
+    padding-top:22px;
+    display:flex;
+    justify-content:space-between;
+    font-family:'DM Mono',monospace;
+    font-size:9px;
+    color:#777;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:850px){
 
     nav{
-        padding:20px;
+        padding:0 18px;
     }
 
-    .nav-links a:not(.nav-button){
+    .nav-right a{
+        padding:0 10px;
+        font-size:8px;
+    }
+
+    .nav-right a:nth-child(1),
+    .nav-right a:nth-child(2){
         display:none;
     }
 
-    .hero{
-        padding:120px 7% 70px;
+    .hero-meta{
+        padding:0 18px;
     }
 
-    .hero-content{
-        width:100%;
+    .hero-school{
+        left:18px;
     }
 
-    .visual-container{
+    .hero-title{
+        left:7%;
+        top:42%;
+        font-size:25vw;
+        letter-spacing:-7px;
+    }
+
+    .hero-title .line-two{
+        margin-left:30px;
+    }
+
+    .hero-object{
+        width:105vw;
+        right:-45%;
+        top:20%;
+        opacity:.8;
+    }
+
+    .hero-intro{
+        left:7%;
+        bottom:55px;
+        width:80%;
+        font-size:14px;
+    }
+
+    .hero-index{
         display:none;
-    }
-
-    .stats{
-        grid-template-columns:repeat(2,1fr);
     }
 
     .about{
+        padding:100px 20px;
+        display:block;
+    }
+
+    .about .section-label{
+        margin-bottom:45px;
+    }
+
+    .about-description{
         grid-template-columns:1fr;
-        gap:40px;
+        gap:25px;
+    }
+
+    .projects{
+        padding:100px 20px 0;
     }
 
     .projects-header{
         display:block;
     }
 
-    .projects-sub{
-        margin-top:25px;
+    .projects-header .section-label{
+        margin-bottom:35px;
     }
 
-    .skills-grid{
-        grid-template-columns:1fr;
+    .project{
+        display:block;
+        padding-top:20px;
     }
 
-    .achievement{
-        grid-template-columns:50px 1fr;
+    .project-number{
+        margin-bottom:20px;
     }
 
-    .achievement-type{
+    .project-main{
+        min-height:520px;
+    }
+
+    .project-info{
+        left:25px;
+        bottom:30px;
+    }
+
+    .skills{
+        padding:100px 20px;
+    }
+
+    .skills-header{
+        display:block;
+        margin-bottom:60px;
+    }
+
+    .skills-header .section-label{
+        margin-bottom:40px;
+    }
+
+    .skills-list{
+        margin-left:0;
+    }
+
+    .skill-row{
+        grid-template-columns:45px 1fr;
+    }
+
+    .skill-type{
         display:none;
     }
 
-    .contact-bottom{
-        flex-direction:column;
-        gap:20px;
+    .achievements{
+        padding:100px 20px;
+    }
+
+    .achievement-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .achievement{
+        min-height:220px;
+        border-bottom:1px solid var(--line);
+    }
+
+    .resume{
+        padding:100px 20px;
+        min-height:700px;
+    }
+
+    .resume-circle{
+        width:230px;
+        height:230px;
+        right:20px;
+        bottom:100px;
+    }
+
+    .resume-note{
+        left:20px;
+    }
+
+    .contact{
+        padding:80px 20px 25px;
+    }
+
+    .contact-links{
+        flex-wrap:wrap;
+        gap:25px;
     }
 }
 
@@ -730,19 +964,20 @@ nav{
 
 <body>
 
-<div class="background-grid"></div>
+<div class="grid"></div>
 
-<!-- NAVIGATION -->
+<!-- NAV -->
 
 <nav>
-    <a href="#home" class="logo">MEHA<span>.</span></a>
+    <a href="#home" class="logo">
+        MEHA.E <small>PORTFOLIO</small>
+    </a>
 
-    <div class="nav-links">
+    <div class="nav-right">
+        <a href="#projects">SELECTED WORK</a>
         <a href="#about">ABOUT</a>
-        <a href="#projects">PROJECTS</a>
         <a href="#skills">SKILLS</a>
-        <a href="#contact">CONTACT</a>
-        <a href="#resume" class="nav-button">RESUME ↗</a>
+        <a href="#contact">MENU +</a>
     </div>
 </nav>
 
@@ -751,77 +986,53 @@ nav{
 
 <section class="hero" id="home">
 
-    <div class="hero-glow"></div>
+    <div class="top-word">PORTFOLIO</div>
 
-    <div class="hero-content">
-
-        <div class="hero-tag">
-            <div class="dot"></div>
-            AVAILABLE FOR NEW OPPORTUNITIES
-        </div>
-
-        <h1>
-            THINK.<br>
-            <span>BUILD.</span><br>
-            SECURE.
-        </h1>
-
-        <p class="hero-description">
-            Hi, I'm <strong>Meha E.</strong> — a Computing and Data Science
-            student at Sai University, exploring technology through
-            critical thinking, creativity and a growing passion for cybersecurity.
-        </p>
-
-        <div class="hero-buttons">
-            <a href="#projects" class="primary-btn">EXPLORE MY WORK ↓</a>
-            <a href="#contact" class="secondary-btn">LET'S CONNECT</a>
-        </div>
-
+    <div class="hero-meta">
+        <span>CHENNAI / INDIA</span>
+        <span>ASPIRING CYBER ANALYST</span>
     </div>
 
-    <div class="visual-container">
-
-        <div class="orb"></div>
-
-        <div class="floating-card card1">
-            <div class="card-small">CURRENTLY</div>
-            COMPUTING & DATA SCIENCE
-        </div>
-
-        <div class="floating-card card2">
-            <div class="card-small">EXPLORING</div>
-            CYBERSECURITY
-        </div>
-
+    <div class="hero-school">
+        COMPUTING & DATA SCIENCE / SAI UNIVERSITY
     </div>
+
+    <div class="hero-object"></div>
+
+    <h1 class="hero-title">
+        <span class="line-one">THINK</span>
+        <span class="line-two">BEYOND.</span>
+    </h1>
+
+    <p class="hero-intro">
+        I'm <strong>Meha E</strong> — a Computing and Data Science student,
+        problem solver and aspiring Cyber Analyst exploring technology
+        through curiosity, creativity and critical thinking.
+    </p>
+
+    <div class="hero-index">01 — 06</div>
 
 </section>
 
 
-<!-- STATS -->
+<!-- MARQUEE -->
 
-<section class="stats">
+<section class="marquee">
+    <div class="marquee-track">
+        <span>PYTHON <b>✦</b></span>
+        <span>DATA STRUCTURES <b>✦</b></span>
+        <span>CYBERSECURITY <b>✦</b></span>
+        <span>WEB DEVELOPMENT <b>✦</b></span>
+        <span>CRITICAL THINKING <b>✦</b></span>
+        <span>LEADERSHIP <b>✦</b></span>
 
-    <div class="stat">
-        <div class="stat-number">03</div>
-        <div class="stat-label">FEATURED PROJECTS</div>
+        <span>PYTHON <b>✦</b></span>
+        <span>DATA STRUCTURES <b>✦</b></span>
+        <span>CYBERSECURITY <b>✦</b></span>
+        <span>WEB DEVELOPMENT <b>✦</b></span>
+        <span>CRITICAL THINKING <b>✦</b></span>
+        <span>LEADERSHIP <b>✦</b></span>
     </div>
-
-    <div class="stat">
-        <div class="stat-number">9.64</div>
-        <div class="stat-label">CURRENT CGPA</div>
-    </div>
-
-    <div class="stat">
-        <div class="stat-number">08+</div>
-        <div class="stat-label">TECHNICAL SKILLS</div>
-    </div>
-
-    <div class="stat">
-        <div class="stat-number">∞</div>
-        <div class="stat-label">CURIOSITY TO LEARN</div>
-    </div>
-
 </section>
 
 
@@ -829,33 +1040,35 @@ nav{
 
 <section class="about" id="about">
 
-    <div>
-        <div class="section-tag">01 / ABOUT ME</div>
+    <div class="section-label">
+        01 / ABOUT
     </div>
 
-    <div>
+    <div class="about-content">
 
-        <h2 class="about-title">
-            Curious minds<br>
-            build better<br>
-            systems.
+        <h2>
+            I like finding<br>
+            <em>order</em> in complex<br>
+            problems.
         </h2>
 
-        <p class="about-text">
+        <div class="about-description">
 
-            I'm a second-year <strong>Computing and Data Science student
-            at Sai University</strong> with a strong interest in understanding
-            how technology works beneath the surface.
+            <p>
+                I'm a second-year <strong>Computing and Data Science student
+                at Sai University</strong>. I enjoy understanding how systems
+                work and breaking complex problems into logical, structured
+                solutions.
+            </p>
 
-            <br><br>
+            <p>
+                With strong interests in <strong>problem-solving, leadership
+                and cybersecurity</strong>, I'm continuously exploring new
+                technologies while building practical projects that turn
+                ideas into working systems.
+            </p>
 
-            I enjoy problem solving, leading ideas forward and breaking
-            complex challenges into structured solutions. My long-term
-            goal is to build a career in <strong>Cybersecurity</strong>,
-            combining analytical thinking with technology to understand
-            and protect digital systems.
-
-        </p>
+        </div>
 
     </div>
 
@@ -869,35 +1082,32 @@ nav{
     <div class="projects-header">
 
         <div>
-            <div class="section-tag">02 / SELECTED WORK</div>
-
+            <div class="section-label">02 / SELECTED WORK</div>
             <h2 class="projects-title">
-                Things I've<br>
-                built.
+                Made with<br>
+                <em>curiosity.</em>
             </h2>
         </div>
-
-        <p class="projects-sub">
-            A collection of projects exploring web development,
-            data structures and practical software solutions.
-        </p>
 
     </div>
 
 
-    <div class="project-grid">
+    <!-- PROJECT 1 -->
 
-        <!-- PROJECT 1 -->
+    <article class="project">
 
-        <div class="project-card project1">
+        <div class="project-number">
+            01 — 03
+        </div>
 
-            <div class="project-bg"></div>
-            <div class="project-graphic"></div>
+        <div class="project-main">
 
-            <div class="project-content">
+            <div class="project-visual visual-one"></div>
 
-                <div class="project-number">
-                    01 / WEB PLATFORM
+            <div class="project-info">
+
+                <div class="project-category">
+                    WEB PLATFORM
                 </div>
 
                 <h3 class="project-name">
@@ -905,92 +1115,104 @@ nav{
                 </h3>
 
                 <p class="project-description">
-                    A student-focused platform designed to improve
+                    A student-focused web platform designed to improve
                     connectivity and access to academic information
                     within Sai University.
                 </p>
 
-                <a href="https://github.com/mehaelangomani/SaiUConnect"
-                   target="_blank"
-                   class="project-link">
-                    VIEW PROJECT ↗
+                <a class="project-button"
+                   href="https://github.com/mehaelangomani/SaiUConnect"
+                   target="_blank">
+                    VIEW ON GITHUB ↗
                 </a>
 
             </div>
 
         </div>
 
+    </article>
 
-        <!-- PROJECT 2 -->
 
-        <div class="project-card project2">
+    <!-- PROJECT 2 -->
 
-            <div class="project-bg"></div>
-            <div class="project-graphic"></div>
+    <article class="project">
 
-            <div class="project-content">
+        <div class="project-number">
+            02 — 03
+        </div>
 
-                <div class="project-number">
-                    02 / DATA STRUCTURES
+        <div class="project-main">
+
+            <div class="project-visual visual-two"></div>
+
+            <div class="project-info">
+
+                <div class="project-category">
+                    DATA STRUCTURES / C
                 </div>
 
                 <h3 class="project-name">
-                    Corporate Org<br>
-                    Chart Tool
+                    Corporate<br>Org Chart Tool
                 </h3>
 
                 <p class="project-description">
-                    A C-based system for representing and managing
-                    employee hierarchies using tree data structures
-                    and dynamic memory allocation.
+                    A C-based organizational hierarchy system that uses
+                    tree data structures and dynamic memory allocation
+                    to manage employee relationships.
                 </p>
 
-                <a href="https://github.com/mehaelangomani/Corporate_Org_Chart_Tool"
-                   target="_blank"
-                   class="project-link">
-                    VIEW PROJECT ↗
+                <a class="project-button"
+                   href="https://github.com/mehaelangomani/Corporate_Org_Chart_Tool"
+                   target="_blank">
+                    VIEW ON GITHUB ↗
                 </a>
 
             </div>
 
         </div>
 
+    </article>
 
-        <!-- PROJECT 3 -->
 
-        <div class="project-card project3">
+    <!-- PROJECT 3 -->
 
-            <div class="project-bg"></div>
-            <div class="project-graphic"></div>
+    <article class="project">
 
-            <div class="project-content">
+        <div class="project-number">
+            03 — 03
+        </div>
 
-                <div class="project-number">
-                    03 / MANAGEMENT SYSTEM
+        <div class="project-main">
+
+            <div class="project-visual visual-three"></div>
+
+            <div class="project-info">
+
+                <div class="project-category">
+                    SOFTWARE SYSTEM
                 </div>
 
                 <h3 class="project-name">
-                    Staff Management<br>
-                    System
+                    Staff Management<br>System
                 </h3>
 
                 <p class="project-description">
-                    A structured software solution designed to
-                    organize and manage staff-related information
-                    efficiently.
+                    A structured management solution developed to organize
+                    and efficiently manage staff-related information
+                    and operations.
                 </p>
 
-                <a href="https://github.com/mehaelangomani/Staff_Management_System"
-                   target="_blank"
-                   class="project-link">
-                    VIEW PROJECT ↗
+                <a class="project-button"
+                   href="https://github.com/mehaelangomani/Staff_Management_System"
+                   target="_blank">
+                    VIEW ON GITHUB ↗
                 </a>
 
             </div>
 
         </div>
 
-    </div>
+    </article>
 
 </section>
 
@@ -999,61 +1221,67 @@ nav{
 
 <section class="skills" id="skills">
 
-    <div class="section-tag">03 / CAPABILITIES</div>
+    <div class="skills-header">
 
-    <h2 class="skills-title">
-        Skills &<br>
-        technologies.
-    </h2>
-
-    <div class="skills-grid">
-
-        <div class="skill">
-            <div class="skill-icon">⌘</div>
-            <h3>Python</h3>
-            <p>Programming and problem solving.</p>
+        <div class="section-label">
+            03 / CAPABILITIES
         </div>
 
-        <div class="skill">
-            <div class="skill-icon">◈</div>
-            <h3>C Programming</h3>
-            <p>Core programming and system logic.</p>
+        <h2 class="skills-title">
+            Things I<br>
+            <em>speak.</em>
+        </h2>
+
+    </div>
+
+    <div class="skills-list">
+
+        <div class="skill-row">
+            <span class="skill-index">01</span>
+            <span class="skill-name">Python</span>
+            <span class="skill-type">PROGRAMMING</span>
         </div>
 
-        <div class="skill">
-            <div class="skill-icon">◫</div>
-            <h3>Data Structures</h3>
-            <p>Algorithms and structured problem solving.</p>
+        <div class="skill-row">
+            <span class="skill-index">02</span>
+            <span class="skill-name">C Programming</span>
+            <span class="skill-type">PROGRAMMING</span>
         </div>
 
-        <div class="skill">
-            <div class="skill-icon">◉</div>
-            <h3>MySQL</h3>
-            <p>Database concepts and management.</p>
+        <div class="skill-row">
+            <span class="skill-index">03</span>
+            <span class="skill-name">Data Structures</span>
+            <span class="skill-type">ALGORITHMS</span>
         </div>
 
-        <div class="skill">
-            <div class="skill-icon">◌</div>
-            <h3>Web Development</h3>
-            <p>HTML, CSS and JavaScript.</p>
+        <div class="skill-row">
+            <span class="skill-index">04</span>
+            <span class="skill-name">HTML / CSS / JavaScript</span>
+            <span class="skill-type">WEB DEVELOPMENT</span>
         </div>
 
-        <div class="skill">
-            <div class="skill-icon">⌬</div>
-            <h3>Cybersecurity</h3>
-            <p>Exploring digital security and systems.</p>
+        <div class="skill-row">
+            <span class="skill-index">05</span>
+            <span class="skill-name">MySQL</span>
+            <span class="skill-type">DATABASES</span>
         </div>
 
-        <div class="skill">
-            <div class="skill-icon">✦</div>
-            <h3>Leadership</h3>
-            <p>Taking initiative and working with teams.</p>
+        <div class="skill-row">
+            <span class="skill-index">06</span>
+            <span class="skill-name">Cybersecurity</span>
+            <span class="skill-type">EXPLORING</span>
         </div>
 
-        <div class="skill">
-            <div class="skill-icon">↗</div>
-            <h3>Critical Thinking</h3>
-            <p>Analysing challenges from multiple perspectives.</p>
+        <div class="skill-row">
+            <span class="skill-index">07</span>
+            <span class="skill-name">Leadership</span>
+            <span class="skill-type">COLLABORATION</span>
+        </div>
+
+        <div class="skill-row">
+            <span class="skill-index">08</span>
+            <span class="skill-name">Critical Thinking</span>
+            <span class="skill-type">PROBLEM SOLVING</span>
         </div>
 
     </div>
@@ -1065,53 +1293,39 @@ nav{
 
 <section class="achievements">
 
-    <div class="section-tag">04 / BEYOND TECHNOLOGY</div>
+    <div class="section-label">
+        04 / BEYOND THE SCREEN
+    </div>
 
     <h2 class="achievements-title">
-        Beyond the<br>
-        screen.
+        More than<br>just <em>code.</em>
     </h2>
 
-    <div class="achievement-list">
+    <div class="achievement-grid">
 
         <div class="achievement">
-            <span class="achievement-number">01</span>
-            <span class="achievement-name">
-                Guinness Recognition in Classical Dance
-            </span>
-            <span class="achievement-type">PERFORMANCE</span>
+            <span class="achievement-no">01</span>
+            <h3>Guinness Recognition in Classical Dance</h3>
         </div>
 
         <div class="achievement">
-            <span class="achievement-number">02</span>
-            <span class="achievement-name">
-                State-Level Athletics — 100m
-            </span>
-            <span class="achievement-type">SPORTS</span>
+            <span class="achievement-no">02</span>
+            <h3>State-Level Athlete — 100m</h3>
         </div>
 
         <div class="achievement">
-            <span class="achievement-number">03</span>
-            <span class="achievement-name">
-                State-Level Athletics — 400m
-            </span>
-            <span class="achievement-type">SPORTS</span>
+            <span class="achievement-no">03</span>
+            <h3>State-Level Athlete — 400m</h3>
         </div>
 
         <div class="achievement">
-            <span class="achievement-number">04</span>
-            <span class="achievement-name">
-                State-Level 400m Relay
-            </span>
-            <span class="achievement-type">SPORTS</span>
+            <span class="achievement-no">04</span>
+            <h3>State-Level 400m Relay Participant</h3>
         </div>
 
         <div class="achievement">
-            <span class="achievement-number">05</span>
-            <span class="achievement-name">
-                Recognition in Singing & Drawing
-            </span>
-            <span class="achievement-type">CREATIVITY</span>
+            <span class="achievement-no">05</span>
+            <h3>Recognition in Singing & Drawing</h3>
         </div>
 
     </div>
@@ -1121,28 +1335,26 @@ nav{
 
 <!-- RESUME -->
 
-<section class="resume-section" id="resume">
+<section class="resume" id="resume">
 
-    <div class="resume-content">
+    <div class="section-label">
+        05 / CURRICULUM VITAE
+    </div>
 
-        <div class="section-tag">05 / RESUME</div>
+    <h2>
+        The story,<br>
+        <em>on paper.</em>
+    </h2>
 
-        <h2>
-            My journey,<br>
-            on paper.
-        </h2>
+    <!-- CHANGE resume.pdf.pdf TO YOUR EXACT FILE NAME IF NEEDED -->
+    <a href="resume.pdf.pdf"
+       target="_blank"
+       class="resume-circle">
+        VIEW<br>RESUME ↗
+    </a>
 
-        <p>
-            Explore my academic background, skills,
-            projects and achievements.
-        </p>
-
-        <a href="resume.pdf"
-           target="_blank"
-           class="resume-btn">
-            VIEW<br>RESUME ↗
-        </a>
-
+    <div class="resume-note">
+        EDUCATION / PROJECTS / SKILLS / ACHIEVEMENTS
     </div>
 
 </section>
@@ -1152,18 +1364,19 @@ nav{
 
 <section class="contact" id="contact">
 
-    <div class="section-tag">06 / CONTACT</div>
+    <div>
 
-    <h2>
-        Let's build<br>
-        something <span>interesting.</span>
-    </h2>
+        <div class="section-label">
+            06 / CONTACT
+        </div>
 
-    <div class="contact-bottom">
+        <h2 class="contact-title">
+            Let's make<br>
+            something<br>
+            <em>matter.</em>
+        </h2>
 
-        <div>CHENNAI / INDIA</div>
-
-        <div class="socials">
+        <div class="contact-links">
 
             <a href="mailto:mehaelango@gmail.com">
                 EMAIL ↗
@@ -1181,8 +1394,12 @@ nav{
 
         </div>
 
-        <div>© 2026 MEHA.E</div>
+    </div>
 
+    <div class="footer">
+        <span>MEHA.E © 2026</span>
+        <span>CHENNAI / INDIA</span>
+        <span>DESIGNED & BUILT BY MEHA</span>
     </div>
 
 </section>
@@ -1190,8 +1407,10 @@ nav{
 
 <script>
 
-const elements = document.querySelectorAll(
-    ".project-card, .skill, .achievement"
+/* Reveal animation */
+
+const revealElements = document.querySelectorAll(
+    '.project-main, .skill-row, .achievement'
 );
 
 const observer = new IntersectionObserver((entries) => {
@@ -1199,35 +1418,43 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
 
         if(entry.isIntersecting){
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
+
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+
         }
 
     });
 
-},{
-    threshold:.1
+}, {
+    threshold:0.08
 });
 
-elements.forEach(element => {
+revealElements.forEach(element => {
 
-    element.style.opacity = "0";
-    element.style.transform = "translateY(30px)";
-    element.style.transition = ".8s cubic-bezier(.2,.8,.2,1)";
+    element.style.opacity = '0';
+    element.style.transform = 'translateY(35px)';
+    element.style.transition = 'opacity .8s ease, transform .8s cubic-bezier(.16,1,.3,1)';
 
     observer.observe(element);
 
 });
 
-const nav = document.querySelector("nav");
 
-window.addEventListener("scroll", () => {
+/* Slight parallax for hero object */
 
-    if(window.scrollY > 50){
-        nav.style.background = "rgba(7,7,7,.95)";
-    } else {
-        nav.style.background =
-        "linear-gradient(to bottom,rgba(7,7,7,.95),rgba(7,7,7,.4),transparent)";
+const object = document.querySelector('.hero-object');
+
+window.addEventListener('mousemove', (e) => {
+
+    if(window.innerWidth > 850){
+
+        const x = (e.clientX / window.innerWidth - .5) * 15;
+        const y = (e.clientY / window.innerHeight - .5) * 15;
+
+        object.style.transform =
+            `translate(${x}px, ${y}px)`;
+
     }
 
 });
