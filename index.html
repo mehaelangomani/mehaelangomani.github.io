@@ -5,27 +5,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Meha E. | Portfolio</title>
+<title>Meha E. — Portfolio</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap');
 
-/* =========================================================
-   GOOGLE FONT
-========================================================= */
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
-
-
-/* =========================================================
-   ROOT
-========================================================= */
 :root{
-    --bg:#07090c;
-    --bg2:#0d1117;
-    --text:#f3f6f7;
-    --muted:#8d969f;
-    --accent:#47d7ff;
-    --accent2:#315cff;
-    --line:rgba(255,255,255,.12);
+    --bg:#e9e7e2;
+    --dark:#111111;
+    --text:#171717;
+    --muted:#77746e;
+    --line:rgba(20,20,20,.18);
+    --lime:#d8ff36;
 }
 
 *{
@@ -41,1843 +32,1404 @@ html{
 body{
     background:var(--bg);
     color:var(--text);
-    font-family:'Outfit',sans-serif;
+    font-family:"Manrope",sans-serif;
     overflow-x:hidden;
-    cursor:none;
 }
 
-body.loading{
+body.menu-open{
     overflow:hidden;
 }
 
 a{
-    text-decoration:none;
     color:inherit;
+    text-decoration:none;
 }
 
-button{
-    font-family:inherit;
+/* =========================
+   CUSTOM CURSOR
+========================= */
+
+.cursor{
+    width:11px;
+    height:11px;
+    background:#111;
+    border-radius:50%;
+    position:fixed;
+    z-index:9999;
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+    transition:width .25s,height .25s,background .25s;
 }
 
+.cursor.hover{
+    width:55px;
+    height:55px;
+    background:rgba(216,255,54,.85);
+}
 
-/* =========================================================
+/* =========================
    PRELOADER
-========================================================= */
+========================= */
 
-#preloader{
+.loader{
     position:fixed;
     inset:0;
-    background:#050607;
     z-index:10000;
+    background:#111;
+    color:#e9e7e2;
     display:flex;
-    align-items:center;
-    justify-content:center;
     flex-direction:column;
+    justify-content:space-between;
+    padding:28px 35px;
+}
+
+.loader-top{
+    display:flex;
+    justify-content:space-between;
+    font-size:11px;
+    font-family:"DM Mono";
 }
 
 .loader-number{
-    font-size:clamp(80px,15vw,240px);
-    font-weight:800;
-    letter-spacing:-10px;
-    color:white;
+    font-size:clamp(120px,25vw,400px);
+    font-weight:500;
+    letter-spacing:-.08em;
+    align-self:center;
 }
 
-.loader-text{
-    font-family:'DM Mono';
-    font-size:11px;
-    letter-spacing:4px;
-    color:var(--accent);
-    margin-top:10px;
+.loader-bottom{
+    font-family:"DM Mono";
+    font-size:10px;
+    display:flex;
+    justify-content:space-between;
 }
 
-
-/* =========================================================
-   CUSTOM CURSOR
-========================================================= */
-
-.cursor{
-    width:10px;
-    height:10px;
-    background:white;
-    position:fixed;
-    border-radius:50%;
-    pointer-events:none;
-    z-index:9999;
-    transform:translate(-50%,-50%);
-    transition:
-        width .25s,
-        height .25s,
-        background .25s;
-}
-
-.cursor-ring{
-    width:40px;
-    height:40px;
-    border:1px solid rgba(255,255,255,.6);
-    position:fixed;
-    border-radius:50%;
-    pointer-events:none;
-    z-index:9998;
-    transform:translate(-50%,-50%);
-    transition:width .25s,height .25s;
-}
-
-.cursor.active{
-    width:60px;
-    height:60px;
-    background:rgba(71,215,255,.15);
-    backdrop-filter:blur(2px);
-}
-
-
-/* =========================================================
-   BACKGROUND CANVAS
-========================================================= */
-
-#particleCanvas{
-    position:fixed;
-    inset:0;
-    z-index:-3;
-    opacity:.65;
-}
-
-.noise{
-    position:fixed;
-    inset:0;
-    opacity:.04;
-    pointer-events:none;
-    z-index:50;
-    background-image:
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-
-/* =========================================================
-   PROGRESS BAR
-========================================================= */
-
-.progress{
-    position:fixed;
-    top:0;
-    left:0;
-    height:3px;
-    background:linear-gradient(90deg,var(--accent),#6d4cff);
-    width:0%;
-    z-index:999;
-}
-
-
-/* =========================================================
-   NAVBAR
-========================================================= */
+/* =========================
+   NAVIGATION
+========================= */
 
 nav{
-    position:fixed;
-    top:0;
+    position:absolute;
     width:100%;
-    padding:25px 5vw;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+    top:0;
     z-index:100;
+    padding:25px 35px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:white;
     mix-blend-mode:difference;
 }
 
-.logo{
-    font-size:22px;
+.brand{
+    font-size:15px;
     font-weight:800;
-    letter-spacing:-1px;
+    letter-spacing:-.04em;
 }
 
-.logo span{
-    color:var(--accent);
+.brand small{
+    font-family:"DM Mono";
+    font-size:8px;
+    font-weight:400;
+    margin-left:5px;
 }
 
-.nav-links{
+.nav-right{
     display:flex;
     gap:30px;
+    align-items:center;
+    font-family:"DM Mono";
+    font-size:10px;
 }
 
-.nav-links a{
-    font-family:'DM Mono';
-    font-size:11px;
-    letter-spacing:1px;
+.menu-button{
+    border:none;
+    background:none;
+    color:inherit;
+    font-family:"DM Mono";
+    font-size:10px;
+    cursor:pointer;
+}
+
+/* =========================
+   FULL SCREEN MENU
+========================= */
+
+.menu{
+    position:fixed;
+    inset:0;
+    background:#111;
+    color:#e9e7e2;
+    z-index:500;
+    transform:translateY(-100%);
+    transition:transform .8s cubic-bezier(.76,0,.24,1);
+    padding:30px 35px;
+    display:flex;
+    flex-direction:column;
+}
+
+.menu.active{
+    transform:translateY(0);
+}
+
+.menu-head{
+    display:flex;
+    justify-content:space-between;
+    font-family:"DM Mono";
+    font-size:10px;
+}
+
+.menu-links{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+}
+
+.menu-links a{
+    font-size:clamp(55px,9vw,140px);
+    line-height:.9;
+    font-weight:700;
+    letter-spacing:-.07em;
+    border-bottom:1px solid rgba(255,255,255,.15);
+    padding:15px 0;
     transition:.3s;
 }
 
-.nav-links a:hover{
-    color:var(--accent);
+.menu-links a:hover{
+    color:var(--lime);
+    padding-left:25px;
 }
 
+.menu-footer{
+    display:flex;
+    justify-content:space-between;
+    font-family:"DM Mono";
+    font-size:10px;
+    color:#999;
+}
 
-/* =========================================================
+/* =========================
    HERO
-========================================================= */
+========================= */
 
 .hero{
-    height:100vh;
-    min-height:700px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    padding:0 5vw;
+    min-height:100vh;
+    background:#111;
+    color:#e9e7e2;
     position:relative;
     overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:0 35px 35px;
 }
 
-.hero-eyebrow{
-    font-family:'DM Mono';
-    font-size:11px;
-    letter-spacing:3px;
-    color:var(--accent);
-    margin-bottom:25px;
+.hero-grid{
+    position:absolute;
+    inset:0;
+    background-image:
+        linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+    background-size:80px 80px;
+    opacity:.35;
+    mask-image:linear-gradient(to bottom,black,transparent);
+}
+
+.hero-shape{
+    position:absolute;
+    width:min(55vw,750px);
+    aspect-ratio:1;
+    right:3%;
+    top:15%;
+    border-radius:48% 52% 45% 55% / 45% 40% 60% 55%;
+    background:
+        radial-gradient(circle at 35% 35%,#f0ff9b 0%,#b8ff28 15%,#4e6b1e 40%,#111 70%);
+    filter:blur(.5px);
+    animation:morph 10s ease-in-out infinite;
+    opacity:.9;
+}
+
+.hero-shape:after{
+    content:"";
+    position:absolute;
+    inset:18%;
+    border:1px solid rgba(255,255,255,.25);
+    border-radius:inherit;
+}
+
+@keyframes morph{
+    0%,100%{
+        border-radius:48% 52% 45% 55% / 45% 40% 60% 55%;
+        transform:rotate(0deg);
+    }
+    50%{
+        border-radius:60% 40% 58% 42% / 55% 60% 40% 45%;
+        transform:rotate(18deg) scale(1.08);
+    }
+}
+
+.hero-topline{
+    position:absolute;
+    top:110px;
+    left:35px;
+    font-family:"DM Mono";
+    font-size:10px;
+    letter-spacing:.08em;
+    color:#999;
 }
 
 .hero-title{
-    font-size:clamp(75px,13vw,220px);
-    font-weight:800;
-    line-height:.78;
-    letter-spacing:-.07em;
     position:relative;
     z-index:2;
-}
-
-.hero-title .outline{
-    color:transparent;
-    -webkit-text-stroke:1px rgba(255,255,255,.7);
-}
-
-.hero-sub{
-    position:absolute;
-    bottom:10%;
-    right:7%;
-    width:300px;
-    font-size:15px;
-    line-height:1.7;
-    color:var(--muted);
-}
-
-.hero-orb{
-    width:45vw;
-    height:45vw;
-    max-width:650px;
-    max-height:650px;
-    position:absolute;
-    right:-8vw;
-    top:18%;
-    border-radius:50%;
-    background:
-        radial-gradient(circle at 30% 30%,#9ff4ff,#1677ff 28%,#101a49 60%,#000 75%);
-    filter:blur(.2px);
-    box-shadow:
-        0 0 100px rgba(45,150,255,.25),
-        inset -40px -40px 80px rgba(0,0,0,.8);
-    animation:floatOrb 8s ease-in-out infinite;
-}
-
-@keyframes floatOrb{
-    0%,100%{
-        transform:translate(0,0) rotate(0deg);
-    }
-
-    50%{
-        transform:translate(-30px,40px) rotate(10deg);
-    }
-}
-
-.scroll-indicator{
-    position:absolute;
-    bottom:30px;
-    left:5vw;
-    font-family:'DM Mono';
-    font-size:10px;
-    letter-spacing:2px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    color:var(--muted);
-}
-
-.scroll-line{
-    height:1px;
-    width:70px;
-    background:var(--muted);
-    position:relative;
-    overflow:hidden;
-}
-
-.scroll-line:after{
-    content:"";
-    position:absolute;
-    width:30%;
-    height:100%;
-    background:white;
-    animation:scrollLine 1.5s infinite;
-}
-
-@keyframes scrollLine{
-    from{left:-30%}
-    to{left:100%}
-}
-
-
-/* =========================================================
-   MARQUEE
-========================================================= */
-
-.marquee{
-    overflow:hidden;
-    border-top:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-    padding:18px 0;
-    white-space:nowrap;
-}
-
-.marquee-track{
-    display:inline-flex;
-    animation:marquee 25s linear infinite;
-}
-
-.marquee span{
-    font-size:clamp(25px,3vw,45px);
-    font-weight:600;
-    margin-right:40px;
-    color:rgba(255,255,255,.7);
-}
-
-.marquee b{
-    color:var(--accent);
-}
-
-@keyframes marquee{
-    to{
-        transform:translateX(-50%);
-    }
-}
-
-
-/* =========================================================
-   GENERAL SECTIONS
-========================================================= */
-
-section{
-    padding:140px 5vw;
-    position:relative;
-}
-
-.section-tag{
-    font-family:'DM Mono';
-    color:var(--accent);
-    font-size:11px;
-    letter-spacing:3px;
-    margin-bottom:25px;
-}
-
-.section-title{
-    font-size:clamp(50px,8vw,120px);
-    line-height:.9;
-    letter-spacing:-.06em;
+    font-size:clamp(90px,16vw,270px);
+    line-height:.72;
     font-weight:700;
-    margin-bottom:70px;
+    letter-spacing:-.09em;
+    max-width:100%;
 }
 
-.reveal{
-    opacity:0;
-    transform:translateY(70px);
-    transition:
-        opacity 1s cubic-bezier(.2,.8,.2,1),
-        transform 1s cubic-bezier(.2,.8,.2,1);
-}
-
-.reveal.show{
-    opacity:1;
-    transform:none;
-}
-
-
-/* =========================================================
-   ABOUT
-========================================================= */
-
-.about{
-    display:grid;
-    grid-template-columns:1.2fr .8fr;
-    gap:100px;
-    align-items:start;
-}
-
-.about-text{
-    font-size:clamp(28px,3.5vw,55px);
-    line-height:1.2;
-    letter-spacing:-.03em;
-}
-
-.about-text span{
-    color:var(--accent);
-}
-
-.about-side{
-    padding-top:15px;
-}
-
-.about-side p{
-    color:var(--muted);
-    line-height:1.8;
-    font-size:16px;
-    margin-bottom:35px;
-}
-
-.stats{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    border-top:1px solid var(--line);
-}
-
-.stat{
-    padding:25px 0;
-    border-bottom:1px solid var(--line);
-}
-
-.stat-number{
-    font-size:35px;
-    font-weight:700;
-}
-
-.stat-label{
-    font-family:'DM Mono';
-    font-size:10px;
-    color:var(--muted);
-    margin-top:5px;
-    letter-spacing:1px;
-}
-
-
-/* =========================================================
-   PROJECTS
-========================================================= */
-
-.projects{
-    background:linear-gradient(
-        180deg,
-        transparent,
-        rgba(25,50,70,.12),
-        transparent
-    );
-}
-
-.project{
-    border-top:1px solid var(--line);
-    padding:50px 0;
-    display:grid;
-    grid-template-columns:100px 1fr 250px;
-    gap:30px;
-    align-items:center;
-    transition:.5s;
-    position:relative;
-}
-
-.project:last-child{
-    border-bottom:1px solid var(--line);
-}
-
-.project:hover{
-    padding-left:25px;
-    background:rgba(255,255,255,.025);
-}
-
-.project-number{
-    font-family:'DM Mono';
-    font-size:12px;
-    color:var(--accent);
-}
-
-.project-name{
-    font-size:clamp(32px,5vw,75px);
-    letter-spacing:-.05em;
-    font-weight:600;
-}
-
-.project-desc{
-    font-size:13px;
-    color:var(--muted);
-    line-height:1.6;
-}
-
-.project-arrow{
-    position:absolute;
-    right:25px;
-    font-size:30px;
-    opacity:0;
-    transition:.4s;
-}
-
-.project:hover .project-arrow{
-    opacity:1;
-    transform:translateX(-10px);
-}
-
-
-/* =========================================================
-   SKILLS
-========================================================= */
-
-.skills-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    border-top:1px solid var(--line);
-    border-left:1px solid var(--line);
-}
-
-.skill{
-    min-height:190px;
-    padding:25px;
-    border-right:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    transition:.4s;
-}
-
-.skill:hover{
-    background:linear-gradient(
-        135deg,
-        rgba(71,215,255,.14),
-        rgba(49,92,255,.05)
-    );
-    transform:translateY(-5px);
-}
-
-.skill-number{
-    font-family:'DM Mono';
-    font-size:10px;
-    color:var(--muted);
-}
-
-.skill-name{
-    font-size:24px;
+.hero-title .italic{
+    font-family:"Playfair Display",serif;
+    font-style:italic;
     font-weight:500;
+    margin-left:12vw;
 }
 
-
-/* =========================================================
-   ACHIEVEMENTS
-========================================================= */
-
-.achievements{
-    overflow:hidden;
-}
-
-.achievement-list{
-    border-top:1px solid var(--line);
-}
-
-.achievement{
+.hero-bottom{
+    position:relative;
+    z-index:2;
+    margin-top:45px;
     display:grid;
-    grid-template-columns:100px 1fr 200px;
-    padding:35px 0;
-    border-bottom:1px solid var(--line);
-    align-items:center;
-    transition:.3s;
+    grid-template-columns:1fr 300px 1fr;
+    gap:30px;
+    align-items:end;
 }
 
-.achievement:hover{
-    padding-left:20px;
-    background:rgba(255,255,255,.02);
-}
-
-.achievement-icon{
-    font-size:25px;
-}
-
-.achievement-title{
-    font-size:clamp(20px,3vw,38px);
-    letter-spacing:-.03em;
-}
-
-.achievement-type{
-    color:var(--muted);
-    font-family:'DM Mono';
+.hero-scroll,
+.hero-meta{
+    font-family:"DM Mono";
     font-size:10px;
-    letter-spacing:1px;
+    color:#a6a6a6;
 }
 
-
-/* =========================================================
-   RESUME
-========================================================= */
-
-.resume{
-    min-height:700px;
-    background:
-        radial-gradient(circle at 70% 20%,rgba(49,92,255,.18),transparent 35%),
-        #0a0e14;
-}
-
-.resume-box{
-    border:1px solid var(--line);
-    padding:60px;
-    background:rgba(255,255,255,.025);
-    backdrop-filter:blur(20px);
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:60px;
-}
-
-.resume-intro h3{
-    font-size:clamp(35px,5vw,70px);
-    letter-spacing:-.05em;
-    line-height:.95;
-    margin-bottom:30px;
-}
-
-.resume-intro p{
-    color:var(--muted);
-    line-height:1.8;
-}
-
-.resume-details{
-    display:flex;
-    flex-direction:column;
-    gap:25px;
-}
-
-.resume-row{
-    padding-bottom:20px;
-    border-bottom:1px solid var(--line);
-}
-
-.resume-row small{
-    font-family:'DM Mono';
-    color:var(--accent);
-    font-size:10px;
-    letter-spacing:2px;
-}
-
-.resume-row h4{
-    margin-top:8px;
-    font-size:20px;
-}
-
-.resume-row p{
-    color:var(--muted);
+.hero-description{
     font-size:14px;
-    margin-top:5px;
+    line-height:1.6;
+    color:#c5c5c5;
 }
 
-.resume-buttons{
-    margin-top:35px;
-    display:flex;
-    gap:15px;
-    flex-wrap:wrap;
+.hero-index{
+    text-align:right;
+    font-family:"DM Mono";
+    font-size:10px;
+    color:#999;
 }
 
-.btn{
-    padding:15px 25px;
-    border:1px solid var(--line);
-    font-family:'DM Mono';
-    font-size:11px;
-    letter-spacing:1px;
-    transition:.3s;
-    display:inline-block;
-    cursor:none;
-}
+/* =========================
+   INTRO STRIP
+========================= */
 
-.btn-primary{
-    background:var(--accent);
-    color:#031015;
-    border-color:var(--accent);
-}
-
-.btn:hover{
-    transform:translateY(-4px);
-    box-shadow:0 15px 40px rgba(71,215,255,.15);
-}
-
-
-/* =========================================================
-   CONTACT
-========================================================= */
-
-.contact{
-    min-height:80vh;
+.intro{
+    min-height:75vh;
+    padding:10vw 7vw;
     display:flex;
     flex-direction:column;
     justify-content:center;
+}
+
+.eyebrow{
+    font-family:"DM Mono";
+    font-size:10px;
+    letter-spacing:.08em;
+    margin-bottom:40px;
+    color:var(--muted);
+}
+
+.intro h2{
+    max-width:1200px;
+    font-size:clamp(42px,6vw,100px);
+    line-height:1.03;
+    letter-spacing:-.065em;
+    font-weight:500;
+}
+
+.intro h2 em{
+    font-family:"Playfair Display",serif;
+    font-weight:500;
+}
+
+.intro-bottom{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:70px;
+}
+
+.intro-bottom p{
+    width:400px;
+    max-width:100%;
+    color:var(--muted);
+    line-height:1.7;
+    font-size:15px;
+}
+
+/* =========================
+   MARQUEE
+========================= */
+
+.ticker{
+    background:var(--lime);
+    overflow:hidden;
+    white-space:nowrap;
+    padding:18px 0;
+    transform:rotate(-1.5deg) scale(1.03);
+}
+
+.ticker-track{
+    display:inline-flex;
+    animation:move 20s linear infinite;
+}
+
+.ticker span{
+    font-size:clamp(30px,4vw,65px);
+    font-weight:700;
+    letter-spacing:-.05em;
+    margin-right:30px;
+}
+
+@keyframes move{
+    to{transform:translateX(-50%)}
+}
+
+/* =========================
+   PROJECTS
+========================= */
+
+.projects{
+    background:#151515;
+    color:#e9e7e2;
+    padding:140px 35px;
+}
+
+.projects-header{
+    display:flex;
+    justify-content:space-between;
     align-items:flex-start;
+    margin-bottom:100px;
 }
 
-.contact h2{
-    font-size:clamp(60px,12vw,180px);
-    line-height:.78;
-    letter-spacing:-.07em;
-    margin-bottom:50px;
+.projects-header h2{
+    font-size:clamp(70px,11vw,180px);
+    letter-spacing:-.08em;
+    line-height:.8;
 }
 
-.contact h2 span{
-    color:transparent;
-    -webkit-text-stroke:1px var(--accent);
+.projects-header p{
+    font-family:"DM Mono";
+    font-size:10px;
+    color:#999;
+    max-width:230px;
+    line-height:1.6;
+}
+
+.project-item{
+    position:relative;
+    border-top:1px solid rgba(255,255,255,.15);
+    padding:25px 0;
+    cursor:pointer;
+}
+
+.project-item:last-child{
+    border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+.project-top{
+    display:grid;
+    grid-template-columns:80px 1fr 200px 50px;
+    align-items:center;
+    position:relative;
+    z-index:3;
+}
+
+.project-no,
+.project-category{
+    font-family:"DM Mono";
+    font-size:10px;
+    color:#999;
+}
+
+.project-name{
+    font-size:clamp(38px,6vw,100px);
+    font-weight:600;
+    letter-spacing:-.065em;
+    transition:transform .6s cubic-bezier(.22,1,.36,1);
+}
+
+.project-arrow{
+    font-size:28px;
+    text-align:right;
+}
+
+.project-image{
+    position:absolute;
+    width:360px;
+    height:230px;
+    object-fit:cover;
+    right:18%;
+    top:50%;
+    transform:translateY(-50%) rotate(6deg) scale(.8);
+    opacity:0;
+    transition:.55s cubic-bezier(.22,1,.36,1);
+    pointer-events:none;
+    background:#333;
+}
+
+.project-item:hover .project-image{
+    opacity:1;
+    transform:translateY(-50%) rotate(-3deg) scale(1);
+}
+
+.project-item:hover .project-name{
+    transform:translateX(25px);
+    color:var(--lime);
+}
+
+/* visual placeholders */
+.project-visual-1{
+    background:
+        radial-gradient(circle at 70% 30%,#d8ff36,transparent 22%),
+        linear-gradient(135deg,#0c281c,#1e4d35);
+}
+
+.project-visual-2{
+    background:
+        linear-gradient(130deg,#f0a7ff,#7139ba 45%,#191124);
+}
+
+.project-visual-3{
+    background:
+        radial-gradient(circle at center,#6ba9ff,transparent 30%),
+        linear-gradient(135deg,#061b31,#153b5c);
+}
+
+/* =========================
+   PROJECT DETAILS
+========================= */
+
+.work-statement{
+    background:#151515;
+    color:#e9e7e2;
+    padding:0 7vw 160px;
+}
+
+.work-statement p{
+    max-width:1000px;
+    font-size:clamp(30px,4vw,60px);
+    letter-spacing:-.05em;
+    line-height:1.08;
+    color:#aaa;
+}
+
+.work-statement strong{
+    color:#e9e7e2;
+    font-weight:500;
+}
+
+/* =========================
+   SKILLS
+========================= */
+
+.skills{
+    padding:140px 35px;
+}
+
+.skills-heading{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    margin-bottom:100px;
+}
+
+.skills-heading h2{
+    font-size:clamp(65px,9vw,150px);
+    line-height:.82;
+    letter-spacing:-.08em;
+}
+
+.skills-heading p{
+    align-self:end;
+    color:var(--muted);
+    max-width:350px;
+    line-height:1.7;
+}
+
+.skill-list{
+    border-top:1px solid var(--line);
+}
+
+.skill-row{
+    display:grid;
+    grid-template-columns:80px 1fr 1fr;
+    padding:25px 0;
+    border-bottom:1px solid var(--line);
+    transition:.4s;
+}
+
+.skill-row:hover{
+    padding-left:20px;
+    background:rgba(0,0,0,.025);
+}
+
+.skill-row span:first-child{
+    font-family:"DM Mono";
+    font-size:10px;
+    color:var(--muted);
+}
+
+.skill-row h3{
+    font-size:clamp(26px,3vw,50px);
+    font-weight:500;
+    letter-spacing:-.04em;
+}
+
+.skill-row p{
+    color:var(--muted);
+    align-self:center;
+    font-size:13px;
+}
+
+/* =========================
+   ABOUT / ACHIEVEMENTS
+========================= */
+
+.story{
+    background:#c7d6ff;
+    min-height:100vh;
+    padding:140px 7vw;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.story-title{
+    font-size:clamp(70px,12vw,210px);
+    line-height:.76;
+    letter-spacing:-.09em;
+}
+
+.story-title em{
+    font-family:"Playfair Display";
+    font-weight:500;
+}
+
+.story-grid{
+    margin-top:120px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:100px;
+}
+
+.story-grid p{
+    font-size:clamp(24px,3vw,45px);
+    line-height:1.15;
+    letter-spacing:-.04em;
+}
+
+.achievement-list{
+    border-top:1px solid rgba(0,0,0,.2);
+}
+
+.achievement{
+    padding:20px 0;
+    border-bottom:1px solid rgba(0,0,0,.2);
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    font-size:14px;
+}
+
+.achievement span:last-child{
+    font-family:"DM Mono";
+    font-size:9px;
+    color:#555;
+}
+
+/* =========================
+   RESUME
+========================= */
+
+.resume{
+    background:#111;
+    color:#e9e7e2;
+    padding:140px 35px;
+}
+
+.resume-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:120px;
+}
+
+.resume-top h2{
+    font-size:clamp(70px,12vw,190px);
+    line-height:.75;
+    letter-spacing:-.09em;
+}
+
+.resume-button{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    background:var(--lime);
+    color:#111;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-family:"DM Mono";
+    font-size:10px;
+    transition:.4s;
+}
+
+.resume-button:hover{
+    transform:rotate(12deg) scale(1.08);
+}
+
+.resume-content{
+    display:grid;
+    grid-template-columns:1fr 2fr;
+    gap:80px;
+    border-top:1px solid rgba(255,255,255,.18);
+    padding-top:35px;
+}
+
+.resume-label{
+    font-family:"DM Mono";
+    font-size:10px;
+    color:#999;
+}
+
+.resume-main{
+    display:flex;
+    flex-direction:column;
+    gap:45px;
+}
+
+.resume-entry{
+    display:grid;
+    grid-template-columns:150px 1fr;
+    border-bottom:1px solid rgba(255,255,255,.12);
+    padding-bottom:30px;
+}
+
+.resume-entry small{
+    font-family:"DM Mono";
+    font-size:10px;
+    color:#888;
+}
+
+.resume-entry h3{
+    font-size:clamp(22px,3vw,38px);
+    font-weight:500;
+    letter-spacing:-.04em;
+}
+
+.resume-entry p{
+    margin-top:8px;
+    color:#999;
+    font-size:14px;
+    line-height:1.6;
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact{
+    min-height:100vh;
+    padding:35px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.contact-main{
+    margin-top:auto;
+    margin-bottom:auto;
+}
+
+.contact-main h2{
+    font-size:clamp(75px,15vw,250px);
+    line-height:.73;
+    letter-spacing:-.1em;
+}
+
+.contact-main h2 em{
+    font-family:"Playfair Display";
+    font-weight:500;
+}
+
+.contact-info{
+    display:flex;
+    justify-content:space-between;
+    border-top:1px solid var(--line);
+    padding-top:20px;
+    font-family:"DM Mono";
+    font-size:10px;
 }
 
 .contact-links{
     display:flex;
-    gap:25px;
-    flex-wrap:wrap;
+    gap:30px;
 }
 
-.contact-link{
-    font-family:'DM Mono';
-    font-size:12px;
-    padding-bottom:8px;
-    border-bottom:1px solid var(--line);
+.contact-links a{
     transition:.3s;
 }
 
-.contact-link:hover{
-    color:var(--accent);
-    border-color:var(--accent);
+.contact-links a:hover{
+    color:#777;
 }
 
+/* =========================
+   REVEAL
+========================= */
 
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer{
-    padding:25px 5vw;
-    border-top:1px solid var(--line);
-    display:flex;
-    justify-content:space-between;
-    font-family:'DM Mono';
-    font-size:10px;
-    color:var(--muted);
+.reveal{
+    opacity:0;
+    transform:translateY(45px);
+    transition:1s cubic-bezier(.22,1,.36,1);
 }
 
+.reveal.visible{
+    opacity:1;
+    transform:none;
+}
 
-/* =========================================================
+/* =========================
    RESPONSIVE
-========================================================= */
+========================= */
 
-@media(max-width:900px){
+@media(max-width:800px){
 
-    .nav-links{
+    body{
+        cursor:auto;
+    }
+
+    .cursor{
         display:none;
     }
 
-    .hero-orb{
-        width:75vw;
-        height:75vw;
-        opacity:.6;
-    }
-
-    .hero-sub{
-        position:relative;
-        right:auto;
-        bottom:auto;
-        margin-top:45px;
-    }
-
-    .about{
-        grid-template-columns:1fr;
-        gap:45px;
-    }
-
-    .project{
-        grid-template-columns:60px 1fr;
-    }
-
-    .project-desc{
-        grid-column:2;
-    }
-
-    .skills-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .achievement{
-        grid-template-columns:60px 1fr;
-        gap:15px;
-    }
-
-    .achievement-type{
-        grid-column:2;
-    }
-
-    .resume-box{
-        grid-template-columns:1fr;
-        padding:35px;
-    }
-
-}
-
-@media(max-width:550px){
-
-    section{
-        padding:90px 6vw;
+    nav,
+    .hero,
+    .projects,
+    .skills,
+    .resume,
+    .contact{
+        padding-left:20px;
+        padding-right:20px;
     }
 
     nav{
-        padding:20px 6vw;
+        padding-top:20px;
     }
 
-    .hero{
-        padding:0 6vw;
+    .nav-right a{
+        display:none;
     }
 
-    .hero-title{
-        font-size:23vw;
+    .hero-shape{
+        width:90vw;
+        right:-20vw;
+        top:20%;
+        opacity:.65;
     }
 
-    .skills-grid{
+    .hero-bottom{
         grid-template-columns:1fr;
     }
 
-    .achievement{
-        grid-template-columns:45px 1fr;
+    .hero-index{
+        display:none;
     }
 
-    .resume-box{
-        padding:25px;
+    .projects-header,
+    .skills-heading,
+    .story-grid,
+    .resume-content{
+        grid-template-columns:1fr;
+        display:grid;
+        gap:35px;
     }
 
-    footer{
+    .projects-header{
+        margin-bottom:60px;
+    }
+
+    .project-top{
+        grid-template-columns:45px 1fr 30px;
+    }
+
+    .project-category{
+        display:none;
+    }
+
+    .project-image{
+        display:none;
+    }
+
+    .project-name{
+        font-size:40px;
+    }
+
+    .skill-row{
+        grid-template-columns:40px 1fr;
+    }
+
+    .skill-row p{
+        display:none;
+    }
+
+    .story{
+        padding:100px 25px;
+    }
+
+    .resume-entry{
+        grid-template-columns:1fr;
+        gap:15px;
+    }
+
+    .contact-info{
         flex-direction:column;
-        gap:10px;
+        gap:25px;
     }
 
+    .loader{
+        padding:20px;
+    }
 }
-
 </style>
 </head>
 
+<body>
 
-<body class="loading">
+<div class="loader" id="loader">
+    <div class="loader-top">
+        <span>MEHA.E / PORTFOLIO</span>
+        <span id="loadPercent">000%</span>
+    </div>
 
-<!-- =====================================================
-PRELOADER
-===================================================== -->
+    <div class="loader-number" id="loadNumber">0</div>
 
-<div id="preloader">
-    <div class="loader-number" id="loaderNumber">0</div>
-    <div class="loader-text">INITIALISING EXPERIENCE</div>
+    <div class="loader-bottom">
+        <span>INITIALISING EXPERIENCE</span>
+        <span>2026</span>
+    </div>
 </div>
-
-
-<!-- =====================================================
-CURSOR
-===================================================== -->
 
 <div class="cursor"></div>
-<div class="cursor-ring"></div>
 
-
-<!-- =====================================================
-BACKGROUND
-===================================================== -->
-
-<canvas id="particleCanvas"></canvas>
-<div class="noise"></div>
-<div class="progress"></div>
-
-
-<!-- =====================================================
-NAVIGATION
-===================================================== -->
-
+<!-- NAV -->
 <nav>
-
-    <a href="#home" class="logo">
-        MEHA<span>.</span>E
+    <a href="#home" class="brand">
+        MEHA.E <small>PORTFOLIO</small>
     </a>
 
-    <div class="nav-links">
+    <div class="nav-right">
+        <a href="#work">SELECTED WORK</a>
         <a href="#about">ABOUT</a>
-        <a href="#projects">WORK</a>
-        <a href="#skills">SKILLS</a>
-        <a href="#resume">RESUME</a>
-        <a href="#contact">CONTACT</a>
+        <button class="menu-button" onclick="toggleMenu()">MENU +</button>
     </div>
-
 </nav>
 
-
-
-<!-- =====================================================
-HERO
-===================================================== -->
-
-<section class="hero" id="home">
-
-    <div class="hero-eyebrow">
-        COMPUTING × DATA × SECURITY
+<!-- FULL MENU -->
+<div class="menu" id="menu">
+    <div class="menu-head">
+        <span>MEHA.E</span>
+        <button class="menu-button" onclick="toggleMenu()">CLOSE ×</button>
     </div>
 
-    <div class="hero-orb" id="orb"></div>
-
-    <h1 class="hero-title">
-        MEHA<br>
-        <span class="outline">E.</span>
-    </h1>
-
-    <p class="hero-sub">
-        Computing and Data Science student exploring
-        intelligent systems, technology and cybersecurity.
-        Building ideas with curiosity, logic and ambition.
-    </p>
-
-    <div class="scroll-indicator">
-        <span>SCROLL TO EXPLORE</span>
-        <div class="scroll-line"></div>
+    <div class="menu-links">
+        <a href="#home" onclick="toggleMenu()">Home</a>
+        <a href="#work" onclick="toggleMenu()">Projects</a>
+        <a href="#skills" onclick="toggleMenu()">Skills</a>
+        <a href="#about" onclick="toggleMenu()">About</a>
+        <a href="#resume" onclick="toggleMenu()">Resume</a>
+        <a href="#contact" onclick="toggleMenu()">Contact</a>
     </div>
 
-</section>
-
-
-
-<!-- =====================================================
-MARQUEE
-===================================================== -->
-
-<div class="marquee">
-
-    <div class="marquee-track">
-
-        <span>PYTHON <b>✦</b></span>
-        <span>DATA <b>✦</b></span>
-        <span>CYBERSECURITY <b>✦</b></span>
-        <span>WEB DEVELOPMENT <b>✦</b></span>
-        <span>PROBLEM SOLVING <b>✦</b></span>
-
-        <span>PYTHON <b>✦</b></span>
-        <span>DATA <b>✦</b></span>
-        <span>CYBERSECURITY <b>✦</b></span>
-        <span>WEB DEVELOPMENT <b>✦</b></span>
-        <span>PROBLEM SOLVING <b>✦</b></span>
-
+    <div class="menu-footer">
+        <span>CHENNAI / INDIA</span>
+        <span>ASPIRING CYBER ANALYST</span>
     </div>
-
 </div>
 
+<!-- HERO -->
+<section class="hero" id="home">
+    <div class="hero-grid"></div>
+    <div class="hero-shape"></div>
 
-
-<!-- =====================================================
-ABOUT
-===================================================== -->
-
-<section id="about">
-
-    <div class="section-tag reveal">
-        01 / ABOUT ME
+    <div class="hero-topline">
+        COMPUTING & DATA SCIENCE / SAI UNIVERSITY
     </div>
 
-    <div class="about">
+    <h1 class="hero-title">
+        THINK<br>
+        <span class="italic">BEYOND.</span>
+    </h1>
 
-        <div class="about-text reveal">
+    <div class="hero-bottom">
+        <div class="hero-scroll">↓ SCROLL TO EXPLORE</div>
 
-            I don't just learn technology.
-            <span>I explore how it works, why it works,
-            and how it can be improved.</span>
+        <p class="hero-description">
+            I'm Meha E — a Computing and Data Science student,
+            problem solver and aspiring Cyber Analyst exploring
+            technology through curiosity and critical thinking.
+        </p>
 
-        </div>
-
-
-        <div class="about-side reveal">
-
-            <p>
-                I'm Meha E, a Computing and Data Science student
-                at Sai University with a strong interest in technology,
-                analytical thinking and cybersecurity.
-            </p>
-
-            <p>
-                I enjoy breaking down complex problems, approaching
-                challenges logically and turning ideas into practical
-                digital solutions. Alongside my technical interests,
-                leadership and critical thinking have shaped the way
-                I collaborate, learn and take initiative.
-            </p>
-
-            <p>
-                Currently, I'm building my knowledge across programming,
-                data structures, web technologies and cybersecurity
-                while working towards my goal of becoming a
-                <strong>Cyber Analyst.</strong>
-            </p>
-
-
-            <div class="stats">
-
-                <div class="stat">
-                    <div class="stat-number">9.64</div>
-                    <div class="stat-label">CGPA</div>
-                </div>
-
-                <div class="stat">
-                    <div class="stat-number">02</div>
-                    <div class="stat-label">FEATURED PROJECTS</div>
-                </div>
-
-                <div class="stat">
-                    <div class="stat-number">∞</div>
-                    <div class="stat-label">CURIOSITY</div>
-                </div>
-
-                <div class="stat">
-                    <div class="stat-number">01</div>
-                    <div class="stat-label">BIG GOAL</div>
-                </div>
-
-            </div>
-
-        </div>
-
+        <div class="hero-index">01 — 06</div>
     </div>
-
 </section>
 
-
-
-<!-- =====================================================
-PROJECTS
-===================================================== -->
-
-<section class="projects" id="projects">
-
-    <div class="section-tag reveal">
-        02 / SELECTED WORK
-    </div>
-
-    <h2 class="section-title reveal">
-        Things I've<br>built.
-    </h2>
-
-
-    <!-- PROJECT 1 -->
-
-    <a
-    href="https://github.com/mehaelangomani"
-    target="_blank"
-    class="project reveal">
-
-        <div class="project-number">
-            001
-        </div>
-
-        <div>
-            <div class="project-name">
-                SaiUConnect
-            </div>
-        </div>
-
-        <div class="project-desc">
-            A web-based platform concept designed around
-            improving academic connectivity and helping
-            students navigate university-related information
-            more efficiently.
-        </div>
-
-        <div class="project-arrow">↗</div>
-
-    </a>
-
-
-
-    <!-- PROJECT 2 -->
-
-    <a
-    href="https://github.com/mehaelangomani"
-    target="_blank"
-    class="project reveal">
-
-        <div class="project-number">
-            002
-        </div>
-
-        <div>
-            <div class="project-name">
-                Management System
-            </div>
-        </div>
-
-        <div class="project-desc">
-            A management-focused software project exploring
-            structured data handling, application logic and
-            practical problem-solving through programming.
-        </div>
-
-        <div class="project-arrow">↗</div>
-
-    </a>
-
-
-    <!-- GITHUB -->
-
-    <a
-    href="https://github.com/mehaelangomani"
-    target="_blank"
-    class="project reveal">
-
-        <div class="project-number">
-            003
-        </div>
-
-        <div>
-            <div class="project-name">
-                More Coming Soon
-            </div>
-        </div>
-
-        <div class="project-desc">
-            Exploring new ideas, experimenting with technology
-            and continuously building.
-        </div>
-
-        <div class="project-arrow">↗</div>
-
-    </a>
-
-</section>
-
-
-
-<!-- =====================================================
-SKILLS
-===================================================== -->
-
-<section id="skills">
-
-    <div class="section-tag reveal">
-        03 / TOOLKIT
-    </div>
-
-    <h2 class="section-title reveal">
-        Skills &
-        <br>technologies.
-    </h2>
-
-
-    <div class="skills-grid reveal">
-
-        <div class="skill">
-            <span class="skill-number">01</span>
-            <span class="skill-name">Python</span>
-        </div>
-
-        <div class="skill">
-            <span class="skill-number">02</span>
-            <span class="skill-name">C Programming</span>
-        </div>
-
-        <div class="skill">
-            <span class="skill-number">03</span>
-            <span class="skill-name">MySQL</span>
-        </div>
-
-        <div class="skill">
-            <span class="skill-number">04</span>
-            <span class="skill-name">HTML & CSS</span>
-        </div>
-
-        <div class="skill">
-            <span class="skill-number">05</span>
-            <span class="skill-name">JavaScript</span>
-        </div>
-
-        <div class="skill">
-            <span class="skill-number">06</span>
-            <span class="skill-name">Data Structures</span>
-        </div>
-
-        <div class="skill">
-            <span class="skill-number">07</span>
-            <span class="skill-name">Problem Solving</span>
-        </div>
-
-        <div class="skill">
-            <span class="skill-number">08</span>
-            <span class="skill-name">Leadership</span>
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-ACHIEVEMENTS
-===================================================== -->
-
-<section class="achievements">
-
-    <div class="section-tag reveal">
-        04 / BEYOND TECHNOLOGY
-    </div>
-
-    <h2 class="section-title reveal">
-        More than<br>just code.
-    </h2>
-
-
-    <div class="achievement-list">
-
-
-        <div class="achievement reveal">
-
-            <div class="achievement-icon">🏆</div>
-
-            <div class="achievement-title">
-                Guinness Recognition in Classical Dance
-            </div>
-
-            <div class="achievement-type">
-                PERFORMING ARTS
-            </div>
-
-        </div>
-
-
-        <div class="achievement reveal">
-
-            <div class="achievement-icon">🏃</div>
-
-            <div class="achievement-title">
-                State-Level Athletics Participation
-            </div>
-
-            <div class="achievement-type">
-                100M • 400M • RELAY
-            </div>
-
-        </div>
-
-
-        <div class="achievement reveal">
-
-            <div class="achievement-icon">🎤</div>
-
-            <div class="achievement-title">
-                Recognition in Singing
-            </div>
-
-            <div class="achievement-type">
-                CREATIVE ARTS
-            </div>
-
-        </div>
-
-
-        <div class="achievement reveal">
-
-            <div class="achievement-icon">🎨</div>
-
-            <div class="achievement-title">
-                Awards & Recognition in Drawing
-            </div>
-
-            <div class="achievement-type">
-                CREATIVE EXPRESSION
-            </div>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-RESUME
-===================================================== -->
-
-<section class="resume" id="resume">
-
-    <div class="section-tag reveal">
-        05 / RESUME
-    </div>
-
-    <div class="resume-box reveal">
-
-
-        <div class="resume-intro">
-
-            <h3>
-                My journey,<br>
-                <span style="color:var(--accent)">
-                    on paper.
-                </span>
-            </h3>
-
-            <p>
-                A snapshot of my academic journey,
-                technical skills, projects and achievements.
-                Currently pursuing Computing and Data Science
-                with a growing focus on cybersecurity and
-                analytical problem solving.
-            </p>
-
-
-            <div class="resume-buttons">
-
-                <!-- ADD YOUR PDF FILE HERE LATER -->
-
-                <a
-                href="resume.pdf"
-                target="_blank"
-                class="btn btn-primary magnetic">
-                    VIEW RESUME
-                </a>
-
-                <a
-                href="resume.pdf"
-                download
-                class="btn magnetic">
-                    DOWNLOAD PDF ↓
-                </a>
-
-            </div>
-
-        </div>
-
-
-
-        <div class="resume-details">
-
-
-            <div class="resume-row">
-
-                <small>EDUCATION</small>
-
-                <h4>
-                    B.Tech / Computing & Data Science
-                </h4>
-
-                <p>
-                    Sai University • Currently Pursuing
-                </p>
-
-            </div>
-
-
-            <div class="resume-row">
-
-                <small>ACADEMICS</small>
-
-                <h4>
-                    CGPA — 9.64
-                </h4>
-
-                <p>
-                    Strong academic foundation in computing
-                    and analytical disciplines.
-                </p>
-
-            </div>
-
-
-            <div class="resume-row">
-
-                <small>CAREER GOAL</small>
-
-                <h4>
-                    Aspiring Cyber Analyst
-                </h4>
-
-                <p>
-                    Interested in cybersecurity, systems,
-                    data and analytical problem solving.
-                </p>
-
-            </div>
-
-
-            <div class="resume-row">
-
-                <small>CORE STRENGTHS</small>
-
-                <h4>
-                    Leadership • Critical Thinking
-                </h4>
-
-                <p>
-                    Problem solving, teamwork, creativity
-                    and continuous learning.
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-CONTACT
-===================================================== -->
-
-<section class="contact" id="contact">
-
-    <div class="section-tag reveal">
-        06 / CONTACT
-    </div>
+<!-- INTRO -->
+<section class="intro">
+    <div class="eyebrow reveal">01 — INTRODUCTION</div>
 
     <h2 class="reveal">
-        LET'S BUILD<br>
-        <span>SOMETHING.</span>
+        I believe technology becomes meaningful when
+        <em>curiosity meets purpose.</em>
     </h2>
 
+    <div class="intro-bottom reveal">
+        <p>
+            I am a second-year Computing and Data Science student at
+            Sai University with a strong interest in analytical thinking,
+            technology and cybersecurity. I enjoy solving problems,
+            leading ideas forward and constantly learning how complex
+            systems work.
+        </p>
+    </div>
+</section>
 
-    <div class="contact-links reveal">
+<!-- TICKER -->
+<div class="ticker">
+    <div class="ticker-track">
+        <span>CRITICAL THINKING ✳ LEADERSHIP ✳ CYBERSECURITY ✳ PROBLEM SOLVING ✳ DATA ✳ DEVELOPMENT ✳ </span>
+        <span>CRITICAL THINKING ✳ LEADERSHIP ✳ CYBERSECURITY ✳ PROBLEM SOLVING ✳ DATA ✳ DEVELOPMENT ✳ </span>
+    </div>
+</div>
 
-        <a
-        class="contact-link magnetic"
-        href="mailto:mehaelango@gmail.com">
-            EMAIL ↗
+<!-- PROJECTS -->
+<section class="projects" id="work">
+
+    <div class="projects-header reveal">
+        <h2>Selected<br>Work.</h2>
+
+        <p>
+            A selection of projects where I explore
+            software development, data structures,
+            systems and real-world problem solving.
+        </p>
+    </div>
+
+    <!-- PROJECT 1 -->
+    <a href="https://github.com/mehaelangomani" target="_blank" class="project-item reveal">
+        <div class="project-top">
+            <span class="project-no">01</span>
+            <h3 class="project-name">SaiUConnect</h3>
+            <span class="project-category">WEB PLATFORM</span>
+            <span class="project-arrow">↗</span>
+        </div>
+
+        <div class="project-image project-visual-1"></div>
+    </a>
+
+    <!-- PROJECT 2 -->
+    <a href="https://github.com/mehaelangomani" target="_blank" class="project-item reveal">
+        <div class="project-top">
+            <span class="project-no">02</span>
+            <h3 class="project-name">Corporate Org<br>Chart Tool</h3>
+            <span class="project-category">DATA STRUCTURES</span>
+            <span class="project-arrow">↗</span>
+        </div>
+
+        <div class="project-image project-visual-2"></div>
+    </a>
+
+    <!-- PROJECT 3 -->
+    <a href="https://github.com/mehaelangomani" target="_blank" class="project-item reveal">
+        <div class="project-top">
+            <span class="project-no">03</span>
+            <h3 class="project-name">Staff Management<br>System</h3>
+            <span class="project-category">MANAGEMENT SYSTEM</span>
+            <span class="project-arrow">↗</span>
+        </div>
+
+        <div class="project-image project-visual-3"></div>
+    </a>
+
+</section>
+
+<section class="work-statement">
+    <p class="reveal">
+        I approach projects as opportunities to
+        <strong>understand problems deeply, structure solutions
+        logically and build something useful.</strong>
+    </p>
+</section>
+
+<!-- SKILLS -->
+<section class="skills" id="skills">
+
+    <div class="skills-heading reveal">
+        <h2>Tools of<br>thought.</h2>
+
+        <p>
+            A growing technical toolkit supported by
+            analytical thinking, creativity and a willingness
+            to explore unfamiliar problems.
+        </p>
+    </div>
+
+    <div class="skill-list">
+
+        <div class="skill-row reveal">
+            <span>01</span>
+            <h3>Python</h3>
+            <p>Programming & problem solving</p>
+        </div>
+
+        <div class="skill-row reveal">
+            <span>02</span>
+            <h3>C Programming</h3>
+            <p>Core programming concepts</p>
+        </div>
+
+        <div class="skill-row reveal">
+            <span>03</span>
+            <h3>Data Structures</h3>
+            <p>Algorithms & logical systems</p>
+        </div>
+
+        <div class="skill-row reveal">
+            <span>04</span>
+            <h3>MySQL</h3>
+            <p>Database fundamentals</p>
+        </div>
+
+        <div class="skill-row reveal">
+            <span>05</span>
+            <h3>Web Development</h3>
+            <p>HTML, CSS & JavaScript</p>
+        </div>
+
+        <div class="skill-row reveal">
+            <span>06</span>
+            <h3>Cybersecurity</h3>
+            <p>Exploring systems & security</p>
+        </div>
+
+        <div class="skill-row reveal">
+            <span>07</span>
+            <h3>Leadership</h3>
+            <p>Collaboration & initiative</p>
+        </div>
+
+        <div class="skill-row reveal">
+            <span>08</span>
+            <h3>Critical Thinking</h3>
+            <p>Analysing complex problems</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="story" id="about">
+
+    <div class="eyebrow reveal">04 — BEYOND ACADEMICS</div>
+
+    <h2 class="story-title reveal">
+        More than<br>
+        <em>just code.</em>
+    </h2>
+
+    <div class="story-grid">
+
+        <p class="reveal">
+            Technology is only one part of who I am.
+            Discipline, creativity and performance have
+            shaped the way I approach challenges.
+        </p>
+
+        <div class="achievement-list reveal">
+
+            <div class="achievement">
+                <span>Guinness Recognition in Classical Dance</span>
+                <span>PERFORMANCE</span>
+            </div>
+
+            <div class="achievement">
+                <span>State-Level Athletics — 100m</span>
+                <span>SPORTS</span>
+            </div>
+
+            <div class="achievement">
+                <span>State-Level Athletics — 400m</span>
+                <span>SPORTS</span>
+            </div>
+
+            <div class="achievement">
+                <span>State-Level 400m Relay</span>
+                <span>SPORTS</span>
+            </div>
+
+            <div class="achievement">
+                <span>Recognition in Singing</span>
+                <span>CREATIVITY</span>
+            </div>
+
+            <div class="achievement">
+                <span>Awards in Drawing</span>
+                <span>CREATIVITY</span>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- RESUME -->
+<section class="resume" id="resume">
+
+    <div class="resume-top reveal">
+        <h2>On<br>paper.</h2>
+
+        <!-- Put resume.pdf in same folder -->
+        <a href="resume.pdf" target="_blank" class="resume-button">
+            VIEW<br>RESUME ↗
         </a>
+    </div>
 
+    <div class="resume-content">
 
-        <a
-        class="contact-link magnetic"
-        href="https://www.linkedin.com/in/meha-elangomani-436114394/"
-        target="_blank">
-            LINKEDIN ↗
-        </a>
+        <div class="resume-label reveal">
+            A SNAPSHOT OF MY JOURNEY<br><br>
+            EDUCATION<br>
+            SKILLS<br>
+            PROJECTS<br>
+            ACHIEVEMENTS
+        </div>
 
+        <div class="resume-main">
 
-        <a
-        class="contact-link magnetic"
-        href="https://github.com/mehaelangomani"
-        target="_blank">
-            GITHUB ↗
-        </a>
+            <div class="resume-entry reveal">
+                <small>EDUCATION</small>
+                <div>
+                    <h3>Computing & Data Science</h3>
+                    <p>
+                        Sai University — Currently pursuing my undergraduate degree.
+                        Current CGPA: 9.64
+                    </p>
+                </div>
+            </div>
+
+            <div class="resume-entry reveal">
+                <small>CAREER DIRECTION</small>
+                <div>
+                    <h3>Aspiring Cyber Analyst</h3>
+                    <p>
+                        Interested in cybersecurity, analytical problem solving,
+                        computing systems and understanding how technology can
+                        be made more secure.
+                    </p>
+                </div>
+            </div>
+
+            <div class="resume-entry reveal">
+                <small>FEATURED WORK</small>
+                <div>
+                    <h3>SaiUConnect / Corporate Org Chart Tool / Staff Management System</h3>
+                    <p>
+                        Academic and personal projects focused on web development,
+                        data structures and software-based management solutions.
+                    </p>
+                </div>
+            </div>
+
+            <div class="resume-entry reveal">
+                <small>STRENGTHS</small>
+                <div>
+                    <h3>Leadership · Critical Thinking · Problem Solving</h3>
+                    <p>
+                        Combining analytical ability with creativity,
+                        discipline and continuous learning.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+
+    <div class="eyebrow">06 — CONTACT</div>
+
+    <div class="contact-main reveal">
+        <h2>
+            LET'S<br>
+            <em>CONNECT.</em>
+        </h2>
+    </div>
+
+    <div class="contact-info">
+
+        <div>
+            <div>BASED IN</div>
+            <br>
+            <div>CHENNAI, INDIA</div>
+        </div>
+
+        <div class="contact-links">
+            <a href="mailto:mehaelango@gmail.com">EMAIL ↗</a>
+            <a href="https://github.com/mehaelangomani" target="_blank">GITHUB ↗</a>
+            <a href="https://www.linkedin.com/in/meha-elangomani-436114394/" target="_blank">LINKEDIN ↗</a>
+        </div>
+
+        <div>
+            © 2026 MEHA.E
+        </div>
 
     </div>
 
 </section>
-
-
-
-<!-- =====================================================
-FOOTER
-===================================================== -->
-
-<footer>
-
-    <span>
-        © 2026 MEHA E.
-    </span>
-
-    <span>
-        DESIGNED & BUILT WITH CURIOSITY
-    </span>
-
-</footer>
-
-
-
-<!-- =====================================================
-JAVASCRIPT
-===================================================== -->
 
 <script>
 
+/* PRELOADER */
 
-/* =====================================================
-PRELOADER
-===================================================== */
+const loader = document.getElementById("loader");
+const loadNumber = document.getElementById("loadNumber");
+const loadPercent = document.getElementById("loadPercent");
 
-const loaderNumber = document.getElementById("loaderNumber");
-let count = 0;
+let progress = 0;
 
-const loaderInterval = setInterval(() => {
+const loading = setInterval(() => {
 
-    count += Math.floor(Math.random() * 12) + 4;
+    progress += Math.floor(Math.random() * 10) + 3;
 
-    if(count >= 100){
-        count = 100;
-        clearInterval(loaderInterval);
+    if(progress >= 100){
+        progress = 100;
+        clearInterval(loading);
 
         setTimeout(() => {
-
-            document.getElementById("preloader").style.opacity = "0";
-            document.getElementById("preloader").style.transition = "opacity .8s ease";
-
-            setTimeout(() => {
-                document.getElementById("preloader").style.display = "none";
-                document.body.classList.remove("loading");
-            },800);
-
-        },400);
+            loader.style.transition = "transform .9s cubic-bezier(.76,0,.24,1)";
+            loader.style.transform = "translateY(-100%)";
+        }, 350);
     }
 
-    loaderNumber.textContent = count;
+    loadNumber.textContent = progress;
+    loadPercent.textContent = String(progress).padStart(3,"0") + "%";
 
-},90);
+}, 65);
 
 
-
-/* =====================================================
-CUSTOM CURSOR
-===================================================== */
+/* CUSTOM CURSOR */
 
 const cursor = document.querySelector(".cursor");
-const cursorRing = document.querySelector(".cursor-ring");
 
-let mouseX = 0;
-let mouseY = 0;
+document.addEventListener("mousemove", e => {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+});
 
-let ringX = 0;
-let ringY = 0;
+document.querySelectorAll("a, button, .project-item").forEach(item => {
 
+    item.addEventListener("mouseenter", () => {
+        cursor.classList.add("hover");
+    });
 
-document.addEventListener("mousemove",(e)=>{
-
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-
-    cursor.style.left = mouseX + "px";
-    cursor.style.top = mouseY + "px";
+    item.addEventListener("mouseleave", () => {
+        cursor.classList.remove("hover");
+    });
 
 });
 
 
-function animateCursor(){
+/* MENU */
 
-    ringX += (mouseX - ringX) * .15;
-    ringY += (mouseY - ringY) * .15;
+function toggleMenu(){
 
-    cursorRing.style.left = ringX + "px";
-    cursorRing.style.top = ringY + "px";
+    const menu = document.getElementById("menu");
 
-    requestAnimationFrame(animateCursor);
+    menu.classList.toggle("active");
+
+    document.body.classList.toggle("menu-open");
 
 }
 
-animateCursor();
 
+/* SCROLL REVEAL */
 
-document.querySelectorAll("a, button, .skill").forEach(el=>{
+const observer = new IntersectionObserver(entries => {
 
-    el.addEventListener("mouseenter",()=>{
-        cursor.classList.add("active");
-    });
-
-    el.addEventListener("mouseleave",()=>{
-        cursor.classList.remove("active");
-    });
-
-});
-
-
-
-/* =====================================================
-SCROLL PROGRESS
-===================================================== */
-
-window.addEventListener("scroll",()=>{
-
-    const scrollTop = window.scrollY;
-
-    const height =
-    document.documentElement.scrollHeight -
-    window.innerHeight;
-
-    const progress = (scrollTop / height) * 100;
-
-    document.querySelector(".progress").style.width =
-    progress + "%";
-
-});
-
-
-
-/* =====================================================
-SCROLL REVEAL
-===================================================== */
-
-const observer = new IntersectionObserver((entries)=>{
-
-    entries.forEach(entry=>{
+    entries.forEach(entry => {
 
         if(entry.isIntersecting){
-
-            entry.target.classList.add("show");
-
+            entry.target.classList.add("visible");
         }
 
     });
 
 },{
-    threshold:.12
+    threshold:0.12
+});
+
+document.querySelectorAll(".reveal").forEach(element => {
+    observer.observe(element);
 });
 
 
-document.querySelectorAll(".reveal").forEach(el=>{
-    observer.observe(el);
-});
+/* HERO SHAPE PARALLAX */
 
+const shape = document.querySelector(".hero-shape");
 
+document.addEventListener("mousemove", e => {
 
-/* =====================================================
-MAGNETIC BUTTONS
-===================================================== */
+    const x = (e.clientX / window.innerWidth - 0.5) * 25;
+    const y = (e.clientY / window.innerHeight - 0.5) * 25;
 
-document.querySelectorAll(".magnetic").forEach(button=>{
-
-    button.addEventListener("mousemove",(e)=>{
-
-        const rect = button.getBoundingClientRect();
-
-        const x = e.clientX - rect.left - rect.width/2;
-        const y = e.clientY - rect.top - rect.height/2;
-
-        button.style.transform =
-        `translate(${x*.18}px,${y*.18}px)`;
-
-    });
-
-
-    button.addEventListener("mouseleave",()=>{
-
-        button.style.transform = "translate(0,0)";
-
-    });
-
-});
-
-
-
-/* =====================================================
-HERO ORB PARALLAX
-===================================================== */
-
-const orb = document.getElementById("orb");
-
-document.addEventListener("mousemove",(e)=>{
-
-    const x =
-    (e.clientX / window.innerWidth - .5) * 30;
-
-    const y =
-    (e.clientY / window.innerHeight - .5) * 30;
-
-    orb.style.marginLeft = x + "px";
-    orb.style.marginTop = y + "px";
-
-});
-
-
-
-/* =====================================================
-PARTICLE CANVAS
-===================================================== */
-
-const canvas =
-document.getElementById("particleCanvas");
-
-const ctx = canvas.getContext("2d");
-
-
-function resizeCanvas(){
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-}
-
-resizeCanvas();
-
-window.addEventListener("resize",resizeCanvas);
-
-
-const particles = [];
-
-const particleCount =
-window.innerWidth < 700 ? 35 : 75;
-
-
-class Particle{
-
-    constructor(){
-
-        this.x =
-        Math.random() * canvas.width;
-
-        this.y =
-        Math.random() * canvas.height;
-
-        this.size =
-        Math.random() * 1.5 + .3;
-
-        this.speedX =
-        (Math.random() - .5) * .25;
-
-        this.speedY =
-        (Math.random() - .5) * .25;
-
+    if(shape){
+        shape.style.marginLeft = x + "px";
+        shape.style.marginTop = y + "px";
     }
 
-
-    update(){
-
-        this.x += this.speedX;
-        this.y += this.speedY;
-
-        if(this.x < 0 || this.x > canvas.width)
-            this.speedX *= -1;
-
-        if(this.y < 0 || this.y > canvas.height)
-            this.speedY *= -1;
-
-    }
+});
 
 
-    draw(){
+/* SMOOTH PROJECT IMAGE FOLLOW */
 
-        ctx.fillStyle =
-        "rgba(100,210,255,.55)";
+document.querySelectorAll(".project-item").forEach(project => {
 
-        ctx.beginPath();
+    project.addEventListener("mousemove", e => {
 
-        ctx.arc(
-            this.x,
-            this.y,
-            this.size,
-            0,
-            Math.PI * 2
-        );
+        const image = project.querySelector(".project-image");
 
-        ctx.fill();
+        if(!image) return;
 
-    }
+        const rect = project.getBoundingClientRect();
+        const x = e.clientX - rect.left;
 
-}
-
-
-for(let i=0;i<particleCount;i++){
-
-    particles.push(new Particle());
-
-}
-
-
-function connectParticles(){
-
-    for(let a=0;a<particles.length;a++){
-
-        for(let b=a;b<particles.length;b++){
-
-            const dx =
-            particles[a].x - particles[b].x;
-
-            const dy =
-            particles[a].y - particles[b].y;
-
-            const distance =
-            Math.sqrt(dx*dx + dy*dy);
-
-
-            if(distance < 120){
-
-                ctx.strokeStyle =
-                `rgba(70,180,255,${
-                    .08 - distance/2000
-                })`;
-
-                ctx.lineWidth = .5;
-
-                ctx.beginPath();
-
-                ctx.moveTo(
-                    particles[a].x,
-                    particles[a].y
-                );
-
-                ctx.lineTo(
-                    particles[b].x,
-                    particles[b].y
-                );
-
-                ctx.stroke();
-
-            }
-
-        }
-
-    }
-
-}
-
-
-function animateParticles(){
-
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-
-    particles.forEach(p=>{
-
-        p.update();
-        p.draw();
-
-    });
-
-
-    connectParticles();
-
-    requestAnimationFrame(animateParticles);
-
-}
-
-
-animateParticles();
-
-
-/* =====================================================
-PROJECT HOVER GLOW
-===================================================== */
-
-document.querySelectorAll(".project").forEach(project=>{
-
-    project.addEventListener("mouseenter",()=>{
-
-        document.body.style.background =
-        "#090d13";
-
-    });
-
-
-    project.addEventListener("mouseleave",()=>{
-
-        document.body.style.background =
-        "#07090c";
+        image.style.left = Math.min(
+            Math.max(x - 160, 100),
+            window.innerWidth - 400
+        ) + "px";
 
     });
 
 });
-
-
-/* =====================================================
-CONSOLE EASTER EGG
-===================================================== */
-
-console.log(`
-╔══════════════════════════════════╗
-        HELLO, CURIOUS HUMAN.
-        WELCOME TO MEHA'S WORLD.
-        BUILD • LEARN • EXPLORE
-╚══════════════════════════════════╝
-`);
 
 </script>
 
