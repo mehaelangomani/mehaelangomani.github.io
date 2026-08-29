@@ -15,18 +15,13 @@
     --text:#171717;
     --muted:#77746e;
     --line:rgba(20,20,20,.18);
-    --lime:#d8ff36;
+    --blue:#9dbdff;
+    --blue-dark:#6f95eb;
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
-html{
-    scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth;}
 
 body{
     background:var(--bg);
@@ -35,19 +30,11 @@ body{
     overflow-x:hidden;
 }
 
-body.menu-open{
-    overflow:hidden;
-}
+body.menu-open{overflow:hidden;}
 
-a{
-    color:inherit;
-    text-decoration:none;
-}
+a{color:inherit;text-decoration:none;}
 
-/* =========================
-   CUSTOM CURSOR
-========================= */
-
+/* CURSOR */
 .cursor{
     width:11px;
     height:11px;
@@ -63,13 +50,10 @@ a{
 .cursor.hover{
     width:55px;
     height:55px;
-    background:rgba(216,255,54,.85);
+    background:rgba(157,189,255,.85);
 }
 
-/* =========================
-   PRELOADER
-========================= */
-
+/* LOADER */
 .loader{
     position:fixed;
     inset:0;
@@ -103,10 +87,7 @@ a{
     justify-content:space-between;
 }
 
-/* =========================
-   NAVIGATION
-========================= */
-
+/* NAV */
 nav{
     position:absolute;
     width:100%;
@@ -117,7 +98,6 @@ nav{
     justify-content:space-between;
     align-items:center;
     color:white;
-    mix-blend-mode:difference;
 }
 
 .brand{
@@ -150,10 +130,7 @@ nav{
     cursor:pointer;
 }
 
-/* =========================
-   FULL SCREEN MENU
-========================= */
-
+/* MENU */
 .menu{
     position:fixed;
     inset:0;
@@ -167,9 +144,7 @@ nav{
     flex-direction:column;
 }
 
-.menu.active{
-    transform:translateY(0);
-}
+.menu.active{transform:translateY(0);}
 
 .menu-head{
     display:flex;
@@ -196,7 +171,7 @@ nav{
 }
 
 .menu-links a:hover{
-    color:var(--lime);
+    color:var(--blue);
     padding-left:25px;
 }
 
@@ -208,10 +183,7 @@ nav{
     color:#999;
 }
 
-/* =========================
-   HERO
-========================= */
-
+/* HERO */
 .hero{
     min-height:100vh;
     background:#111;
@@ -224,49 +196,52 @@ nav{
     padding:0 35px 35px;
 }
 
+/* NO GREEN BLOB - BLUE GRID / GLOW ONLY */
 .hero-grid{
     position:absolute;
     inset:0;
     background-image:
-        linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+        linear-gradient(rgba(157,189,255,.08) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(157,189,255,.08) 1px,transparent 1px);
     background-size:80px 80px;
-    opacity:.35;
-    mask-image:linear-gradient(to bottom,black,transparent);
+    opacity:.7;
 }
 
-.hero-shape{
+.hero-glow{
     position:absolute;
-    width:min(55vw,750px);
-    aspect-ratio:1;
-    right:3%;
-    top:15%;
-    border-radius:48% 52% 45% 55% / 45% 40% 60% 55%;
-    background:
-        radial-gradient(circle at 35% 35%,#f0ff9b 0%,#b8ff28 15%,#4e6b1e 40%,#111 70%);
-    filter:blur(.5px);
-    animation:morph 10s ease-in-out infinite;
-    opacity:.9;
+    width:700px;
+    height:700px;
+    right:-250px;
+    top:10%;
+    border-radius:50%;
+    background:radial-gradient(circle,
+        rgba(157,189,255,.32) 0%,
+        rgba(100,140,220,.12) 35%,
+        transparent 70%);
+    filter:blur(20px);
+    pointer-events:none;
 }
 
-.hero-shape:after{
+.hero-ring{
+    position:absolute;
+    width:min(52vw,650px);
+    height:min(52vw,650px);
+    right:7%;
+    top:15%;
+    border:1px solid rgba(157,189,255,.3);
+    border-radius:50%;
+}
+
+.hero-ring::before,
+.hero-ring::after{
     content:"";
     position:absolute;
-    inset:18%;
-    border:1px solid rgba(255,255,255,.25);
-    border-radius:inherit;
+    border-radius:50%;
+    border:1px solid rgba(157,189,255,.18);
 }
 
-@keyframes morph{
-    0%,100%{
-        border-radius:48% 52% 45% 55% / 45% 40% 60% 55%;
-        transform:rotate(0deg);
-    }
-    50%{
-        border-radius:60% 40% 58% 42% / 55% 60% 40% 45%;
-        transform:rotate(18deg) scale(1.08);
-    }
-}
+.hero-ring::before{inset:12%;}
+.hero-ring::after{inset:28%;}
 
 .hero-topline{
     position:absolute;
@@ -293,6 +268,7 @@ nav{
     font-style:italic;
     font-weight:500;
     margin-left:12vw;
+    color:var(--blue);
 }
 
 .hero-bottom{
@@ -305,8 +281,7 @@ nav{
     align-items:end;
 }
 
-.hero-scroll,
-.hero-meta{
+.hero-scroll,.hero-meta{
     font-family:"DM Mono";
     font-size:10px;
     color:#a6a6a6;
@@ -325,10 +300,7 @@ nav{
     color:#999;
 }
 
-/* =========================
-   INTRO STRIP
-========================= */
-
+/* INTRO */
 .intro{
     min-height:75vh;
     padding:10vw 7vw;
@@ -372,12 +344,9 @@ nav{
     font-size:15px;
 }
 
-/* =========================
-   MARQUEE
-========================= */
-
+/* TICKER */
 .ticker{
-    background:var(--lime);
+    background:var(--blue);
     overflow:hidden;
     white-space:nowrap;
     padding:18px 0;
@@ -400,10 +369,7 @@ nav{
     to{transform:translateX(-50%)}
 }
 
-/* =========================
-   PROJECTS
-========================= */
-
+/* PROJECTS */
 .projects{
     background:#151515;
     color:#e9e7e2;
@@ -433,6 +399,7 @@ nav{
 
 .project-item{
     position:relative;
+    display:block;
     border-top:1px solid rgba(255,255,255,.15);
     padding:25px 0;
     cursor:pointer;
@@ -450,8 +417,7 @@ nav{
     z-index:3;
 }
 
-.project-no,
-.project-category{
+.project-no,.project-category{
     font-family:"DM Mono";
     font-size:10px;
     color:#999;
@@ -473,14 +439,12 @@ nav{
     position:absolute;
     width:360px;
     height:230px;
-    object-fit:cover;
     right:18%;
     top:50%;
     transform:translateY(-50%) rotate(6deg) scale(.8);
     opacity:0;
     transition:.55s cubic-bezier(.22,1,.36,1);
     pointer-events:none;
-    background:#333;
 }
 
 .project-item:hover .project-image{
@@ -490,32 +454,28 @@ nav{
 
 .project-item:hover .project-name{
     transform:translateX(25px);
-    color:var(--lime);
+    color:var(--blue);
 }
-
-/* PROJECT VISUALS */
 
 .project-visual-1{
     background:
-        radial-gradient(circle at 70% 30%,#d8ff36,transparent 22%),
-        linear-gradient(135deg,#0c281c,#1e4d35);
+    radial-gradient(circle at 70% 30%,#b9d0ff,transparent 18%),
+    linear-gradient(135deg,#071426,#174278);
 }
 
 .project-visual-2{
     background:
-        linear-gradient(130deg,#f0a7ff,#7139ba 45%,#191124);
+    radial-gradient(circle at 40% 30%,#9dbdff,transparent 20%),
+    linear-gradient(135deg,#10172a,#4c6fae);
 }
 
 .project-visual-3{
     background:
-        radial-gradient(circle at center,#6ba9ff,transparent 30%),
-        linear-gradient(135deg,#061b31,#153b5c);
+    radial-gradient(circle at center,#b7ccff,transparent 20%),
+    linear-gradient(135deg,#08152b,#24467c);
 }
 
-/* =========================
-   PROJECT DETAILS
-========================= */
-
+/* WORK STATEMENT */
 .work-statement{
     background:#151515;
     color:#e9e7e2;
@@ -535,13 +495,8 @@ nav{
     font-weight:500;
 }
 
-/* =========================
-   SKILLS
-========================= */
-
-.skills{
-    padding:140px 35px;
-}
+/* SKILLS */
+.skills{padding:140px 35px;}
 
 .skills-heading{
     display:grid;
@@ -562,9 +517,7 @@ nav{
     line-height:1.7;
 }
 
-.skill-list{
-    border-top:1px solid var(--line);
-}
+.skill-list{border-top:1px solid var(--line);}
 
 .skill-row{
     display:grid;
@@ -576,7 +529,7 @@ nav{
 
 .skill-row:hover{
     padding-left:20px;
-    background:rgba(0,0,0,.025);
+    background:rgba(157,189,255,.12);
 }
 
 .skill-row span:first-child{
@@ -597,12 +550,9 @@ nav{
     font-size:13px;
 }
 
-/* =========================
-   ABOUT / ACHIEVEMENTS
-========================= */
-
+/* ABOUT */
 .story{
-    background:#c7d6ff;
+    background:#9dbdff;
     min-height:100vh;
     padding:140px 7vw;
     display:flex;
@@ -650,13 +600,10 @@ nav{
 .achievement span:last-child{
     font-family:"DM Mono";
     font-size:9px;
-    color:#555;
+    color:#444;
 }
 
-/* =========================
-   RESUME
-========================= */
-
+/* RESUME */
 .resume{
     background:#111;
     color:#e9e7e2;
@@ -680,7 +627,7 @@ nav{
     width:140px;
     height:140px;
     border-radius:50%;
-    background:var(--lime);
+    background:var(--blue);
     color:#111;
     display:flex;
     align-items:center;
@@ -741,10 +688,7 @@ nav{
     line-height:1.6;
 }
 
-/* =========================
-   CONTACT
-========================= */
-
+/* CONTACT */
 .contact{
     min-height:100vh;
     padding:35px;
@@ -767,6 +711,7 @@ nav{
 .contact-main h2 em{
     font-family:"Playfair Display";
     font-weight:500;
+    color:var(--blue-dark);
 }
 
 .contact-info{
@@ -783,18 +728,7 @@ nav{
     gap:30px;
 }
 
-.contact-links a{
-    transition:.3s;
-}
-
-.contact-links a:hover{
-    color:#777;
-}
-
-/* =========================
-   REVEAL
-========================= */
-
+/* REVEAL */
 .reveal{
     opacity:0;
     transform:translateY(45px);
@@ -806,52 +740,27 @@ nav{
     transform:none;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-
 @media(max-width:800px){
 
-    body{
-        cursor:auto;
-    }
+    .cursor{display:none;}
 
-    .cursor{
-        display:none;
-    }
-
-    nav,
-    .hero,
-    .projects,
-    .skills,
-    .resume,
-    .contact{
+    nav,.hero,.projects,.skills,.resume,.contact{
         padding-left:20px;
         padding-right:20px;
     }
 
-    nav{
-        padding-top:20px;
+    .nav-right a{display:none;}
+
+    .hero-ring{
+        width:80vw;
+        height:80vw;
+        right:-10vw;
+        top:18%;
     }
 
-    .nav-right a{
-        display:none;
-    }
+    .hero-bottom{grid-template-columns:1fr;}
 
-    .hero-shape{
-        width:90vw;
-        right:-20vw;
-        top:20%;
-        opacity:.65;
-    }
-
-    .hero-bottom{
-        grid-template-columns:1fr;
-    }
-
-    .hero-index{
-        display:none;
-    }
+    .hero-index{display:none;}
 
     .projects-header,
     .skills-heading,
@@ -862,37 +771,19 @@ nav{
         gap:35px;
     }
 
-    .projects-header{
-        margin-bottom:60px;
-    }
-
     .project-top{
         grid-template-columns:45px 1fr 30px;
     }
 
-    .project-category{
-        display:none;
-    }
+    .project-category{display:none;}
 
-    .project-image{
-        display:none;
-    }
+    .project-image{display:none;}
 
-    .project-name{
-        font-size:40px;
-    }
+    .skill-row{grid-template-columns:40px 1fr;}
 
-    .skill-row{
-        grid-template-columns:40px 1fr;
-    }
+    .skill-row p{display:none;}
 
-    .skill-row p{
-        display:none;
-    }
-
-    .story{
-        padding:100px 25px;
-    }
+    .story{padding:100px 25px;}
 
     .resume-entry{
         grid-template-columns:1fr;
@@ -902,10 +793,6 @@ nav{
     .contact-info{
         flex-direction:column;
         gap:25px;
-    }
-
-    .loader{
-        padding:20px;
     }
 }
 </style>
@@ -918,9 +805,7 @@ nav{
         <span>MEHA.E / PORTFOLIO</span>
         <span id="loadPercent">000%</span>
     </div>
-
     <div class="loader-number" id="loadNumber">0</div>
-
     <div class="loader-bottom">
         <span>INITIALISING EXPERIENCE</span>
         <span>2026</span>
@@ -930,9 +815,7 @@ nav{
 <div class="cursor"></div>
 
 <nav>
-    <a href="#home" class="brand">
-        MEHA.E <small>PORTFOLIO</small>
-    </a>
+    <a href="#home" class="brand">MEHA.E <small>PORTFOLIO</small></a>
 
     <div class="nav-right">
         <a href="#work">SELECTED WORK</a>
@@ -963,8 +846,10 @@ nav{
 </div>
 
 <section class="hero" id="home">
+
     <div class="hero-grid"></div>
-    <div class="hero-shape"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-ring"></div>
 
     <div class="hero-topline">
         COMPUTING & DATA SCIENCE / SAI UNIVERSITY
@@ -998,11 +883,10 @@ nav{
 
     <div class="intro-bottom reveal">
         <p>
-            I am a second-year Computing and Data Science student at
-            Sai University with a strong interest in analytical thinking,
-            technology and cybersecurity. I enjoy solving problems,
-            leading ideas forward and constantly learning how complex
-            systems work.
+            I am a Computing and Data Science student at Sai University
+            with a strong interest in analytical thinking, technology and
+            cybersecurity. A natural leader and critical thinker, I enjoy
+            breaking down complex problems and turning ideas into meaningful solutions.
         </p>
     </div>
 </section>
@@ -1014,61 +898,43 @@ nav{
     </div>
 </div>
 
-<!-- PROJECTS -->
 <section class="projects" id="work">
 
     <div class="projects-header reveal">
         <h2>Selected<br>Work.</h2>
-
         <p>
-            A selection of projects where I explore
-            software development, data structures,
-            systems and real-world problem solving.
+            A selection of projects exploring software development,
+            data structures and real-world problem solving.
         </p>
     </div>
 
-    <!-- PROJECT 1 -->
-    <a href="https://github.com/mehaelangomani/SaiUConnect"
-       target="_blank"
-       class="project-item reveal">
-
+    <a href="https://github.com/mehaelangomani/SaiUConnect" target="_blank" class="project-item reveal">
         <div class="project-top">
             <span class="project-no">01</span>
             <h3 class="project-name">SaiUConnect</h3>
             <span class="project-category">WEB PLATFORM</span>
             <span class="project-arrow">↗</span>
         </div>
-
         <div class="project-image project-visual-1"></div>
     </a>
 
-    <!-- PROJECT 2 -->
-    <a href="https://github.com/mehaelangomani/Corporate-Org-Chart-Tool"
-       target="_blank"
-       class="project-item reveal">
-
+    <a href="https://github.com/mehaelangomani/Corporate-Org-Chart-Tool" target="_blank" class="project-item reveal">
         <div class="project-top">
             <span class="project-no">02</span>
             <h3 class="project-name">Corporate Org<br>Chart Tool</h3>
             <span class="project-category">DATA STRUCTURES</span>
             <span class="project-arrow">↗</span>
         </div>
-
         <div class="project-image project-visual-2"></div>
     </a>
 
-    <!-- PROJECT 3 -->
-    <a href="https://github.com/mehaelangomani/Staff-Management-System"
-       target="_blank"
-       class="project-item reveal">
-
+    <a href="https://github.com/mehaelangomani/Staff-Management-System" target="_blank" class="project-item reveal">
         <div class="project-top">
             <span class="project-no">03</span>
             <h3 class="project-name">Staff Management<br>System</h3>
             <span class="project-category">MANAGEMENT SYSTEM</span>
             <span class="project-arrow">↗</span>
         </div>
-
         <div class="project-image project-visual-3"></div>
     </a>
 
@@ -1077,8 +943,8 @@ nav{
 <section class="work-statement">
     <p class="reveal">
         I approach projects as opportunities to
-        <strong>understand problems deeply, structure solutions
-        logically and build something useful.</strong>
+        <strong>understand problems deeply, structure solutions logically
+        and build something useful.</strong>
     </p>
 </section>
 
@@ -1086,63 +952,22 @@ nav{
 
     <div class="skills-heading reveal">
         <h2>Tools of<br>thought.</h2>
-
         <p>
-            A growing technical toolkit supported by
-            analytical thinking, creativity and a willingness
-            to explore unfamiliar problems.
+            A growing technical toolkit supported by analytical thinking,
+            creativity and curiosity.
         </p>
     </div>
 
     <div class="skill-list">
 
-        <div class="skill-row reveal">
-            <span>01</span>
-            <h3>Python</h3>
-            <p>Programming & problem solving</p>
-        </div>
-
-        <div class="skill-row reveal">
-            <span>02</span>
-            <h3>C Programming</h3>
-            <p>Core programming concepts</p>
-        </div>
-
-        <div class="skill-row reveal">
-            <span>03</span>
-            <h3>Data Structures</h3>
-            <p>Algorithms & logical systems</p>
-        </div>
-
-        <div class="skill-row reveal">
-            <span>04</span>
-            <h3>MySQL</h3>
-            <p>Database fundamentals</p>
-        </div>
-
-        <div class="skill-row reveal">
-            <span>05</span>
-            <h3>Web Development</h3>
-            <p>HTML, CSS & JavaScript</p>
-        </div>
-
-        <div class="skill-row reveal">
-            <span>06</span>
-            <h3>Cybersecurity</h3>
-            <p>Exploring systems & security</p>
-        </div>
-
-        <div class="skill-row reveal">
-            <span>07</span>
-            <h3>Leadership</h3>
-            <p>Collaboration & initiative</p>
-        </div>
-
-        <div class="skill-row reveal">
-            <span>08</span>
-            <h3>Critical Thinking</h3>
-            <p>Analysing complex problems</p>
-        </div>
+        <div class="skill-row reveal"><span>01</span><h3>Python</h3><p>Programming & problem solving</p></div>
+        <div class="skill-row reveal"><span>02</span><h3>C Programming</h3><p>Core programming concepts</p></div>
+        <div class="skill-row reveal"><span>03</span><h3>Data Structures</h3><p>Algorithms & logical systems</p></div>
+        <div class="skill-row reveal"><span>04</span><h3>MySQL</h3><p>Database fundamentals</p></div>
+        <div class="skill-row reveal"><span>05</span><h3>Web Development</h3><p>HTML, CSS & JavaScript</p></div>
+        <div class="skill-row reveal"><span>06</span><h3>Cybersecurity</h3><p>Systems & security exploration</p></div>
+        <div class="skill-row reveal"><span>07</span><h3>Leadership</h3><p>Collaboration & initiative</p></div>
+        <div class="skill-row reveal"><span>08</span><h3>Critical Thinking</h3><p>Analysing complex problems</p></div>
 
     </div>
 </section>
@@ -1152,50 +977,24 @@ nav{
     <div class="eyebrow reveal">04 — BEYOND ACADEMICS</div>
 
     <h2 class="story-title reveal">
-        More than<br>
-        <em>just code.</em>
+        More than<br><em>just code.</em>
     </h2>
 
     <div class="story-grid">
 
         <p class="reveal">
             Technology is only one part of who I am.
-            Discipline, creativity and performance have
-            shaped the way I approach challenges.
+            Discipline, creativity and performance have shaped
+            the way I approach challenges.
         </p>
 
         <div class="achievement-list reveal">
-
-            <div class="achievement">
-                <span>Guinness Recognition in Classical Dance</span>
-                <span>PERFORMANCE</span>
-            </div>
-
-            <div class="achievement">
-                <span>State-Level Athletics — 100m</span>
-                <span>SPORTS</span>
-            </div>
-
-            <div class="achievement">
-                <span>State-Level Athletics — 400m</span>
-                <span>SPORTS</span>
-            </div>
-
-            <div class="achievement">
-                <span>State-Level 400m Relay</span>
-                <span>SPORTS</span>
-            </div>
-
-            <div class="achievement">
-                <span>Recognition in Singing</span>
-                <span>CREATIVITY</span>
-            </div>
-
-            <div class="achievement">
-                <span>Awards in Drawing</span>
-                <span>CREATIVITY</span>
-            </div>
-
+            <div class="achievement"><span>Guinness Recognition in Classical Dance</span><span>PERFORMANCE</span></div>
+            <div class="achievement"><span>State-Level Athletics — 100m</span><span>SPORTS</span></div>
+            <div class="achievement"><span>State-Level Athletics — 400m</span><span>SPORTS</span></div>
+            <div class="achievement"><span>State-Level 400m Relay</span><span>SPORTS</span></div>
+            <div class="achievement"><span>Recognition in Singing</span><span>CREATIVITY</span></div>
+            <div class="achievement"><span>Awards in Drawing</span><span>CREATIVITY</span></div>
         </div>
 
     </div>
@@ -1213,7 +1012,7 @@ nav{
 
     <div class="resume-content">
 
-        <div class="resume-label reveal">
+        <div class="resume-label">
             A SNAPSHOT OF MY JOURNEY<br><br>
             EDUCATION<br>
             SKILLS<br>
@@ -1227,10 +1026,7 @@ nav{
                 <small>EDUCATION</small>
                 <div>
                     <h3>Computing & Data Science</h3>
-                    <p>
-                        Sai University — Currently pursuing my undergraduate degree.
-                        Current CGPA: 9.64
-                    </p>
+                    <p>Sai University — Undergraduate Student</p>
                 </div>
             </div>
 
@@ -1238,11 +1034,7 @@ nav{
                 <small>CAREER DIRECTION</small>
                 <div>
                     <h3>Aspiring Cyber Analyst</h3>
-                    <p>
-                        Interested in cybersecurity, analytical problem solving,
-                        computing systems and understanding how technology can
-                        be made more secure.
-                    </p>
+                    <p>Interested in cybersecurity, computing systems and analytical problem solving.</p>
                 </div>
             </div>
 
@@ -1250,10 +1042,7 @@ nav{
                 <small>FEATURED WORK</small>
                 <div>
                     <h3>SaiUConnect / Corporate Org Chart Tool / Staff Management System</h3>
-                    <p>
-                        Academic and personal projects focused on web development,
-                        data structures and software-based management solutions.
-                    </p>
+                    <p>Projects focused on web development, data structures and management solutions.</p>
                 </div>
             </div>
 
@@ -1261,10 +1050,7 @@ nav{
                 <small>STRENGTHS</small>
                 <div>
                     <h3>Leadership · Critical Thinking · Problem Solving</h3>
-                    <p>
-                        Combining analytical ability with creativity,
-                        discipline and continuous learning.
-                    </p>
+                    <p>Combining analytical ability with creativity, discipline and continuous learning.</p>
                 </div>
             </div>
 
@@ -1277,19 +1063,12 @@ nav{
     <div class="eyebrow">06 — CONTACT</div>
 
     <div class="contact-main reveal">
-        <h2>
-            LET'S<br>
-            <em>CONNECT.</em>
-        </h2>
+        <h2>LET'S<br><em>CONNECT.</em></h2>
     </div>
 
     <div class="contact-info">
 
-        <div>
-            <div>BASED IN</div>
-            <br>
-            <div>CHENNAI, INDIA</div>
-        </div>
+        <div>BASED IN<br><br>CHENNAI, INDIA</div>
 
         <div class="contact-links">
             <a href="mailto:mehaelango@gmail.com">EMAIL ↗</a>
@@ -1297,139 +1076,61 @@ nav{
             <a href="https://www.linkedin.com/in/meha-elangomani-436114394/" target="_blank">LINKEDIN ↗</a>
         </div>
 
-        <div>
-            © 2026 MEHA.E
-        </div>
+        <div>© 2026 MEHA.E</div>
 
     </div>
-
 </section>
 
 <script>
+const loader=document.getElementById("loader");
+const loadNumber=document.getElementById("loadNumber");
+const loadPercent=document.getElementById("loadPercent");
 
-/* PRELOADER */
+let progress=0;
 
-const loader = document.getElementById("loader");
-const loadNumber = document.getElementById("loadNumber");
-const loadPercent = document.getElementById("loadPercent");
+const loading=setInterval(()=>{
+    progress+=Math.floor(Math.random()*10)+3;
 
-let progress = 0;
-
-const loading = setInterval(() => {
-
-    progress += Math.floor(Math.random() * 10) + 3;
-
-    if(progress >= 100){
-        progress = 100;
+    if(progress>=100){
+        progress=100;
         clearInterval(loading);
 
-        setTimeout(() => {
-            loader.style.transition = "transform .9s cubic-bezier(.76,0,.24,1)";
-            loader.style.transform = "translateY(-100%)";
-        }, 350);
+        setTimeout(()=>{
+            loader.style.transition="transform .9s cubic-bezier(.76,0,.24,1)";
+            loader.style.transform="translateY(-100%)";
+        },350);
     }
 
-    loadNumber.textContent = progress;
-    loadPercent.textContent = String(progress).padStart(3,"0") + "%";
+    loadNumber.textContent=progress;
+    loadPercent.textContent=String(progress).padStart(3,"0")+"%";
+},65);
 
-}, 65);
+const cursor=document.querySelector(".cursor");
 
-
-/* CUSTOM CURSOR */
-
-const cursor = document.querySelector(".cursor");
-
-document.addEventListener("mousemove", e => {
-    cursor.style.left = e.clientX + "px";
-    cursor.style.top = e.clientY + "px";
+document.addEventListener("mousemove",e=>{
+    if(cursor){
+        cursor.style.left=e.clientX+"px";
+        cursor.style.top=e.clientY+"px";
+    }
 });
 
-document.querySelectorAll("a, button, .project-item").forEach(item => {
-
-    item.addEventListener("mouseenter", () => {
-        cursor.classList.add("hover");
-    });
-
-    item.addEventListener("mouseleave", () => {
-        cursor.classList.remove("hover");
-    });
-
+document.querySelectorAll("a,button").forEach(item=>{
+    item.addEventListener("mouseenter",()=>cursor?.classList.add("hover"));
+    item.addEventListener("mouseleave",()=>cursor?.classList.remove("hover"));
 });
-
-
-/* MENU */
 
 function toggleMenu(){
-
-    const menu = document.getElementById("menu");
-
-    menu.classList.toggle("active");
-
+    document.getElementById("menu").classList.toggle("active");
     document.body.classList.toggle("menu-open");
-
 }
 
-
-/* SCROLL REVEAL */
-
-const observer = new IntersectionObserver(entries => {
-
-    entries.forEach(entry => {
-
-        if(entry.isIntersecting){
-            entry.target.classList.add("visible");
-        }
-
+const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting) entry.target.classList.add("visible");
     });
+},{threshold:.12});
 
-},{
-    threshold:0.12
-});
-
-document.querySelectorAll(".reveal").forEach(element => {
-    observer.observe(element);
-});
-
-
-/* HERO SHAPE PARALLAX */
-
-const shape = document.querySelector(".hero-shape");
-
-document.addEventListener("mousemove", e => {
-
-    const x = (e.clientX / window.innerWidth - 0.5) * 25;
-    const y = (e.clientY / window.innerHeight - 0.5) * 25;
-
-    if(shape){
-        shape.style.marginLeft = x + "px";
-        shape.style.marginTop = y + "px";
-    }
-
-});
-
-
-/* SMOOTH PROJECT IMAGE FOLLOW */
-
-document.querySelectorAll(".project-item").forEach(project => {
-
-    project.addEventListener("mousemove", e => {
-
-        const image = project.querySelector(".project-image");
-
-        if(!image) return;
-
-        const rect = project.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-
-        image.style.left = Math.min(
-            Math.max(x - 160, 100),
-            window.innerWidth - 400
-        ) + "px";
-
-    });
-
-});
-
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 </script>
 
 </body>
