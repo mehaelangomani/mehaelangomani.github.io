@@ -1,0 +1,4078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Meha E — Computing × Data Science</title>
+
+<meta
+    name="description"
+    content="Meha E — Computing, Data Science and Cybersecurity."
+>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    background: #020b11;
+}
+
+body {
+    background: transparent;
+    color: #eefaff;
+    font-family: "DM Mono", monospace;
+    overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+    width: 4px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #020b11;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: rgba(140, 220, 245, 0.35);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+}
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+    --white: #f1fbff;
+    --soft-white: rgba(241, 251, 255, 0.76);
+    --muted: rgba(198, 231, 241, 0.58);
+
+    --cyan: #8eeaff;
+    --cyan-soft: rgba(142, 234, 255, 0.22);
+
+    --deep: #020b11;
+    --deep-blue: #031a27;
+
+    --line: rgba(180, 233, 247, 0.34);
+
+    --serif: "Cormorant Garamond", serif;
+    --mono: "DM Mono", monospace;
+}
+
+/* =========================================================
+   VIDEO BACKGROUND
+========================================================= */
+
+.video-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    background: #020b11;
+}
+
+#oceanVideo {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    filter:
+        brightness(0.62)
+        contrast(1.08)
+        saturate(0.88);
+
+    transform: scale(1.03);
+}
+
+/* dark cinematic layer */
+
+.video-layer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 6, 12, 0.76) 0%,
+            rgba(0, 10, 18, 0.40) 30%,
+            rgba(0, 11, 20, 0.12) 62%,
+            rgba(0, 7, 14, 0.58) 100%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(0, 5, 11, 0.55) 0%,
+            transparent 28%,
+            rgba(0, 7, 13, 0.18) 60%,
+            rgba(0, 5, 10, 0.82) 100%
+        );
+}
+
+/* =========================================================
+   VIGNETTE
+========================================================= */
+
+.vignette {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 35%,
+            rgba(0, 4, 8, 0.30) 68%,
+            rgba(0, 3, 7, 0.82) 100%
+        );
+}
+
+/* =========================================================
+   GRAIN
+========================================================= */
+
+.grain {
+    position: fixed;
+    inset: -50%;
+    z-index: 100;
+    pointer-events: none;
+
+    opacity: 0.055;
+
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+
+    animation: grainMove 0.35s steps(2) infinite;
+}
+
+@keyframes grainMove {
+
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(2%, -1%);
+    }
+
+    50% {
+        transform: translate(-1%, 2%);
+    }
+
+    75% {
+        transform: translate(1%, 1%);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+#particles {
+    position: fixed;
+    inset: 0;
+    z-index: -5;
+    pointer-events: none;
+}
+
+/* =========================================================
+   TOP NAV
+========================================================= */
+
+.nav {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 105px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    padding: 0 4vw;
+
+    z-index: 50;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0, 7, 13, 0.48),
+            transparent
+        );
+
+    transition:
+        background 0.5s ease,
+        backdrop-filter 0.5s ease;
+}
+
+.nav.scrolled {
+    background: rgba(1, 10, 16, 0.58);
+    backdrop-filter: blur(12px);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 42px;
+}
+
+.nav-link {
+    position: relative;
+
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+
+    color: rgba(235, 250, 255, 0.76);
+
+    transition:
+        color 0.3s ease;
+}
+
+.nav-link::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -9px;
+
+    width: 0;
+    height: 1px;
+
+    background: var(--cyan);
+
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+    color: white;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.resume-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 12px 24px;
+
+    border: 1px solid rgba(221, 247, 255, 0.75);
+    border-radius: 999px;
+
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+
+    transition:
+        background 0.35s ease,
+        color 0.35s ease,
+        transform 0.35s ease;
+}
+
+.resume-button svg {
+    width: 14px;
+    height: 14px;
+}
+
+.resume-button:hover {
+    background: rgba(230, 250, 255, 0.92);
+    color: #031019;
+    transform: translateY(-2px);
+}
+
+/* =========================================================
+   SOUND
+========================================================= */
+
+.sound-button {
+    width: 43px;
+    height: 43px;
+
+    margin-left: 28px;
+
+    border-radius: 50%;
+    border: 1px solid rgba(222, 248, 255, 0.75);
+
+    background: rgba(1, 10, 17, 0.18);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease;
+}
+
+.sound-button:hover {
+    background: rgba(255,255,255,0.12);
+    transform: scale(1.06);
+}
+
+.sound-button svg {
+    width: 18px;
+    height: 18px;
+    stroke: white;
+}
+
+.sound-off .sound-wave {
+    display: none;
+}
+
+/* =========================================================
+   DEPTH NAVIGATION
+========================================================= */
+
+.depth-nav {
+    position: fixed;
+
+    right: 4.7vw;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    z-index: 30;
+
+    width: 105px;
+}
+
+.depth-top {
+    margin-bottom: 25px;
+}
+
+.depth-number {
+    font-family: var(--serif);
+
+    font-size: 18px;
+    letter-spacing: 0.18em;
+}
+
+.depth-label {
+    margin-top: 5px;
+
+    font-size: 8px;
+    letter-spacing: 0.3em;
+
+    color: var(--muted);
+}
+
+.depth-line {
+    position: absolute;
+
+    top: 50px;
+    left: 5px;
+
+    width: 1px;
+    height: 355px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(207,241,250,0.55),
+            rgba(207,241,250,0.15)
+        );
+}
+
+.depth-items {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 46px;
+}
+
+.depth-item {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    cursor: pointer;
+}
+
+.depth-dot {
+    position: relative;
+
+    width: 11px;
+    height: 11px;
+
+    margin-left: 0;
+
+    border: 1px solid rgba(209, 246, 255, 0.7);
+    border-radius: 50%;
+
+    background: rgba(3, 22, 31, 0.6);
+
+    transition:
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.depth-item.active .depth-dot {
+    background: var(--cyan);
+    box-shadow:
+        0 0 0 4px rgba(142,234,255,0.10),
+        0 0 14px rgba(142,234,255,0.45);
+}
+
+.depth-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.depth-index {
+    font-size: 8px;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+}
+
+.depth-name {
+    font-size: 8px;
+    letter-spacing: 0.23em;
+}
+
+.deeper {
+    margin-top: 21px;
+
+    font-size: 8px;
+    letter-spacing: 0.3em;
+}
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+section {
+    position: relative;
+    min-height: 100vh;
+
+    padding:
+        150px
+        12vw
+        120px
+        10.5vw;
+
+    overflow: hidden;
+}
+
+.section-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1250px;
+    margin: auto;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+
+    padding-top: 70px;
+}
+
+.hero-content {
+    max-width: 850px;
+}
+
+.hero-kicker {
+    display: flex;
+    align-items: center;
+    gap: 27px;
+
+    margin-bottom: 15px;
+
+    font-size: 12px;
+    letter-spacing: 0.38em;
+
+    color: rgba(235, 250, 255, 0.80);
+}
+
+.hero-kicker span {
+    color: rgba(236, 251, 255, 0.95);
+}
+
+.hero-title {
+    font-family: var(--serif);
+
+    font-size: clamp(
+        110px,
+        12vw,
+        190px
+    );
+
+    font-weight: 400;
+
+    line-height: 0.78;
+
+    letter-spacing: -0.045em;
+
+    color: #f5fbff;
+
+    text-shadow:
+        0 5px 45px rgba(0, 0, 0, 0.30);
+
+    margin-left: -7px;
+}
+
+.hero-title em {
+    font-style: normal;
+}
+
+.hero-subtitle {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+
+    margin-top: 48px;
+
+    font-family: var(--serif);
+
+    font-size: 18px;
+
+    letter-spacing: 0.36em;
+
+    color: rgba(238, 251, 255, 0.86);
+}
+
+.hero-subtitle::before {
+    content: "";
+
+    width: 66px;
+    height: 1px;
+
+    background: rgba(240, 251, 255, 0.8);
+}
+
+.hero-description {
+    margin-top: 25px;
+
+    max-width: 550px;
+
+    font-family: var(--serif);
+
+    font-size: 20px;
+    line-height: 1.65;
+
+    letter-spacing: 0.05em;
+
+    color: rgba(226, 247, 255, 0.75);
+}
+
+.hero-bottom {
+    position: absolute;
+
+    left: 10.5vw;
+    bottom: 65px;
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.scroll-circle {
+    width: 57px;
+    height: 57px;
+
+    border: 1px solid rgba(228, 250, 255, 0.8);
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    animation: breathe 2.7s ease-in-out infinite;
+}
+
+.scroll-circle svg {
+    width: 22px;
+    height: 22px;
+
+    stroke: white;
+
+    animation: arrowDown 1.8s ease-in-out infinite;
+}
+
+.scroll-text {
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    color: rgba(235,250,255,0.72);
+}
+
+@keyframes breathe {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes arrowDown {
+
+    0%,
+    100% {
+        transform: translateY(-3px);
+    }
+
+    50% {
+        transform: translateY(4px);
+    }
+}
+
+/* =========================================================
+   FLOATING TYPOGRAPHY
+========================================================= */
+
+.floating-word {
+    position: absolute;
+
+    font-family: var(--serif);
+
+    font-size: clamp(70px, 11vw, 170px);
+
+    font-weight: 300;
+
+    letter-spacing: 0.04em;
+
+    color: rgba(210, 241, 249, 0.045);
+
+    pointer-events: none;
+
+    white-space: nowrap;
+}
+
+.floating-word.top-left {
+    top: 17%;
+    left: 1%;
+}
+
+.floating-word.bottom-right {
+    right: -4%;
+    bottom: 6%;
+}
+
+/* =========================================================
+   SCROLLING TEXT
+========================================================= */
+
+.scrolling-text {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 55px 0;
+    pointer-events: none;
+}
+
+.scrolling-track {
+    display: inline-flex;
+    width: max-content;
+    animation: scrollText 35s linear infinite;
+}
+
+.scrolling-track span {
+    font-family: var(--serif);
+    font-size: clamp(40px, 5vw, 75px);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: rgba(220, 245, 252, 0.07);
+    padding-right: 80px;
+}
+
+@keyframes scrollText {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* =========================================================
+   SECTION HEADERS
+========================================================= */
+
+.section-number {
+    font-size: 10px;
+    letter-spacing: 0.38em;
+
+    color: rgba(208, 239, 248, 0.52);
+
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-family: var(--serif);
+
+    font-size: clamp(
+        68px,
+        8vw,
+        125px
+    );
+
+    font-weight: 400;
+
+    line-height: 0.9;
+
+    letter-spacing: -0.035em;
+}
+
+.section-intro {
+    margin-top: 30px;
+
+    max-width: 610px;
+
+    font-family: var(--serif);
+
+    font-size: 20px;
+
+    line-height: 1.7;
+
+    color: rgba(226, 246, 253, 0.70);
+}
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about {
+    display: flex;
+    align-items: center;
+}
+
+.about-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.3fr)
+        minmax(300px, 0.7fr);
+
+    gap: 12vw;
+
+    align-items: center;
+}
+
+.about-copy {
+    margin-top: 45px;
+
+    max-width: 650px;
+}
+
+.about-copy p {
+    font-family: var(--serif);
+
+    font-size: 23px;
+
+    line-height: 1.7;
+
+    color: rgba(232, 249, 255, 0.79);
+
+    margin-bottom: 22px;
+}
+
+.about-copy strong {
+    color: white;
+    font-weight: 500;
+}
+
+.about-quote {
+    position: relative;
+
+    padding: 40px 0 40px 38px;
+
+    border-left: 1px solid rgba(158, 231, 249, 0.5);
+}
+
+.about-quote::before {
+    content: "“";
+
+    position: absolute;
+
+    left: -14px;
+    top: -35px;
+
+    font-family: var(--serif);
+
+    font-size: 100px;
+
+    color: rgba(143, 231, 250, 0.25);
+}
+
+.about-quote p {
+    font-family: var(--serif);
+
+    font-size: 31px;
+
+    line-height: 1.25;
+
+    font-style: italic;
+
+    color: rgba(241, 251, 255, 0.85);
+}
+
+.about-quote span {
+    display: block;
+
+    margin-top: 22px;
+
+    font-size: 9px;
+
+    letter-spacing: 0.3em;
+
+    color: var(--muted);
+}
+
+/* =========================================================
+   ABOUT META
+========================================================= */
+
+.about-meta {
+    display: flex;
+
+    gap: 65px;
+
+    margin-top: 65px;
+}
+
+.meta-item {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.meta-label {
+    font-size: 8px;
+
+    letter-spacing: 0.28em;
+
+    color: rgba(210, 240, 248, 0.48);
+}
+
+.meta-value {
+    font-family: var(--serif);
+
+    font-size: 21px;
+
+    color: rgba(243,251,255,0.88);
+}
+
+/* =========================================================
+   SKILLS
+========================================================= */
+
+.skills {
+    min-height: 1100px;
+}
+
+.skills-heading {
+    text-align: center;
+
+    max-width: 900px;
+
+    margin: auto;
+}
+
+.skills-heading .section-intro {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.skill-ocean {
+    position: relative;
+
+    height: 700px;
+
+    margin-top: 70px;
+}
+
+/* Skill bubbles */
+
+.skill-bubble {
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 32% 25%,
+            rgba(220, 250, 255, 0.15),
+            rgba(25, 112, 142, 0.10) 42%,
+            rgba(2, 26, 38, 0.45) 100%
+        );
+
+    border: 1px solid rgba(181, 235, 248, 0.24);
+
+    box-shadow:
+        inset 0 0 45px rgba(105, 215, 241, 0.07),
+        0 0 60px rgba(0, 150, 190, 0.07);
+
+    backdrop-filter: blur(3px);
+
+    transition:
+        transform 0.5s ease,
+        border-color 0.5s ease,
+        box-shadow 0.5s ease;
+}
+
+.skill-bubble:hover {
+    transform: scale(1.045) translateY(-8px);
+
+    border-color: rgba(184, 240, 255, 0.62);
+
+    box-shadow:
+        inset 0 0 55px rgba(111, 223, 249, 0.11),
+        0 0 70px rgba(61, 194, 228, 0.13);
+}
+
+.skill-bubble::before {
+    content: "";
+
+    position: absolute;
+
+    width: 22px;
+    height: 22px;
+
+    top: 20%;
+    left: 21%;
+
+    border-radius: 50%;
+
+    background: rgba(229, 251, 255, 0.16);
+
+    filter: blur(2px);
+}
+
+.skill-content {
+    width: 70%;
+
+    position: relative;
+    z-index: 2;
+}
+
+.skill-name {
+    font-family: var(--serif);
+
+    font-size: 28px;
+
+    margin-bottom: 13px;
+
+    color: rgba(244,252,255,0.94);
+}
+
+.skill-list {
+    font-size: 9px;
+
+    line-height: 2;
+
+    letter-spacing: 0.09em;
+
+    color: rgba(210, 239, 247, 0.62);
+}
+
+/* Bubble positions */
+
+.skill-programming {
+    width: 280px;
+    height: 280px;
+
+    left: 3%;
+    top: 30px;
+}
+
+.skill-data {
+    width: 220px;
+    height: 220px;
+
+    left: 30%;
+    top: 15px;
+}
+
+.skill-web {
+    width: 260px;
+    height: 260px;
+
+    right: 4%;
+    top: 60px;
+}
+
+.skill-dsa {
+    width: 310px;
+    height: 310px;
+
+    left: 22%;
+    bottom: 20px;
+}
+
+.skill-cyber {
+    width: 240px;
+    height: 240px;
+
+    right: 27%;
+    bottom: 5px;
+}
+
+.skill-tools {
+    width: 185px;
+    height: 185px;
+
+    right: 2%;
+    bottom: 25px;
+}
+
+/* =========================================================
+   PROJECTS
+========================================================= */
+
+.projects {
+    min-height: 1200px;
+}
+
+.projects-heading {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    gap: 50px;
+}
+
+.projects-heading .section-intro {
+    max-width: 430px;
+
+    margin-bottom: 10px;
+}
+
+.project-feature-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(12, 1fr);
+
+    gap: 22px;
+
+    margin-top: 75px;
+}
+
+.project-card {
+    position: relative;
+
+    min-height: 300px;
+
+    padding: 35px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(190, 235, 247, 0.16);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(31, 109, 132, 0.14),
+            rgba(1, 15, 23, 0.52)
+        );
+
+    backdrop-filter: blur(7px);
+
+    transition:
+        transform 0.55s ease,
+        border-color 0.55s ease;
+}
+
+.project-card:nth-child(1) {
+    grid-column: span 7;
+}
+
+.project-card:nth-child(2) {
+    grid-column: span 5;
+}
+
+.project-card:nth-child(3) {
+    grid-column: span 5;
+}
+
+.project-card:nth-child(4) {
+    grid-column: span 7;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+
+    border-color: rgba(174, 235, 251, 0.46);
+}
+
+.project-number {
+    font-size: 9px;
+
+    letter-spacing: 0.3em;
+
+    color: rgba(204, 238, 247, 0.45);
+}
+
+.project-title {
+    margin-top: 60px;
+
+    font-family: var(--serif);
+
+    font-size: 46px;
+
+    line-height: 0.95;
+
+    color: rgba(241,251,255,0.92);
+}
+
+.project-description {
+    margin-top: 25px;
+
+    max-width: 520px;
+
+    font-family: var(--serif);
+
+    font-size: 17px;
+
+    line-height: 1.55;
+
+    color: rgba(216,239,247,0.62);
+}
+
+.project-tech {
+    position: absolute;
+
+    left: 35px;
+    bottom: 30px;
+
+    font-size: 8px;
+
+    letter-spacing: 0.19em;
+
+    color: rgba(204,239,249,0.50);
+}
+
+.project-link {
+    position: absolute;
+
+    right: 30px;
+    bottom: 25px;
+
+    width: 42px;
+    height: 42px;
+
+    border: 1px solid rgba(207,241,250,0.35);
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease;
+}
+
+.project-link:hover {
+    background: rgba(220,249,255,0.14);
+
+    transform: translateX(4px);
+}
+
+.project-link svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* =========================================================
+   GITHUB PROJECTS
+========================================================= */
+
+.github-projects {
+    margin-top: 80px;
+}
+
+.github-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+.github-heading span {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: rgba(210,240,248,0.5);
+}
+
+.github-heading a {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+
+    border-bottom: 1px solid rgba(218,244,250,0.4);
+
+    padding-bottom: 5px;
+}
+
+#projectGrid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 16px;
+}
+
+.github-card {
+    min-height: 170px;
+
+    padding: 25px;
+
+    border: 1px solid rgba(189,233,246,0.14);
+
+    background: rgba(2,18,27,0.30);
+
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease;
+}
+
+.github-card:hover {
+    transform: translateY(-5px);
+
+    border-color: rgba(177,235,250,0.4);
+}
+
+.github-card h4 {
+    font-family: var(--serif);
+
+    font-size: 25px;
+
+    font-weight: 400;
+}
+
+.github-card p {
+    margin-top: 12px;
+
+    font-size: 9px;
+
+    line-height: 1.7;
+
+    color: rgba(212,239,247,0.55);
+}
+
+.github-meta {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 25px;
+
+    font-size: 8px;
+
+    letter-spacing: 0.12em;
+
+    color: rgba(210,240,248,0.45);
+}
+
+/* =========================================================
+   JOURNEY
+========================================================= */
+
+.journey {
+    min-height: 1100px;
+}
+
+.journey-intro {
+    max-width: 720px;
+}
+
+.timeline {
+    position: relative;
+
+    margin-top: 90px;
+
+    padding-left: 95px;
+}
+
+.timeline::before {
+    content: "";
+
+    position: absolute;
+
+    left: 17px;
+    top: 0;
+    bottom: 0;
+
+    width: 1px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(185,235,248,0.05),
+            rgba(185,235,248,0.5),
+            rgba(185,235,248,0.05)
+        );
+}
+
+.timeline-item {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns: 100px 1fr;
+
+    gap: 45px;
+
+    padding-bottom: 80px;
+}
+
+.timeline-dot {
+    position: absolute;
+
+    left: -83px;
+    top: 5px;
+
+    width: 35px;
+    height: 35px;
+
+    border: 1px solid rgba(194,238,249,0.6);
+
+    border-radius: 50%;
+
+    background: rgba(2,14,22,0.65);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timeline-dot::after {
+    content: "";
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--cyan);
+
+    opacity: 0.7;
+}
+
+.timeline-year {
+    font-family: var(--serif);
+
+    font-size: 30px;
+
+    color: rgba(240,250,255,0.72);
+}
+
+.timeline-title {
+    font-family: var(--serif);
+
+    font-size: 37px;
+
+    font-weight: 400;
+}
+
+.timeline-text {
+    max-width: 650px;
+
+    margin-top: 13px;
+
+    font-family: var(--serif);
+
+    font-size: 18px;
+
+    line-height: 1.6;
+
+    color: rgba(211,238,246,0.62);
+}
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact {
+    min-height: 900px;
+
+    display: flex;
+
+    align-items: center;
+}
+
+.contact-layout {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        1.1fr
+        0.9fr;
+
+    gap: 10vw;
+}
+
+.contact-title {
+    font-family: var(--serif);
+
+    font-size: clamp(
+        80px,
+        10vw,
+        150px
+    );
+
+    line-height: 0.82;
+
+    letter-spacing: -0.045em;
+}
+
+.contact-subtitle {
+    margin-top: 35px;
+
+    max-width: 550px;
+
+    font-family: var(--serif);
+
+    font-size: 21px;
+
+    line-height: 1.6;
+
+    color: rgba(221,243,249,0.66);
+}
+
+.contact-links {
+    margin-top: 55px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 22px;
+}
+
+.contact-link {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    max-width: 470px;
+
+    padding-bottom: 16px;
+
+    border-bottom: 1px solid rgba(199,236,246,0.16);
+
+    font-size: 10px;
+
+    letter-spacing: 0.2em;
+
+    color: rgba(235,249,253,0.72);
+
+    transition:
+        color 0.3s ease,
+        padding 0.3s ease;
+}
+
+.contact-link:hover {
+    color: white;
+    padding-left: 7px;
+}
+
+.contact-link span:last-child {
+    font-size: 15px;
+}
+
+/* contact form */
+
+.contact-form {
+    padding: 38px;
+
+    border: 1px solid rgba(196,235,246,0.16);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25,102,126,0.11),
+            rgba(0,10,17,0.44)
+        );
+
+    backdrop-filter: blur(8px);
+}
+
+.form-label {
+    display: block;
+
+    margin-bottom: 10px;
+
+    font-size: 8px;
+
+    letter-spacing: 0.3em;
+
+    color: rgba(210,239,247,0.46);
+}
+
+.form-group {
+    margin-bottom: 27px;
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+
+    border: none;
+    border-bottom: 1px solid rgba(206,239,248,0.25);
+
+    background: transparent;
+
+    padding: 10px 0;
+
+    outline: none;
+
+    color: white;
+
+    font-family: var(--serif);
+
+    font-size: 20px;
+}
+
+.form-textarea {
+    resize: vertical;
+
+    min-height: 110px;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    border-color: rgba(170,232,248,0.75);
+}
+
+.form-submit {
+    margin-top: 10px;
+
+    padding: 14px 28px;
+
+    border: 1px solid rgba(217,245,252,0.55);
+
+    border-radius: 999px;
+
+    background: transparent;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 9px;
+
+    letter-spacing: 0.28em;
+
+    text-transform: uppercase;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+.form-submit:hover {
+    background: rgba(236,250,255,0.92);
+    color: #031018;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    position: relative;
+
+    min-height: 180px;
+
+    padding: 55px 6vw;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-top: 1px solid rgba(193,231,241,0.10);
+
+    color: rgba(205,236,245,0.42);
+}
+
+.footer-name {
+    font-family: var(--serif);
+
+    font-size: 30px;
+
+    letter-spacing: 0.05em;
+}
+
+.footer-right {
+    display: flex;
+
+    gap: 35px;
+
+    font-size: 8px;
+
+    letter-spacing: 0.25em;
+}
+
+/* =========================================================
+   REVEAL ANIMATION
+========================================================= */
+
+.reveal {
+    opacity: 0;
+
+    transform: translateY(35px);
+
+    transition:
+        opacity 1.1s ease,
+        transform 1.1s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+/* =========================================================
+   SCROLL PROGRESS
+========================================================= */
+
+.scroll-progress {
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    height: 1px;
+
+    width: 0;
+
+    z-index: 200;
+
+    background: rgba(176,237,252,0.9);
+
+    box-shadow:
+        0 0 10px rgba(135,228,249,0.5);
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+.mobile-menu {
+    display: none;
+}
+
+@media (max-width: 1000px) {
+
+    .nav {
+        height: 82px;
+        padding: 0 25px;
+    }
+
+    .nav-links {
+        gap: 20px;
+    }
+
+    .nav-link {
+        font-size: 8px;
+    }
+
+    .resume-button {
+        padding: 10px 15px;
+        font-size: 8px;
+    }
+
+    .sound-button {
+        margin-left: 10px;
+        width: 38px;
+        height: 38px;
+    }
+
+    .depth-nav {
+        display: none;
+    }
+
+    section {
+        padding:
+            130px
+            8vw
+            100px;
+    }
+
+    .hero {
+        padding-top: 80px;
+    }
+
+    .hero-title {
+        font-size: clamp(85px, 16vw, 150px);
+    }
+
+    .hero-bottom {
+        left: 8vw;
+    }
+
+    .about-layout,
+    .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 70px;
+    }
+
+    .skill-ocean {
+        height: auto;
+
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 25px;
+    }
+
+    .skill-bubble {
+        position: relative;
+
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+
+        width: 100%;
+        height: auto;
+
+        aspect-ratio: 1;
+    }
+
+    .project-feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card:nth-child(n) {
+        grid-column: span 1;
+    }
+
+    #projectGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+
+    .nav {
+        justify-content: flex-end;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .mobile-menu span {
+        width: 24px;
+        height: 1px;
+
+        background: white;
+
+        display: block;
+
+        box-shadow:
+            0 7px 0 white,
+            0 -7px 0 white;
+    }
+
+    .resume-button {
+        display: none;
+    }
+
+    .hero {
+        align-items: flex-end;
+
+        padding-bottom: 120px;
+    }
+
+    .hero-kicker {
+        font-size: 8px;
+
+        gap: 12px;
+
+        letter-spacing: 0.22em;
+    }
+
+    .hero-title {
+        font-size: clamp(72px, 23vw, 115px);
+    }
+
+    .hero-subtitle {
+        font-size: 12px;
+
+        gap: 12px;
+
+        letter-spacing: 0.22em;
+    }
+
+    .hero-subtitle::before {
+        width: 35px;
+    }
+
+    .hero-description {
+        font-size: 17px;
+    }
+
+    .hero-bottom {
+        bottom: 45px;
+    }
+
+    .scroll-circle {
+        width: 47px;
+        height: 47px;
+    }
+
+    .scroll-text {
+        font-size: 8px;
+    }
+
+    section {
+        padding:
+            115px
+            7vw
+            80px;
+    }
+
+    .section-title {
+        font-size: clamp(62px, 18vw, 100px);
+    }
+
+    .section-intro {
+        font-size: 18px;
+    }
+
+    .about-copy p {
+        font-size: 20px;
+    }
+
+    .about-quote p {
+        font-size: 27px;
+    }
+
+    .about-meta {
+        flex-wrap: wrap;
+
+        gap: 25px;
+    }
+
+    .skills {
+        min-height: auto;
+    }
+
+    .skill-ocean {
+        grid-template-columns: 1fr;
+
+        margin-top: 50px;
+    }
+
+    .skill-bubble {
+        width: min(320px, 82vw);
+
+        margin: auto;
+    }
+
+    .project-title {
+        font-size: 39px;
+    }
+
+    .project-description {
+        font-size: 16px;
+    }
+
+    #projectGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline {
+        padding-left: 50px;
+    }
+
+    .timeline-item {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+    .timeline-dot {
+        left: -68px;
+    }
+
+    .timeline-year {
+        font-size: 24px;
+    }
+
+    .timeline-title {
+        font-size: 32px;
+    }
+
+    .contact-title {
+        font-size: 78px;
+    }
+
+    .contact-form {
+        padding: 25px;
+    }
+
+    footer {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 25px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
+
+<div class="video-layer">
+
+    <video
+        id="oceanVideo"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+    >
+        <source
+            src="assets/video/ocean.mp4"
+            type="video/mp4"
+        >
+    </video>
+
+</div>
+
+<div class="vignette"></div>
+
+<div class="grain"></div>
+
+<canvas id="particles"></canvas>
+
+<div class="scroll-progress"></div>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<header class="nav">
+
+    <nav class="nav-links">
+
+        <a class="nav-link active" href="#about">
+            ABOUT
+        </a>
+
+        <a class="nav-link" href="#skills">
+            SKILLS
+        </a>
+
+        <a class="nav-link" href="#projects">
+            PROJECTS
+        </a>
+
+        <a class="nav-link" href="#journey">
+            JOURNEY
+        </a>
+
+        <a class="nav-link" href="#contact">
+            CONTACT
+        </a>
+
+        <a
+            class="resume-button"
+            href="resume.pdf"
+            target="_blank"
+            rel="noopener"
+        >
+
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+            >
+                <path d="M6 3h9l4 4v14H6z"/>
+                <path d="M14 3v5h5"/>
+                <path d="M9 13h6"/>
+                <path d="M9 17h6"/>
+            </svg>
+
+            RESUME
+
+        </a>
+
+    </nav>
+
+    <button
+        class="sound-button"
+        id="soundButton"
+        aria-label="Toggle sound"
+    >
+
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="1.6"
+        >
+
+            <path
+                d="M4 10v4h4l5 4V6l-5 4H4z"
+            />
+
+            <path
+                class="sound-wave"
+                d="M16 9c1.4 1.4 1.4 4.6 0 6"
+            />
+
+            <path
+                class="sound-wave"
+                d="M18.5 6.5c3.2 3.2 3.2 7.8 0 11"
+            />
+
+        </svg>
+
+    </button>
+
+    <div class="mobile-menu">
+        <span></span>
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     DEPTH NAVIGATION
+===================================================== -->
+
+<aside class="depth-nav">
+
+    <div class="depth-top">
+
+        <div class="depth-number">
+            00 m
+        </div>
+
+        <div class="depth-label">
+            SURFACE
+        </div>
+
+    </div>
+
+    <div class="depth-line"></div>
+
+    <div class="depth-items">
+
+        <a
+            href="#about"
+            class="depth-item active"
+        >
+
+            <span class="depth-dot"></span>
+
+            <span class="depth-info">
+
+                <span class="depth-index">
+                    01
+                </span>
+
+                <span class="depth-name">
+                    ABOUT
+                </span>
+
+            </span>
+
+        </a>
+
+
+        <a
+            href="#skills"
+            class="depth-item"
+        >
+
+            <span class="depth-dot"></span>
+
+            <span class="depth-info">
+
+                <span class="depth-index">
+                    02
+                </span>
+
+                <span class="depth-name">
+                    SKILLS
+                </span>
+
+            </span>
+
+        </a>
+
+
+        <a
+            href="#projects"
+            class="depth-item"
+        >
+
+            <span class="depth-dot"></span>
+
+            <span class="depth-info">
+
+                <span class="depth-index">
+                    03
+                </span>
+
+                <span class="depth-name">
+                    PROJECTS
+                </span>
+
+            </span>
+
+        </a>
+
+
+        <a
+            href="#journey"
+            class="depth-item"
+        >
+
+            <span class="depth-dot"></span>
+
+            <span class="depth-info">
+
+                <span class="depth-index">
+                    04
+                </span>
+
+                <span class="depth-name">
+                    JOURNEY
+                </span>
+
+            </span>
+
+        </a>
+
+
+        <a
+            href="#contact"
+            class="depth-item"
+        >
+
+            <span class="depth-dot"></span>
+
+            <span class="depth-info">
+
+                <span class="depth-index">
+                    05
+                </span>
+
+                <span class="depth-name">
+                    CONTACT
+                </span>
+
+            </span>
+
+        </a>
+
+    </div>
+
+    <div class="deeper">
+        DEEPER
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<main>
+
+<section
+    class="hero"
+    id="home"
+>
+
+    <div class="section-inner">
+
+        <div class="hero-content reveal">
+
+            <div class="hero-kicker">
+
+                <span>
+                    COMPUTING
+                </span>
+
+                ×
+
+                <span>
+                    DATA SCIENCE
+                </span>
+
+            </div>
+
+
+            <h1 class="hero-title">
+                Meha <em>E</em>
+            </h1>
+
+
+            <div class="hero-subtitle">
+                IDEAS FLOW DEEPER HERE
+            </div>
+
+
+            <p class="hero-description">
+                Turning curiosity into meaningful technology
+                through code, data and exploration.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-bottom">
+
+        <a
+            href="#about"
+            class="scroll-circle"
+            aria-label="Scroll to explore"
+        >
+
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke-width="1.4"
+            >
+
+                <path d="M12 4v15"/>
+                <path d="M6 13l6 6 6-6"/>
+
+            </svg>
+
+        </a>
+
+        <span class="scroll-text">
+            SCROLL TO EXPLORE
+        </span>
+
+    </div>
+
+
+</section>
+
+<!-- =====================================================
+     SCROLLING TEXT
+===================================================== -->
+
+<div class="scrolling-text">
+
+    <div class="scrolling-track">
+
+        <span>
+            CODE · DATA · CREATE · EXPLORE · BUILD · DISCOVER ·
+        </span>
+
+        <span>
+            CODE · DATA · CREATE · EXPLORE · BUILD · DISCOVER ·
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section
+    class="about"
+    id="about"
+>
+
+    <div class="section-inner">
+
+        <div class="about-layout">
+
+            <div>
+
+                <div class="section-number reveal">
+                    01 · ABOUT
+                </div>
+
+                <h2 class="section-title reveal">
+                    More than<br>
+                    just code.
+                </h2>
+
+
+                <div class="about-copy reveal">
+
+                    <p>
+                        I'm <strong>Meha E</strong>,
+                        a Computing and Data Science student
+                        at Sai University.
+                    </p>
+
+                    <p>
+                        I enjoy understanding how systems work,
+                        breaking problems down, and turning ideas
+                        into things that actually function.
+                    </p>
+
+                    <p>
+                        My interests move across
+                        <strong>programming, data, web development,
+                        algorithms and cybersecurity.</strong>
+                    </p>
+
+                </div>
+
+
+                <div class="about-meta reveal">
+
+                    <div class="meta-item">
+
+                        <span class="meta-label">
+                            UNIVERSITY
+                        </span>
+
+                        <span class="meta-value">
+                            Sai University
+                        </span>
+
+                    </div>
+
+
+                    <div class="meta-item">
+
+                        <span class="meta-label">
+                            FIELD
+                        </span>
+
+                        <span class="meta-value">
+                            Computing × Data Science
+                        </span>
+
+                    </div>
+
+
+                    <div class="meta-item">
+
+                        <span class="meta-label">
+                            EXPLORING
+                        </span>
+
+                        <span class="meta-value">
+                            Cybersecurity
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="about-quote reveal">
+
+                <p>
+                    A deeper mind<br>
+                    builds a brighter<br>
+                    tomorrow.
+                </p>
+
+                <span>
+                    — THE WAY I LIKE TO BUILD
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SKILLS
+===================================================== -->
+
+<section
+    class="skills"
+    id="skills"
+>
+
+    <div class="section-inner">
+
+        <div class="skills-heading">
+
+            <div class="section-number reveal">
+                02 · SKILLS
+            </div>
+
+            <h2 class="section-title reveal">
+                What I work with.
+            </h2>
+
+            <p class="section-intro reveal">
+                Different areas, one underlying curiosity:
+                understanding how technology works beneath
+                the surface.
+            </p>
+
+        </div>
+
+
+        <div class="skill-ocean">
+
+            <!-- PROGRAMMING -->
+
+            <div class="skill-bubble skill-programming reveal">
+
+                <div class="skill-content">
+
+                    <div class="skill-name">
+                        Programming
+                    </div>
+
+                    <div class="skill-list">
+                        Python · C · JavaScript<br>
+                        Problem Solving<br>
+                        OOP · Scripting
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DATA -->
+
+            <div class="skill-bubble skill-data reveal">
+
+                <div class="skill-content">
+
+                    <div class="skill-name">
+                        Data
+                    </div>
+
+                    <div class="skill-list">
+                        Pandas · Visualization<br>
+                        MySQL · PostgreSQL<br>
+                        Supabase
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- WEB -->
+
+            <div class="skill-bubble skill-web reveal">
+
+                <div class="skill-content">
+
+                    <div class="skill-name">
+                        Web
+                    </div>
+
+                    <div class="skill-list">
+                        HTML · CSS · JavaScript<br>
+                        React · Vite<br>
+                        APIs
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DSA -->
+
+            <div class="skill-bubble skill-dsa reveal">
+
+                <div class="skill-content">
+
+                    <div class="skill-name">
+                        Data Structures
+                    </div>
+
+                    <div class="skill-list">
+                        Arrays · Linked Lists<br>
+                        Trees · Graphs · Hashing<br>
+                        Searching · Sorting · Recursion
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CYBERSECURITY -->
+
+            <div class="skill-bubble skill-cyber reveal">
+
+                <div class="skill-content">
+
+                    <div class="skill-name">
+                        Cybersecurity
+                    </div>
+
+                    <div class="skill-list">
+                        Security Fundamentals<br>
+                        Authentication · Access Control<br>
+                        Web Application Security
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TOOLS -->
+
+            <div class="skill-bubble skill-tools reveal">
+
+                <div class="skill-content">
+
+                    <div class="skill-name">
+                        Tools
+                    </div>
+
+                    <div class="skill-list">
+                        Git · GitHub<br>
+                        VS Code · Vercel<br>
+                        Supabase
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROJECTS
+===================================================== -->
+
+<section
+    class="projects"
+    id="projects"
+>
+
+    <div class="section-inner">
+
+        <div class="projects-heading">
+
+            <div>
+
+                <div class="section-number reveal">
+                    03 · PROJECTS
+                </div>
+
+                <h2 class="section-title reveal">
+                    Ideas take<br>
+                    shape deeper here.
+                </h2>
+
+            </div>
+
+
+            <p class="section-intro reveal">
+                Projects where I experiment, learn,
+                debug and turn concepts into working systems.
+            </p>
+
+        </div>
+
+
+        <div class="project-feature-grid">
+
+
+            <!-- SAIUCONNECT -->
+
+            <article class="project-card reveal">
+
+                <div class="project-number">
+                    PROJECT 01
+                </div>
+
+                <h3 class="project-title">
+                    SaiUConnect
+                </h3>
+
+                <p class="project-description">
+                    A university platform connecting students,
+                    faculty and administration through
+                    role-based interfaces, timetables,
+                    authentication and academic data.
+                </p>
+
+                <div class="project-tech">
+                    REACT · SUPABASE · POSTGRESQL
+                </div>
+
+                <a
+                    class="project-link"
+                    href="https://github.com/mehaelangomani"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="View SaiUConnect"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.4"
+                    >
+
+                        <path d="M5 12h13"/>
+                        <path d="M13 6l6 6-6 6"/>
+
+                    </svg>
+
+                </a>
+
+            </article>
+
+
+            <!-- C -->
+
+            <article class="project-card reveal">
+
+                <div class="project-number">
+                    PROJECT 02
+                </div>
+
+                <h3 class="project-title">
+                    C Data<br>
+                    Structures
+                </h3>
+
+                <p class="project-description">
+                    Data structure implementations and
+                    problem-solving projects developed
+                    in C.
+                </p>
+
+                <div class="project-tech">
+                    C · DATA STRUCTURES · ALGORITHMS
+                </div>
+
+                <a
+                    class="project-link"
+                    href="https://github.com/mehaelangomani"
+                    target="_blank"
+                    rel="noopener"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.4"
+                    >
+
+                        <path d="M5 12h13"/>
+                        <path d="M13 6l6 6-6 6"/>
+
+                    </svg>
+
+                </a>
+
+            </article>
+
+
+            <!-- PYTHON -->
+
+            <article class="project-card reveal">
+
+                <div class="project-number">
+                    PROJECT 03
+                </div>
+
+                <h3 class="project-title">
+                    Python<br>
+                    Projects
+                </h3>
+
+                <p class="project-description">
+                    Programming exercises involving
+                    recursion, data structures, algorithms,
+                    OOP and problem solving.
+                </p>
+
+                <div class="project-tech">
+                    PYTHON · OOP · ALGORITHMS
+                </div>
+
+                <a
+                    class="project-link"
+                    href="https://github.com/mehaelangomani"
+                    target="_blank"
+                    rel="noopener"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.4"
+                    >
+
+                        <path d="M5 12h13"/>
+                        <path d="M13 6l6 6-6 6"/>
+
+                    </svg>
+
+                </a>
+
+            </article>
+
+
+            <!-- DATA -->
+
+            <article class="project-card reveal">
+
+                <div class="project-number">
+                    PROJECT 04
+                </div>
+
+                <h3 class="project-title">
+                    Data Analysis<br>
+                    & Visualization
+                </h3>
+
+                <p class="project-description">
+                    Working with datasets to clean,
+                    analyse and communicate patterns
+                    through visualizations.
+                </p>
+
+                <div class="project-tech">
+                    PYTHON · PANDAS · MATPLOTLIB · SEABORN
+                </div>
+
+                <a
+                    class="project-link"
+                    href="https://github.com/mehaelangomani"
+                    target="_blank"
+                    rel="noopener"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.4"
+                    >
+
+                        <path d="M5 12h13"/>
+                        <path d="M13 6l6 6-6 6"/>
+
+                    </svg>
+
+                </a>
+
+            </article>
+
+        </div>
+
+
+        <!-- GITHUB -->
+
+        <div class="github-projects">
+
+            <div class="github-heading">
+
+                <span>
+                    MORE FROM THE DEPTHS
+                </span>
+
+                <a
+                    href="https://github.com/mehaelangomani"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    VIEW GITHUB →
+                </a>
+
+            </div>
+
+
+            <div id="projectGrid">
+
+                <div class="github-card">
+
+                    <h4>
+                        DESCENDING...
+                    </h4>
+
+                    <p>
+                        Loading projects from GitHub.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     JOURNEY
+===================================================== -->
+
+<section
+    class="journey"
+    id="journey"
+>
+
+    <div class="section-inner">
+
+        <div class="journey-intro">
+
+            <div class="section-number reveal">
+                04 · JOURNEY
+            </div>
+
+            <h2 class="section-title reveal">
+                A journey<br>
+                in motion.
+            </h2>
+
+            <p class="section-intro reveal">
+                Every stage has added another layer —
+                from learning the fundamentals to building
+                systems and exploring where cybersecurity
+                can take me next.
+            </p>
+
+        </div>
+
+
+        <div class="timeline">
+
+
+            <!-- 2023 -->
+
+            <div class="timeline-item reveal">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-year">
+                    2023
+                </div>
+
+                <div>
+
+                    <h3 class="timeline-title">
+                        The Beginning
+                    </h3>
+
+                    <p class="timeline-text">
+                        Schooling, academics and discovering
+                        an interest in technology, problem
+                        solving and creative work.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- 2024 -->
+
+            <div class="timeline-item reveal">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-year">
+                    2024
+                </div>
+
+                <div>
+
+                    <h3 class="timeline-title">
+                        Into Computing
+                    </h3>
+
+                    <p class="timeline-text">
+                        Beginning university and building
+                        stronger foundations in programming,
+                        mathematics and computational thinking.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- 2025 -->
+
+            <div class="timeline-item reveal">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-year">
+                    2025
+                </div>
+
+                <div>
+
+                    <h3 class="timeline-title">
+                        Building Systems
+                    </h3>
+
+                    <p class="timeline-text">
+                        Exploring data structures, algorithms,
+                        databases, Python, C and web development
+                        through academic and personal projects.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- 2026 -->
+
+            <div class="timeline-item reveal">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-year">
+                    2026
+                </div>
+
+                <div>
+
+                    <h3 class="timeline-title">
+                        Going Deeper
+                    </h3>
+
+                    <p class="timeline-text">
+                        Building larger systems such as
+                        SaiUConnect while expanding into
+                        data analysis, modern web technologies
+                        and cybersecurity.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- BEYOND -->
+
+            <div class="timeline-item reveal">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-year">
+                    NEXT
+                </div>
+
+                <div>
+
+                    <h3 class="timeline-title">
+                        Cybersecurity
+                    </h3>
+
+                    <p class="timeline-text">
+                        Continue learning how systems work,
+                        how vulnerabilities emerge and how
+                        technology can be designed with security
+                        in mind.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CONTACT
+===================================================== -->
+
+<section
+    class="contact"
+    id="contact"
+>
+
+    <div class="section-inner">
+
+        <div class="contact-layout">
+
+
+            <div>
+
+                <div class="section-number reveal">
+                    05 · CONTACT
+                </div>
+
+                <h2 class="contact-title reveal">
+                    Let's<br>
+                    connect.
+                </h2>
+
+                <p class="contact-subtitle reveal">
+                    Have an idea, a project or simply want
+                    to talk about technology?
+                    Come say hello.
+                </p>
+
+
+                <div class="contact-links reveal">
+
+                    <a
+                        class="contact-link"
+                        href="https://github.com/mehaelangomani"
+                        target="_blank"
+                        rel="noopener"
+                    >
+
+                        <span>
+                            GITHUB
+                        </span>
+
+                        <span>
+                            ↗
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        class="contact-link"
+                        href="mailto:YOUR_EMAIL@example.com"
+                    >
+
+                        <span>
+                            EMAIL
+                        </span>
+
+                        <span>
+                            ↗
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        class="contact-link"
+                        href="#"
+                        onclick="
+                            alert('Add your LinkedIn URL here.');
+                            return false;
+                        "
+                    >
+
+                        <span>
+                            LINKEDIN
+                        </span>
+
+                        <span>
+                            ↗
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- FORM -->
+
+            <form
+                class="contact-form reveal"
+                id="contactForm"
+            >
+
+                <div class="form-group">
+
+                    <label
+                        class="form-label"
+                        for="name"
+                    >
+                        YOUR NAME
+                    </label>
+
+                    <input
+                        class="form-input"
+                        id="name"
+                        name="name"
+                        type="text"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label
+                        class="form-label"
+                        for="email"
+                    >
+                        YOUR EMAIL
+                    </label>
+
+                    <input
+                        class="form-input"
+                        id="email"
+                        name="email"
+                        type="email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label
+                        class="form-label"
+                        for="message"
+                    >
+                        MESSAGE
+                    </label>
+
+                    <textarea
+                        class="form-textarea"
+                        id="message"
+                        name="message"
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <button
+                    class="form-submit"
+                    type="submit"
+                >
+                    SEND MESSAGE
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footer-name">
+        MEHA E
+    </div>
+
+    <div class="footer-right">
+
+        <span>
+            COMPUTING × DATA SCIENCE
+        </span>
+
+        <span>
+            2026
+        </span>
+
+        <span>
+            BELOW THE SURFACE
+        </span>
+
+    </div>
+
+</footer>
+
+
+<!-- =====================================================
+     AUDIO
+===================================================== -->
+
+<audio
+    id="oceanAudio"
+    loop
+    preload="auto"
+>
+    <source
+        src="assets/audio/ocean.mp3"
+        type="audio/mpeg"
+    >
+</audio>
+
+
+<script>
+
+/* =========================================================
+   VIDEO
+========================================================= */
+
+const oceanVideo =
+    document.getElementById("oceanVideo");
+
+oceanVideo.play().catch(() => {
+    // Browser may require interaction.
+});
+
+
+/* =========================================================
+   AUDIO
+========================================================= */
+
+const audio =
+    document.getElementById("oceanAudio");
+
+const soundButton =
+    document.getElementById("soundButton");
+
+let soundOn = false;
+
+soundButton.addEventListener(
+    "click",
+    async () => {
+
+        if (!soundOn) {
+
+            try {
+
+                audio.volume = 0.35;
+
+                await audio.play();
+
+                soundOn = true;
+
+                soundButton.classList.remove(
+                    "sound-off"
+                );
+
+            } catch (error) {
+
+                console.log(
+                    "Audio could not start:",
+                    error
+                );
+
+            }
+
+        } else {
+
+            audio.pause();
+
+            soundOn = false;
+
+            soundButton.classList.add(
+                "sound-off"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+const nav =
+    document.querySelector(".nav");
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        if (window.scrollY > 50) {
+
+            nav.classList.add("scrolled");
+
+        } else {
+
+            nav.classList.remove("scrolled");
+
+        }
+
+    },
+    { passive: true }
+);
+
+
+/* =========================================================
+   SCROLL PROGRESS
+========================================================= */
+
+const progress =
+    document.querySelector(".scroll-progress");
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        const scrollTop =
+            window.scrollY;
+
+        const height =
+            document.documentElement.scrollHeight
+            - window.innerHeight;
+
+        const percentage =
+            height > 0
+                ? (scrollTop / height) * 100
+                : 0;
+
+        progress.style.width =
+            percentage + "%";
+
+    },
+    { passive: true }
+);
+
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+const revealElements =
+    document.querySelectorAll(".reveal");
+
+const revealObserver =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add(
+                        "visible"
+                    );
+
+                    revealObserver.unobserve(
+                        entry.target
+                    );
+
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.12
+        }
+    );
+
+revealElements.forEach(element => {
+
+    revealObserver.observe(element);
+
+});
+
+
+/* =========================================================
+   ACTIVE NAVIGATION
+========================================================= */
+
+const sections =
+    document.querySelectorAll(
+        "section[id]"
+    );
+
+const navLinks =
+    document.querySelectorAll(
+        ".nav-link"
+    );
+
+const depthItems =
+    document.querySelectorAll(
+        ".depth-item"
+    );
+
+function updateNavigation() {
+
+    let current =
+        "about";
+
+    const scrollPosition =
+        window.scrollY
+        + window.innerHeight * 0.35;
+
+    sections.forEach(section => {
+
+        if (
+            scrollPosition >=
+            section.offsetTop
+        ) {
+
+            current =
+                section.id;
+
+        }
+
+    });
+
+
+    navLinks.forEach(link => {
+
+        link.classList.remove("active");
+
+        if (
+            link.getAttribute("href")
+            === "#" + current
+        ) {
+
+            link.classList.add("active");
+
+        }
+
+    });
+
+
+    depthItems.forEach(item => {
+
+        item.classList.remove("active");
+
+        if (
+            item.getAttribute("href")
+            === "#" + current
+        ) {
+
+            item.classList.add("active");
+
+        }
+
+    });
+
+}
+
+window.addEventListener(
+    "scroll",
+    updateNavigation,
+    { passive: true }
+);
+
+
+/* =========================================================
+   DEPTH NAV CLICK
+========================================================= */
+
+depthItems.forEach(item => {
+
+    item.addEventListener(
+        "click",
+        event => {
+
+            event.preventDefault();
+
+            const target =
+                document.querySelector(
+                    item.getAttribute("href")
+                );
+
+            if (target) {
+
+                target.scrollIntoView({
+                    behavior: "smooth"
+                });
+
+            }
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+const canvas =
+    document.getElementById("particles");
+
+const ctx =
+    canvas.getContext("2d");
+
+let particles = [];
+
+function resizeCanvas() {
+
+    canvas.width =
+        window.innerWidth;
+
+    canvas.height =
+        window.innerHeight;
+
+}
+
+resizeCanvas();
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+
+function createParticles() {
+
+    particles = [];
+
+    const count =
+        window.innerWidth < 700
+            ? 35
+            : 70;
+
+    for (
+        let i = 0;
+        i < count;
+        i++
+    ) {
+
+        particles.push({
+
+            x:
+                Math.random()
+                * canvas.width,
+
+            y:
+                Math.random()
+                * canvas.height,
+
+            size:
+                Math.random() * 1.7
+                + 0.3,
+
+            speed:
+                Math.random() * 0.18
+                + 0.04,
+
+            drift:
+                (Math.random() - 0.5)
+                * 0.18,
+
+            opacity:
+                Math.random()
+                * 0.45
+                + 0.08
+
+        });
+
+    }
+
+}
+
+createParticles();
+
+
+function animateParticles() {
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    particles.forEach(particle => {
+
+        particle.y -= particle.speed;
+
+        particle.x += particle.drift;
+
+        if (particle.y < -10) {
+
+            particle.y =
+                canvas.height + 10;
+
+            particle.x =
+                Math.random()
+                * canvas.width;
+
+        }
+
+        if (
+            particle.x < -10 ||
+            particle.x > canvas.width + 10
+        ) {
+
+            particle.x =
+                Math.random()
+                * canvas.width;
+
+        }
+
+
+        ctx.beginPath();
+
+        ctx.arc(
+            particle.x,
+            particle.y,
+            particle.size,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle =
+            `rgba(200,240,250,${particle.opacity})`;
+
+        ctx.fill();
+
+    });
+
+    requestAnimationFrame(
+        animateParticles
+    );
+
+}
+
+animateParticles();
+
+
+/* =========================================================
+   GITHUB PROJECTS
+========================================================= */
+
+const projectGrid =
+    document.getElementById(
+        "projectGrid"
+    );
+
+async function loadGitHubProjects() {
+
+    try {
+
+        const response =
+            await fetch(
+                "https://api.github.com/users/mehaelangomani/repos?sort=updated&per_page=6"
+            );
+
+        if (!response.ok) {
+
+            throw new Error(
+                "GitHub request failed"
+            );
+
+        }
+
+        const repositories =
+            await response.json();
+
+
+        if (
+            !repositories ||
+            repositories.length === 0
+        ) {
+
+            projectGrid.innerHTML = `
+                <div class="github-card">
+                    <h4>No public projects yet.</h4>
+                    <p>
+                        Visit GitHub to explore the work.
+                    </p>
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        projectGrid.innerHTML = "";
+
+
+        repositories
+            .filter(repo => !repo.fork)
+            .slice(0, 6)
+            .forEach(repo => {
+
+                const card =
+                    document.createElement(
+                        "article"
+                    );
+
+                card.className =
+                    "github-card reveal";
+
+
+                const language =
+                    repo.language ||
+                    "PROJECT";
+
+
+                const description =
+                    repo.description ||
+                    "A project exploring code, systems and technology.";
+
+
+                card.innerHTML = `
+
+                    <h4>
+                        ${escapeHTML(repo.name)}
+                    </h4>
+
+                    <p>
+                        ${escapeHTML(description)}
+                    </p>
+
+                    <div class="github-meta">
+
+                        <span>
+                            ${escapeHTML(language)}
+                        </span>
+
+                        <a
+                            href="${repo.html_url}"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            VIEW →
+                        </a>
+
+                    </div>
+
+                `;
+
+
+                projectGrid.appendChild(card);
+
+            });
+
+
+        document
+            .querySelectorAll(
+                "#projectGrid .reveal"
+            )
+            .forEach(element => {
+
+                revealObserver.observe(
+                    element
+                );
+
+            });
+
+    } catch (error) {
+
+        console.error(
+            "GitHub loading error:",
+            error
+        );
+
+
+        projectGrid.innerHTML = `
+
+            <div class="github-card">
+
+                <h4>
+                    GitHub
+                </h4>
+
+                <p>
+                    Explore my projects directly
+                    on GitHub.
+                </p>
+
+                <div class="github-meta">
+
+                    <a
+                        href="https://github.com/mehaelangomani"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        VIEW →
+                    </a>
+
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* Prevent HTML injection from repository metadata */
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+loadGitHubProjects();
+
+
+/* =========================================================
+   CONTACT FORM
+========================================================= */
+
+const contactForm =
+    document.getElementById(
+        "contactForm"
+    );
+
+contactForm.addEventListener(
+    "submit",
+    event => {
+
+        event.preventDefault();
+
+        const name =
+            document.getElementById(
+                "name"
+            ).value.trim();
+
+        const email =
+            document.getElementById(
+                "email"
+            ).value.trim();
+
+        const message =
+            document.getElementById(
+                "message"
+            ).value.trim();
+
+
+        const subject =
+            encodeURIComponent(
+                "Portfolio message from " +
+                name
+            );
+
+
+        const body =
+            encodeURIComponent(
+                `Name: ${name}\n\n` +
+                `Email: ${email}\n\n` +
+                `Message:\n${message}`
+            );
+
+
+        /*
+            IMPORTANT:
+            Replace YOUR_EMAIL@example.com
+            with your real email address.
+        */
+
+        window.location.href =
+            `mailto:YOUR_EMAIL@example.com` +
+            `?subject=${subject}` +
+            `&body=${body}`;
+
+    }
+);
+
+
+/* =========================================================
+   SUBTLE PARALLAX
+========================================================= */
+
+window.addEventListener(
+    "mousemove",
+    event => {
+
+        const x =
+            (event.clientX /
+                window.innerWidth -
+                0.5) * 2;
+
+        const y =
+            (event.clientY /
+                window.innerHeight -
+                0.5) * 2;
+
+
+        const floatingWords =
+            document.querySelectorAll(
+                ".floating-word"
+            );
+
+
+        floatingWords.forEach(
+            (word, index) => {
+
+                const amount =
+                    index === 0
+                        ? 8
+                        : -6;
+
+                word.style.transform =
+                    `translate(
+                        ${x * amount}px,
+                        ${y * amount}px
+                    )`;
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   MOBILE RESUME
+========================================================= */
+
+document
+    .querySelector(".mobile-menu")
+    ?.addEventListener(
+        "click",
+        () => {
+
+            const firstLink =
+                document.querySelector(
+                    ".nav-link"
+                );
+
+            if (firstLink) {
+
+                firstLink.scrollIntoView({
+                    behavior: "smooth"
+                });
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   INITIAL STATE
+========================================================= */
+
+updateNavigation();
+
+</script>
+
+</body>
+</html>
