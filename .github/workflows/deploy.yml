@@ -5,6 +5,7 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# Trigger redeploy after Pages source switched to GitHub Actions
 permissions:
   contents: read
   pages: write
