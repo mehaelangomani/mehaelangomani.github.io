@@ -1,0 +1,16 @@
+AXON particle visual refinement
+
+Modified files:
+- src/webgl/shaders.ts
+- src/webgl/AxonParticleScene.ts
+
+Changes:
+- Reduced GPU and CPU fallback point-size multiplier from 0.045 to 0.018.
+- Added per-particle size variation.
+- Reduced particle base brightness and made lavender highlights rarer.
+- Added soft radial sprite falloff and controlled alpha for additive blending.
+- Made the hollow ring SDF subtly irregular with variable ring/tube radii and softer secondary lobe.
+
+The particle count, GPU simulation, fluid simulation, pointer interaction, UI, and media were left unchanged.
+
+Note: This is a code-level refinement; visual appearance should be checked in the target browser/GPU and may need small tuning adjustments.
