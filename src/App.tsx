@@ -81,12 +81,12 @@ export default function App() {
     return initVanteRibbonScene(refs);
   }, []);
 
-  const mehaRise = smooth(0.12, 0.27, introProgress);
-  const mehaFall = 1 - smooth(0.64, 0.79, introProgress);
+  const mehaRise = smooth(0.05, 0.2, introProgress);
+  const mehaFall = 1 - smooth(0.4, 0.55, introProgress);
   const mehaOpacity = mehaRise * mehaFall;
-  const taglineRise = smooth(0.24, 0.39, introProgress);
+  const taglineRise = smooth(0.15, 0.3, introProgress);
   const taglineOpacity = taglineRise * mehaFall;
-  const technicalOpacity = smooth(0.78, 0.96, introProgress);
+  const technicalOpacity = smooth(0.5, 0.7, introProgress);
   const centered = (opacity: number) => `translate(-50%, -50%) translateY(${20 * (1 - opacity)}px)`;
   const particleOpacity = 1 - smooth(0.91, 1, introProgress);
 
