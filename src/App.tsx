@@ -18,20 +18,17 @@ export default function App() {
   const particleCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const particleSceneRef = useRef<AxonParticleScene | null>(null);
   const ribbonTrackRef = useRef<HTMLDivElement | null>(null);
-  const ribbonStageRef = useRef<HTMLElement | null>(null);
+  const ribbonStageRef = useRef<HTMLDivElement | null>(null);
   const ribbonCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const l1Ref = useRef<HTMLDivElement | null>(null);
   const l2Ref = useRef<HTMLDivElement | null>(null);
   const capRef = useRef<HTMLDivElement | null>(null);
   const hintRef = useRef<HTMLDivElement | null>(null);
-  const pagerRef = useRef<HTMLDivElement | null>(null);
-  const crossRef = useRef<HTMLDivElement | null>(null);
   const glowRef = useRef<HTMLDivElement | null>(null);
-  const ruleRef = useRef<HTMLDivElement | null>(null);
   const nameRef = useRef<HTMLDivElement | null>(null);
-  const [introProgress, setIntroProgress] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [resumeNotice, setResumeNotice] = useState(false);
+  const [introProgress, setIntroProgress] = useState(0);
 
   // Existing particle scene: its progress is derived from native document scrolling.
   useEffect(() => {
@@ -70,14 +67,11 @@ export default function App() {
     const l2 = l2Ref.current;
     const cap = capRef.current;
     const hint = hintRef.current;
-    const pager = pagerRef.current;
-    const cross = crossRef.current;
     const glow = glowRef.current;
-    const rule = ruleRef.current;
     const name = nameRef.current;
-    if (!track || !stage || !canvas || !l1 || !l2 || !cap || !hint || !pager || !cross || !glow || !rule || !name) return;
+    if (!track || !stage || !canvas || !l1 || !l2 || !cap || !hint || !glow || !name) return;
 
-    const refs: RibbonDomRefs = { track, stage, canvas, l1, l2, cap, hint, pager, cross, glow, rule, name };
+    const refs: RibbonDomRefs = { track, stage, canvas, l1, l2, cap, hint, glow, name };
     return initVanteRibbonScene(refs);
   }, []);
 
@@ -137,11 +131,8 @@ export default function App() {
             </h2>
             <div id="cap" ref={capRef}>A selection of projects, experiments and things in motion.</div>
             <div id="glow" ref={glowRef} />
-            <div id="cross" ref={crossRef}><i>+</i></div>
-            <div id="rule" ref={ruleRef} />
             <canvas id="gl" ref={ribbonCanvasRef} />
             <div id="hint" ref={hintRef}>SCROLL TO EXPLORE</div>
-            <div id="pager" ref={pagerRef}><span>01</span><span>06</span></div>
             <header className="ribbon-top">
               <div className="section-label">MEHA <span>/</span> SELECTED WORK</div>
               <nav className="portfolio-actions" aria-label="Portfolio actions">

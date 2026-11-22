@@ -8,10 +8,7 @@ export interface RibbonDomRefs {
   l2: HTMLElement;
   cap: HTMLElement;
   hint: HTMLElement;
-  pager: HTMLElement;
-  cross: HTMLElement;
   glow: HTMLElement;
-  rule: HTMLElement;
   name: HTMLElement;
 }
 
@@ -355,12 +352,7 @@ export function initVanteRibbonScene(refs: RibbonDomRefs): () => void {
 
     const intro = String(1 - span(pp, 0, 0.05));
     refs.hint.style.opacity = intro;
-    refs.pager.style.opacity = intro;
-    refs.cross.style.opacity = intro;
     refs.glow.style.opacity = intro;
-
-    refs.rule.style.transform = `scaleX(${ease(span(pp, 0.72, 0.86))})`;
-    refs.rule.style.top = '50%';
 
     // ribbon, then the grid
     const pr = span(pp, RIB_A, RIB_B);
@@ -474,3 +466,5 @@ export function initVanteRibbonScene(refs: RibbonDomRefs): () => void {
     renderer.dispose();
   };
 }
+
+
