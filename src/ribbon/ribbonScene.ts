@@ -364,12 +364,15 @@ export function initVanteRibbonScene(refs: RibbonDomRefs): () => void {
         c.mesh.visible = s > CARD_W;
         c.rect = null;
         if (c.mesh.visible) poseRibbon(c, head);
-      } else if (c.i < cols * rows) {
-        // each card flies to its slot the moment it leaves the rail
-        const st = mix(RIB_A, RIB_B, (end + c.i * STEP) / (pathLength + cards.length * STEP));
-        const q = out(span(pp, st, st + 0.13));
-        c.mesh.visible = q > 0.001;
-        if (c.mesh.visible) poseGrid(c, q);
+       } else if (c.i < cols * rows) {
+         // each card flies to its slot the moment it leaves the rail
+         const st = mix(RIB_A, RIB_B, (end + c.i * STEP) / (pathLength + cards.length * STEP));
+         const q = out(span(pp, st, st + 0.13));
+         c.mesh.visible = q > 0.001;
+         if (c.mesh.visible) {
+           poseGrid(c, q);
+           c.mat.uniforms.ready.value = 0;
+         }
       } else {
         c.mesh.visible = false;
         c.rect = null;
