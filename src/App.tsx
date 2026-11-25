@@ -141,7 +141,7 @@ export default function App() {
               </nav>
             </header>
             <footer className="ribbon-bottom">
-              <p>Selected projects and experiments.</p>
+              <p>SELECTED PROJECTS</p>
               <div className="ribbon-bottom-center">DESIGN <s>/</s> DEVELOPMENT <s>/</s> EXPERIMENTS</div>
               <div className="ribbon-bottom-right">SCROLL TO EXPLORE <span>↓</span></div>
             </footer>
