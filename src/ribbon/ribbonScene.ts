@@ -374,7 +374,6 @@ export function initVanteRibbonScene(refs: RibbonDomRefs): () => void {
          c.mesh.visible = q > 0.001;
          if (c.mesh.visible) {
            poseGrid(c, q);
-           c.mat.uniforms.ready.value = 0;
          }
       } else {
         c.mesh.visible = false;
