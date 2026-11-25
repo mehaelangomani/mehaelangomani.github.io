@@ -170,7 +170,7 @@ export function initVanteRibbonScene(refs: RibbonDomRefs): () => void {
     v.playsInline = true;
     v.preload = 'auto';
     v.setAttribute('playsinline', '');
-    v.src = url;
+    v.removeAttribute('src');
 
     const tex = new THREE.VideoTexture(v);
     tex.colorSpace = THREE.NoColorSpace;
@@ -428,16 +428,6 @@ export function initVanteRibbonScene(refs: RibbonDomRefs): () => void {
     p += (target - p) * alpha;
     if (Math.abs(target - p) < 0.00005) p = target;
 
-    for (const c of cards) {
-      if (c.mesh.visible && !c.failed && c.v.paused) {
-        c.v.play().catch(() => {
-          // Autoplay or transient load interruption; keep placeholder visible without crashing
-        });
-      } else if (!c.mesh.visible && !c.v.paused) {
-        c.v.pause();
-      }
-    }
-
     render();
     rafId = requestAnimationFrame(loop);
   }
@@ -469,5 +459,6 @@ export function initVanteRibbonScene(refs: RibbonDomRefs): () => void {
     renderer.dispose();
   };
 }
+
 
 
