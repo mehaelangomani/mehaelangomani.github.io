@@ -41,14 +41,14 @@ interface RibbonCard {
 const R2 = 'https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/';
 
 export const WORK: ReadonlyArray<readonly [string, string]> = [
-  ['Roadster 3D', 'designs/roadster-3d-car-landing.mp4'],
-  ['Living Portrait', 'aaaf/living-portrait-hero.mp4'],
-  ['Particle Self', 'aaaf/oraciteslArea.mp4'],
-  ['Robot Jellyfish', 'aaaf/medusa-jellyfish-hero.mp4'],
-  ['Ink Reveal', 'designs/ink-reveal-hover.mp4'],
-  ['Space Voyage', 'designs/space-voyage-video.mp4'],
-  ['Helion Dispatch', 'designs/helion-dispatch-landing.mp4'],
-  ['Honey Bee', 'designs/honey-bee-melli-landing.mp4'],
+  ['Video 1', '/videos/video1.mp4'],
+  ['Video 2', '/videos/video2.mp4'],
+  ['Video 3', '/videos/video3.mp4'],
+  ['Video 4', '/videos/video4.mp4'],
+  ['Video 5', '/videos/video5.mp4'],
+  ['Video 6', '/videos/video6.mp4'],
+  ['Video 7', '/videos/video7.mp4'],
+  ['Video 8', '/videos/video8.mp4'],
 ];
 
 const clamp = (x: number, a = 0, b = 1): number => Math.min(b, Math.max(a, x));
@@ -162,15 +162,16 @@ export function initVanteRibbonScene(refs: RibbonDomRefs): () => void {
 
   /* ---------- cards ---------- */
   const cards: RibbonCard[] = WORK.map(([title, src], i) => {
-    const url = R2 + src;
+    const url = src;
     const v = document.createElement('video');
-    v.crossOrigin = 'anonymous';
-    v.muted = true;
-    v.loop = true;
-    v.playsInline = true;
-    v.preload = 'auto';
-    v.setAttribute('playsinline', '');
-    v.removeAttribute('src');
+  v.crossOrigin = 'anonymous';
+  v.muted = true;
+  v.loop = true;
+  v.playsInline = true;
+  v.autoplay = true;
+  v.preload = 'auto';
+  v.setAttribute('playsinline', '');
+  v.src = url;
 
     const tex = new THREE.VideoTexture(v);
     tex.colorSpace = THREE.NoColorSpace;
@@ -208,12 +209,14 @@ export function initVanteRibbonScene(refs: RibbonDomRefs): () => void {
       rect: null,
       failed: false,
       onLoadedData: () => {
+        console.log('[ribbon] loaded', title, v.videoWidth, v.videoHeight);
         if (v.videoWidth > 0 && v.videoHeight > 0) {
           const va = v.videoWidth / v.videoHeight;
           const ca = CARD_W / CARD_H;
           mat.uniforms.cover.value.set(va > ca ? ca / va : 1, va > ca ? 1 : va / ca);
           mat.uniforms.ready.value = 1;
           card.failed = false;
+          v.play().catch((e) => console.warn('[ribbon] play failed', title, e));
         }
       },
       onError: () => {
@@ -459,6 +462,8 @@ export function initVanteRibbonScene(refs: RibbonDomRefs): () => void {
     renderer.dispose();
   };
 }
+
+
 
 
 

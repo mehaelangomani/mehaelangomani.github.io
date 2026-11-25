@@ -111,10 +111,10 @@ export default function App() {
             <div className="scroll-technical" id="technical-identity-anchor" style={{ opacity: technicalOpacity, transform: centered(technicalOpacity) }}>
               <h1 className="scroll-title">TECHNICAL IDENTITY</h1>
               <div className="tech-grid">
-                <SkillPanel number="01" title="DEVELOPMENT" skills={DEV_SKILLS} />
-                <SkillPanel number="02" title="AI & MACHINE LEARNING" skills={AI_SKILLS} />
-                <SkillPanel number="03" title="DATA" skills={DATA_SKILLS} />
-                <SkillPanel number="04" title="ALGORITHMS & PROBLEM SOLVING" skills={ALGO_SKILLS} />
+<SkillPanel title="DEVELOPMENT" skills={DEV_SKILLS} />
+<SkillPanel title="AI & MACHINE LEARNING" skills={AI_SKILLS} />
+<SkillPanel title="DATA" skills={DATA_SKILLS} />
+<SkillPanel title="ALGORITHMS & PROBLEM SOLVING" skills={ALGO_SKILLS} />
               </div>
             </div>
             <div className="intro-scroll-hint" style={{ opacity: 1 - smooth(0.02, 0.12, introProgress) }}>SCROLL TO EXPLORE</div>
@@ -175,10 +175,9 @@ export default function App() {
   );
 }
 
-function SkillPanel({ number, title, skills }: { number: string; title: string; skills: string[] }) {
+function SkillPanel({ title, skills }: { title: string; skills: string[] }) {
   return (
     <div className="tech-panel">
-      <div className="panel-number">{number}</div>
       <h3 className="panel-title">{title}</h3>
       <ul className="tech-list">{skills.map((skill) => <li key={skill}>{skill}</li>)}</ul>
     </div>
