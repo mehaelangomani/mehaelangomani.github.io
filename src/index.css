@@ -49,18 +49,21 @@ canvas#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;
 #name{position:absolute;z-index:6;left:0;top:0;padding:6px 11px;background:var(--ink);color:#0a0a0b;border-radius:99px;font-size:11px;font-weight:600;letter-spacing:.04em;pointer-events:none;opacity:0;transition:opacity .16s;white-space:nowrap}
 .gallery-end-label{position:absolute;z-index:4;left:50%;bottom:25px;transform:translateX(-50%);font:400 10px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:var(--mid);opacity:0;pointer-events:none}
 .github-projects{padding:80px 32px;background:#000;color:var(--ink)}
-.github-header{margin-bottom:40px}
-.github-count{color:var(--mid);font:400 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;margin:8px 0 0}
+.github-header{margin-bottom:48px}
+.github-count{color:var(--mid);font:400 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;margin:8px 0 0;text-transform:uppercase}
 .github-status{color:var(--mid);font:400 13px Inter,system-ui,sans-serif}
 .github-status a{color:var(--ink)}
-.github-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-.github-card{border:1px solid var(--line);padding:1.2rem;border-radius:3px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:.6rem;transition:border-color .2s}
-.github-card:hover{border-color:rgba(244,241,234,.4)}
-.github-card-title{margin:0;font-family:'Inter Tight',Inter,system-ui,sans-serif;font-size:1.2rem;font-weight:400;letter-spacing:-.02em}
-.github-card-desc{margin:0;color:var(--mid);font-size:.88rem;line-height:1.35}
-.github-card-meta{display:flex;gap:.8rem;flex-wrap:wrap;font:400 10px 'IBM Plex Mono',monospace;color:var(--mid);letter-spacing:.06em}
-@media(max-width:760px){.github-grid{grid-template-columns:1fr}.github-projects{padding:48px 16px}}
-.menu-close{position:absolute;top:28px;right:32px;border:1px solid var(--line);border-radius:99px;background:transparent;color:var(--ink);padding:12px 20px;letter-spacing:.1em;font-size:11px;cursor:pointer}
+.github-grid{display:flex;flex-direction:column;gap:0}
+.github-card{display:block;text-decoration:none;color:var(--ink);padding:40px 0;border-bottom:1px solid rgba(244,241,234,.12);transition:opacity .2s}
+.github-card:hover .github-card-title{color:#fff}
+.github-card:hover .github-external{transform:translateX(4px)}
+.github-card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.github-project-label{color:var(--mid);font:400 10px 'IBM Plex Mono',monospace;letter-spacing:.12em}
+.github-external{color:var(--mid);font:400 10px 'IBM Plex Mono',monospace;letter-spacing:.12em;transition:transform .2s;display:inline-block}
+.github-card-title{margin:0;font-family:'Inter Tight',Inter,system-ui,sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:400;letter-spacing:-.03em;color:#f4f1ea;transition:color .2s}
+.github-card-desc{margin:12px 0 0;color:var(--mid);font:300 14px Inter,system-ui,sans-serif;max-width:720px;line-height:1.5}
+.github-card-meta{margin-top:16px;display:flex;gap:1rem;flex-wrap:wrap;font:400 10px 'IBM Plex Mono',monospace;color:var(--mid);letter-spacing:.06em;text-transform:uppercase}
+@media(max-width:760px){.github-projects{padding:48px 16px}.github-card{padding:28px 0}}
 .menu-overlay nav{width:min(760px,84vw);display:flex;flex-direction:column}.menu-overlay nav button{display:flex;justify-content:space-between;align-items:center;padding:22px 0;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--ink);font-family:'Cormorant Garamond',serif;font-size:clamp(32px,6vw,68px);text-align:left;cursor:pointer}.menu-overlay nav button span{font:400 11px 'IBM Plex Mono',monospace;color:var(--mid)}
 .resume-notice-card{position:relative;width:min(440px,88vw);padding:42px;border:1px solid var(--line);background:#0b0b0b}.resume-notice-card p{margin:0 0 24px;font:400 10px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:var(--mid)}.resume-notice-card h2{margin:0 0 12px;font:500 34px 'Cormorant Garamond',serif}.resume-notice-card span{color:var(--mid);font-size:13px;line-height:1.6}.resume-notice-card code{color:var(--ink)}.resume-close{position:absolute;right:14px;top:10px;border:0;background:none;color:var(--ink);font-size:24px;cursor:pointer}
 @media(max-width:760px){
@@ -69,3 +72,4 @@ canvas#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;
  .ribbon-top{left:16px;right:16px;top:16px}.section-label{font-size:9px}.portfolio-actions{gap:5px}.portfolio-actions button{height:36px;padding:0 12px;font-size:9px;gap:7px}.ribbon-bottom{left:16px;right:16px;bottom:16px;grid-template-columns:1fr auto}.ribbon-bottom-center{display:none}.ribbon-bottom p{font-size:10px;max-width:15em}.ribbon-bottom-right{font-size:9px}#hint,#pager{display:none}#cross{left:16px;right:16px}.menu-close{right:16px;top:16px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+

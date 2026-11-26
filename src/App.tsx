@@ -190,8 +190,12 @@ export default function App() {
           <p className="github-status">No public repositories found.</p>
         )}
         <div className="github-grid">
-          {repos.map((repo: any) => (
+          {repos.map((repo: any, idx: number) => (
             <a key={repo.id} href={repo.html_url} target="_blank" rel="noreferrer" className="github-card">
+              <div className="github-card-top">
+                <span className="github-project-label">PROJECT {String(idx + 1).padStart(2, '0')}</span>
+                <span className="github-external">↗ GITHUB</span>
+              </div>
               <h3 className="github-card-title">{repo.name}</h3>
               {repo.description && <p className="github-card-desc">{repo.description}</p>}
               <div className="github-card-meta">
