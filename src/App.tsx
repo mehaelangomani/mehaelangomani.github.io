@@ -35,7 +35,7 @@ export default function App() {
 
   useEffect(() => {
     let cancelled = false;
-    fetch('https://api.github.com/users/mehaelangomani/repos?per_page=100&sort=updated')
+    fetch('https://api.github.com/users/mehaelangomani/repos?per_page=100&sort=updated', { cache: 'no-store' })
       .then((r) => {
         if (!r.ok) throw new Error('fetch failed');
         return r.json();
@@ -191,7 +191,7 @@ export default function App() {
         )}
         <div className="github-grid">
           {repos.map((repo: any, idx: number) => (
-            <a key={repo.id} href={repo.html_url} target="_blank" rel="noreferrer" className="github-card">
+            <a key={repo.id} href={repo.html_url} target="_blank" rel="noopener noreferrer" className="github-card" onClick={() => { if (repo.html_url) window.open(repo.html_url, '_blank', 'noopener,noreferrer'); }}>
               <div className="github-card-top">
                 <span className="github-project-label">PROJECT {String(idx + 1).padStart(2, '0')}</span>
                 <span className="github-external">↗ GITHUB</span>
