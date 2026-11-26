@@ -48,19 +48,19 @@ canvas#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;
 #rule{position:absolute;z-index:4;left:3.5vw;right:3.5vw;top:50%;height:1px;background:var(--line);transform-origin:left;transform:scaleX(0);pointer-events:none}
 #name{position:absolute;z-index:6;left:0;top:0;padding:6px 11px;background:var(--ink);color:#0a0a0b;border-radius:99px;font-size:11px;font-weight:600;letter-spacing:.04em;pointer-events:none;opacity:0;transition:opacity .16s;white-space:nowrap}
 .gallery-end-label{position:absolute;z-index:4;left:50%;bottom:25px;transform:translateX(-50%);font:400 10px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:var(--mid);opacity:0;pointer-events:none}
-.github-projects{padding:80px 32px;background:#000;color:var(--ink)}
+.github-projects{padding:80px 32px;background:#000;color:var(--ink);max-width:1100px;margin:0 auto}
 .github-header{margin-bottom:48px}
 .github-count{color:var(--mid);font:400 11px 'IBM Plex Mono',monospace;letter-spacing:.12em;margin:8px 0 0;text-transform:uppercase}
 .github-status{color:var(--mid);font:400 13px Inter,system-ui,sans-serif}
 .github-status a{color:var(--ink)}
 .github-grid{display:flex;flex-direction:column;gap:0}
-.github-card{display:block;text-decoration:none;color:var(--ink);padding:40px 0;border-bottom:1px solid rgba(244,241,234,.12);transition:opacity .2s}
+.github-card{display:block;text-decoration:none;color:var(--ink);padding:28px 0;border-bottom:1px solid rgba(244,241,234,.12);transition:opacity .2s}
 .github-card:hover .github-card-title{color:#fff}
 .github-card:hover .github-external{transform:translateX(4px)}
 .github-card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .github-project-label{color:var(--mid);font:400 10px 'IBM Plex Mono',monospace;letter-spacing:.12em}
 .github-external{color:var(--mid);font:400 10px 'IBM Plex Mono',monospace;letter-spacing:.12em;transition:transform .2s;display:inline-block}
-.github-card-title{margin:0;font-family:'Inter Tight',Inter,system-ui,sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:400;letter-spacing:-.03em;color:#f4f1ea;transition:color .2s}
+.github-card-title{margin:0;font-family:'Inter Tight',Inter,system-ui,sans-serif;font-size:clamp(1.5rem,2.2vw,1.875rem);font-weight:400;letter-spacing:-.02em;color:#f4f1ea;transition:color .2s;line-height:1.15;word-break:break-word}
 .github-card-desc{margin:12px 0 0;color:var(--mid);font:300 14px Inter,system-ui,sans-serif;max-width:720px;line-height:1.5}
 .github-card-meta{margin-top:16px;display:flex;gap:1rem;flex-wrap:wrap;font:400 10px 'IBM Plex Mono',monospace;color:var(--mid);letter-spacing:.06em;text-transform:uppercase}
 @media(max-width:760px){.github-projects{padding:48px 16px}.github-card{padding:28px 0}}
