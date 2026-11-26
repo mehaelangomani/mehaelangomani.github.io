@@ -29,6 +29,30 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [resumeNotice, setResumeNotice] = useState(false);
   const [introProgress, setIntroProgress] = useState(0);
+  const [repos, setRepos] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch('https://api.github.com/users/mehaelangomani/repos?per_page=100&sort=updated')
+      .then((r) => {
+        if (!r.ok) throw new Error('fetch failed');
+        return r.json();
+      })
+      .then((data) => {
+        if (cancelled) return;
+        const filtered = Array.isArray(data) ? data.filter((r: any) => !r.fork) : [];
+        setRepos(filtered);
+        setLoading(false);
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setError(true);
+        setLoading(false);
+      });
+    return () => { cancelled = true; };
+  }, []);
 
   // Existing particle scene: its progress is derived from native document scrolling.
   useEffect(() => {
@@ -151,7 +175,36 @@ export default function App() {
         </div>
       </section>
 
-      {menuOpen && (
+      <section className="github-projects" id="github-projects" aria-label="GitHub projects">
+        <header className="github-header">
+          <div className="section-label">GITHUB <span>/</span> OPEN SOURCE / PROJECT ARCHIVE</div>
+          <p className="github-count">{loading ? 'Loading…' : `${repos.length} repositories`}</p>
+        </header>
+        {loading && <p className="github-status">Loading repositories…</p>}
+        {error && (
+          <p className="github-status">
+            Failed to load repositories. <a href="https://github.com/mehaelangomani" target="_blank" rel="noreferrer">View on GitHub</a>
+          </p>
+        )}
+        {!loading && !error && repos.length === 0 && (
+          <p className="github-status">No public repositories found.</p>
+        )}
+        <div className="github-grid">
+          {repos.map((repo: any) => (
+            <a key={repo.id} href={repo.html_url} target="_blank" rel="noreferrer" className="github-card">
+              <h3 className="github-card-title">{repo.name}</h3>
+              {repo.description && <p className="github-card-desc">{repo.description}</p>}
+              <div className="github-card-meta">
+                {repo.language && <span>{repo.language}</span>}
+                <span>★ {repo.stargazers_count}</span>
+                <span>⑂ {repo.forks_count}</span>
+                <span>{new Date(repo.updated_at).toLocaleDateString()}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+        {menuOpen && (
         <div className="menu-overlay" role="dialog" aria-modal="true" aria-label="Portfolio menu">
           <button className="menu-close" onClick={() => setMenuOpen(false)} aria-label="Close menu">CLOSE ×</button>
           <nav>
